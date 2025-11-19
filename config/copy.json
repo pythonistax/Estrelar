@@ -1,0 +1,65 @@
+{
+  "hero": {
+    "title": "Discover Your Perfect Match",
+    "subtitle": "Take our quick quiz to find out what's right for you",
+    "cta": "Start Quiz"
+  },
+  "socialProof": {
+    "title": "Join thousands who found their match",
+    "testimonials": [
+      {
+        "name": "Sarah M.",
+        "location": "New York",
+        "text": "This changed everything for me! Found exactly what I was looking for.",
+        "time": "2 hours ago"
+      },
+      {
+        "name": "Michael T.",
+        "location": "California",
+        "text": "Quick and easy. Got my results in minutes!",
+        "time": "5 hours ago"
+      },
+      {
+        "name": "Emma L.",
+        "location": "Texas",
+        "text": "Highly recommend! The results were spot on.",
+        "time": "1 day ago"
+      }
+    ],
+    "stats": {
+      "users": "12,847",
+      "satisfaction": "98%",
+      "completed": "Today"
+    }
+  },
+  "quiz": {
+    "steps": [
+      {
+        "id": 1,
+        "question": "What are you looking for?",
+        "options": [
+          "Option A",
+          "Option B",
+          "Option C",
+          "Option D"
+        ]
+      },
+      {
+        "id": 2,
+        "question": "What matters most to you?",
+        "options": [
+          "Quality",
+          "Price",
+          "Speed",
+          "All of the above"
+        ]
+      }
+    ]
+  },
+  "notifications": [
+    "John from Miami just completed the quiz",
+    "Sarah from New York found her match",
+    "Michael from California got his results"
+  ]
+}
+

@@ -1,0 +1,12 @@
+{
+  "name": "classic-social-proof",
+  "version": "1.0.0",
+  "type": "quiz-offer",
+  "settings": {
+    "enableAnalytics": true,
+    "enableSocialProof": true,
+    "enableCountdown": true,
+    "enableNotifications": true
+  }
+}
+
