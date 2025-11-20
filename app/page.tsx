@@ -52,8 +52,8 @@ export default function Home() {
                   backgroundSize: 'contain',
                   backgroundPosition: 'center center',
                   backgroundRepeat: 'no-repeat',
-                  width: '700px',
-                  height: '420px',
+                  width: '805px',
+                  height: '483px',
                   display: 'block',
                   position: 'static',
                 }}
