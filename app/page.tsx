@@ -7,15 +7,15 @@ export default function Home() {
   const [showQuiz, setShowQuiz] = useState(false)
 
   return (
-    <div id="classic-social-proof" className="min-h-screen bg-white">
-      <div className="relative min-h-screen overflow-x-hidden">
+    <div id="classic-social-proof" className="h-screen bg-white overflow-hidden">
+      <div className="relative h-screen overflow-hidden flex flex-col">
         {/* Header */}
         <CoursivHeader />
 
         {/* Main Content Container */}
-        <div className="mx-auto flex h-full max-w-[400px] flex-col px-4 tablet:max-w-[580px] laptop:max-w-[1100px] laptop:h-screen laptop:flex-col laptop:justify-start laptop:pt-2 laptop:pb-0">
+        <div className="mx-auto flex flex-1 max-w-[400px] flex-col px-4 tablet:max-w-[580px] laptop:max-w-[1100px] laptop:flex-col laptop:justify-between laptop:pt-2 laptop:pb-2">
           {/* Article Container - Split 50/50 */}
-          <article className="w-full laptop:flex laptop:flex-row laptop:space-y-0 laptop:items-center laptop:mb-2">
+          <article className="w-full flex-1 laptop:flex laptop:flex-row laptop:space-y-0 laptop:items-center laptop:mb-0">
             {/* Left Half - Text Container - Perfectly centered in left half */}
             <div className="flex flex-1 flex-col items-center justify-center laptop:h-full laptop:w-1/2">
               <div className="flex flex-col items-start">
@@ -62,7 +62,7 @@ export default function Home() {
           </article>
 
           {/* CTA Button Container - Directly below image section */}
-          <div className="mx-auto w-full max-w-[400px] fixed bottom-0 left-0 right-0 z-10 laptop:static laptop:mt-0 laptop:mb-0">
+          <div className="mx-auto w-full max-w-[400px] fixed bottom-0 left-0 right-0 z-10 laptop:static laptop:mt-0 laptop:mb-0 laptop:flex-shrink-0">
             <div className="flex flex-col px-4 py-2 bg-transparent laptop:px-0 laptop:pt-0 laptop:pb-0">
               <button
                 onClick={() => setShowQuiz(true)}
