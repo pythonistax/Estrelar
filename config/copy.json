@@ -37,6 +37,9 @@
       {
         "id": 1,
         "question": "What is your age?",
+        "subtitle": "We will personalize your AI challenge based on your answers",
+        "hasImages": false,
+        "backgroundImage": "https://d3kigabz1zn79w.cloudfront.net/1-19.webp",
         "options": [
           "18-24",
           "25-34",
@@ -46,12 +49,30 @@
       },
       {
         "id": 2,
-        "question": "What matters most to you?",
+        "question": "What is your main goal?",
+        "subtitle": null,
+        "hasImages": true,
         "options": [
-          "Quality",
-          "Price",
-          "Speed",
-          "All of the above"
+          {
+            "text": "Gain financial skills",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/01-4.webp"
+          },
+          {
+            "text": "Build personal projects",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/02-3.webp"
+          },
+          {
+            "text": "Professional growth",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/03-5.webp"
+          },
+          {
+            "text": "Plan for my future",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/04-4.webp"
+          },
+          {
+            "text": "Self-Improvement",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/05-2.webp"
+          }
         ]
       }
     ]

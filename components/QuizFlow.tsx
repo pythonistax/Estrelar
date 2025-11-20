@@ -28,6 +28,10 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
     }
   }
 
+  const getOptionValue = (option: any): string => {
+    return typeof option === 'string' ? option : option.text
+  }
+
   const handleBackClick = () => {
     if (currentStep > 0) {
       setCurrentStep((prev) => prev - 1)
@@ -117,43 +121,91 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
               <h1 className="text-2xl font-bold leading-9 text-main">
                 {steps[currentStep]?.question || 'What is your age?'}
               </h1>
-              <p className="text-base font-medium leading-[24px] text-secondary">
-                We will personalize your AI challenge based on your answers
-              </p>
+              {steps[currentStep]?.subtitle && (
+                <p className="text-base font-medium leading-[24px] text-secondary">
+                  {steps[currentStep].subtitle}
+                </p>
+              )}
             </div>
 
             {/* Answer Options */}
             <div className="w-full flex-1 px-4 pb-[34px]" id="quiz-page">
-              <div className="mx-auto flex h-full w-full max-w-[400px] flex-col gap-6 tablet:max-w-[580px]">
-                <div className="flex w-[60%] flex-col gap-5 tablet:w-full">
-                  {(steps[currentStep]?.options || ['18-24', '25-34', '35-44', '45+']).map((option, index) => (
-                    <button
-                      key={index}
-                      onClick={() => handleAnswer(option)}
-                      className={`group relative flex min-h-[80px] content-start items-center justify-between gap-1 rounded-lg border border-transparent !px-0 text-center px-2 py-6 transition-all ${
-                        selectedAnswer === option
-                          ? 'bg-question-fill-selected'
-                          : 'bg-question-fill-unselected'
-                      }`}
-                      data-cy-id={`quiz-button-full-single-select-${index}`}
-                      data-testid={`quiz-button-full-single-select-${index}`}
-                    >
-                      <div className="flex w-full flex-col justify-start">
-                        <span className="text flex-1 font-bold text-main text-base">{option}</span>
-                      </div>
-                    </button>
-                  ))}
+              <div className="mx-auto flex max-w-[400px] flex-col gap-6 tablet:max-w-[580px]">
+                <div className="flex flex-col gap-5">
+                  {steps[currentStep]?.hasImages ? (
+                    // Question with images (e.g., Question 2)
+                    (steps[currentStep]?.options || []).map((option: any, index: number) => {
+                      const optionValue = getOptionValue(option)
+                      return (
+                      <button
+                        key={index}
+                        onClick={() => handleAnswer(optionValue)}
+                        className={`group relative flex min-h-[80px] content-start items-center justify-between gap-1 rounded-lg border border-transparent text-left pr-16 max-[375px]:pr-8 transition-all ${
+                          selectedAnswer === optionValue
+                            ? 'bg-question-fill-selected'
+                            : 'bg-question-fill-unselected'
+                        }`}
+                        data-cy-id={`quiz-button-single-select-${index}`}
+                        data-testid={`quiz-button-single-select-${index}`}
+                      >
+                        {/* Image */}
+                        <div className="h-fit w-fit contents">
+                          <div
+                            className="flex-none bg-contain bg-center bg-no-repeat h-[105px] w-[105px]"
+                            style={{
+                              backgroundImage: option.image ? `url("${option.image}")` : 'none',
+                            }}
+                          ></div>
+                        </div>
+                        {/* Text */}
+                        <div className="flex w-full flex-col justify-start mr-4">
+                          <span className="text flex-1 font-bold text-main text-base">
+                            {optionValue}
+                          </span>
+                        </div>
+                      </button>
+                      )
+                    })
+                  ) : (
+                    // Question without images (e.g., Question 1)
+                    <div className="flex w-[60%] flex-col gap-5 tablet:w-full">
+                      {(steps[currentStep]?.options || ['18-24', '25-34', '35-44', '45+']).map((option: any, index: number) => {
+                        const optionValue = getOptionValue(option)
+                        return (
+                        <button
+                          key={index}
+                          onClick={() => handleAnswer(optionValue)}
+                          className={`group relative flex min-h-[80px] content-start items-center justify-between gap-1 rounded-lg border border-transparent !px-0 text-center px-2 py-6 transition-all ${
+                            selectedAnswer === optionValue
+                              ? 'bg-question-fill-selected'
+                              : 'bg-question-fill-unselected'
+                          }`}
+                          data-cy-id={`quiz-button-full-single-select-${index}`}
+                          data-testid={`quiz-button-full-single-select-${index}`}
+                        >
+                          <div className="flex w-full flex-col justify-start">
+                            <span className="text flex-1 font-bold text-main text-base">
+                              {optionValue}
+                            </span>
+                          </div>
+                        </button>
+                        )
+                      })}
+                    </div>
+                  )}
                 </div>
 
-                {/* Background Image */}
-                <div className="fixed bottom-0 right-0 -z-20 h-[400px] w-full max-w-[400px] tablet:h-[500px] laptop:h-[600px] laptop:max-w-[580px]">
-                  <div
-                    className="-z-10 h-[400px] w-full bg-contain bg-right bg-no-repeat object-contain tablet:h-[500px] laptop:h-[600px]"
-                    style={{
-                      backgroundImage: 'url("https://d3kigabz1zn79w.cloudfront.net/1-19.webp")',
-                    }}
-                  ></div>
-                </div>
+                {/* Background Image - Only for question 1 */}
+                {steps[currentStep]?.backgroundImage && (
+                  <div className="fixed bottom-0 right-0 -z-20 h-[400px] w-full max-w-[400px] tablet:h-[500px] laptop:h-[600px] laptop:max-w-[580px]">
+                    <div
+                      className="-z-10 h-[400px] w-full bg-contain bg-right bg-no-repeat object-contain tablet:h-[500px] laptop:h-[600px]"
+                      style={{
+                        backgroundImage: `url("${steps[currentStep].backgroundImage}")`,
+                      }}
+                    ></div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
