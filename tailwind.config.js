@@ -27,6 +27,7 @@ module.exports = {
         'navigation': '#F5F5F5',
         'question-fill-unselected': '#F5F5F5',
         'question-fill-selected': '#EEEEFF',
+        'magic-page': '#FFFFFF',
       },
       screens: {
         tablet: '768px',

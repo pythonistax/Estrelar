@@ -1,0 +1,14 @@
+# Python dependencies for the Flask backend
+# Install with: pip install -r backend_requirements.txt
+
+flask==3.0.0
+flask-cors==4.0.0
+
+# For PostgreSQL (if you prefer PostgreSQL over SQLite):
+# psycopg2-binary==2.9.9
+# sqlalchemy==2.0.23
+
+# For MySQL (if you prefer MySQL):
+# pymysql==1.1.0
+# sqlalchemy==2.0.23
+

@@ -39,3 +39,4 @@
 - Button uses same color as heading
 - Button text is black (not white as initially thought)
 - Image is loaded as background-image CSS property
+

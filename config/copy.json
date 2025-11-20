@@ -74,6 +74,418 @@
             "image": "https://d3kigabz1zn79w.cloudfront.net/05-2.webp"
           }
         ]
+      },
+      {
+        "id": 3,
+        "question": "Do you feel overwhelmed with AI?",
+        "subtitle": null,
+        "hasImages": true,
+        "options": [
+          {
+            "text": "Always",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/quiz_modern-technology_1-1.webp"
+          },
+          {
+            "text": "Often",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/quiz_modern-technology_2-1.webp"
+          },
+          {
+            "text": "Sometimes",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/quiz_modern-technology_3-1.webp"
+          },
+          {
+            "text": "Not really",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/quiz_modern-technology_4-1.webp"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "question": "How comfortable are you with AI tools?",
+        "subtitle": null,
+        "hasImages": true,
+        "options": [
+          {
+            "text": "I don't know anything",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/quiz_modern_tech_1.webp"
+          },
+          {
+            "text": "I struggle a lot",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/quiz_modern_tech_2.webp"
+          },
+          {
+            "text": "I struggle sometimes",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/quiz_modern_tech_3.webp"
+          },
+          {
+            "text": "I'm comfortable",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/quiz_modern_tech_4.webp"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "question": "Are you afraid to fall behind the AI trend?",
+        "subtitle": null,
+        "hasImages": true,
+        "options": [
+          {
+            "text": "Always",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/quiz_younger_gen_1.webp"
+          },
+          {
+            "text": "Often",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/quiz_younger_gen_2.webp"
+          },
+          {
+            "text": "Sometimes",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/quiz_younger_gen_3.webp"
+          },
+          {
+            "text": "Not really",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/quiz_younger_gen_4.webp"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "question": "Do you think that it's hard to learn AI?",
+        "subtitle": null,
+        "hasImages": true,
+        "backgroundImage": "https://d3kigabz1zn79w.cloudfront.net/1-15.webp",
+        "options": [
+          {
+            "text": "Yes, all the time",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/quiz_learn-ai_1-1.webp"
+          },
+          {
+            "text": "Yes, but I still want to learn",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/quiz_learn-ai_2-1.webp"
+          },
+          {
+            "text": "No, it's not hard for me",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/quiz_learn-ai_3-1.webp"
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "question": "Do you think you need to know programming to learn AI?",
+        "subtitle": null,
+        "hasImages": false,
+        "backgroundImage": "https://d3kigabz1zn79w.cloudfront.net/1-15.webp",
+        "options": [
+          "Yes, of course",
+          "Not really",
+          "I never thought about it"
+        ]
+      },
+      {
+        "id": 8,
+        "question": "Rate your knowledge in AI tools",
+        "subtitle": null,
+        "hasImages": true,
+        "options": [
+          {
+            "text": "Expert",
+            "subtitle": "I have extensive knowledge",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/quiz_ai-knowledge_1-1.webp"
+          },
+          {
+            "text": "Proficient",
+            "subtitle": "I am skilled",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/quiz_ai-knowledge_2-1.webp"
+          },
+          {
+            "text": "Intermediate",
+            "subtitle": "I have some knowledge",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_digital-marketing_3.webp"
+          },
+          {
+            "text": "Novice",
+            "subtitle": "I have no experience",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_digital-marketing_4.webp"
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "question": "Have you ever used ChatGPT?",
+        "subtitle": null,
+        "hasImages": true,
+        "options": [
+          {
+            "text": "Yes, I use it daily",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/quiz_chatgpt_1-1.webp"
+          },
+          {
+            "text": "Yes, I used it few times",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/quiz_chatgpt_2-1.webp"
+          },
+          {
+            "text": "I'm afraid to use it",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/quiz_chatgpt_3-1.webp"
+          },
+          {
+            "text": "I am not familiar with ChatGPT",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/quiz_chatgpt_4-1.webp"
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "question": "What other AI tools are you already familiar with?",
+        "subtitle": "Choose all that apply",
+        "hasImages": true,
+        "allowMultiple": true,
+        "gridLayout": true,
+        "options": [
+          {
+            "text": "I'm new to AI tools",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_ai_quiz_ai-tools_10.webp"
+          },
+          {
+            "text": "Google Gemini",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_ai_quiz_ai-tools_3.webp"
+          },
+          {
+            "text": "Midjourney",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_ai_quiz_ai-tools_2.webp"
+          },
+          {
+            "text": "AIVA",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_ai_quiz_ai-tools_4.webp"
+          },
+          {
+            "text": "Otter.ai",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_ai_quiz_ai-tools_5.webp"
+          },
+          {
+            "text": "DALL-E",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_ai_quiz_ai-tools_6.webp"
+          },
+          {
+            "text": "Jasper",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_ai_quiz_ai-tools_7.webp"
+          },
+          {
+            "text": "Copilot",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_ai_quiz_ai-tools_8.webp"
+          },
+          {
+            "text": "OpenAI Playground",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_ai_quiz_ai-tools_9.webp"
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "question": "Are you afraid to be replaced by AI?",
+        "subtitle": null,
+        "hasImages": false,
+        "options": [
+          "Yes, all the time",
+          "Yes, sometimes",
+          "No, because I know how to use it",
+          "I never thought about it"
+        ]
+      },
+      {
+        "id": 12,
+        "question": "What income range aligns with your current career goals?",
+        "subtitle": null,
+        "hasImages": false,
+        "backgroundImage": "https://d3kigabz1zn79w.cloudfront.net/1-18.webp",
+        "options": [
+          "$50,000 - $100,000",
+          "$100,000 - $300,000",
+          "More than $300,000"
+        ]
+      },
+      {
+        "id": 13,
+        "question": "Have you considered how AI skills could impact your career?",
+        "subtitle": null,
+        "hasImages": true,
+        "options": [
+          {
+            "text": "Yes, I've heard of it",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_ai-tools_1.webp"
+          },
+          {
+            "text": "I'm curious",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_ai-tools_2.webp"
+          },
+          {
+            "text": "No, this is news to me",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_ai-tools_3.webp"
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "question": "Are you comfortable with learning new skills or techniques?",
+        "subtitle": null,
+        "hasImages": true,
+        "options": [
+          {
+            "text": "Yes",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_ai_quiz_new-skills_1.webp"
+          },
+          {
+            "text": "No",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_ai_quiz_new-skills_2.webp"
+          },
+          {
+            "text": "Hm, not sure",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_ai_quiz_new-skills_3.webp"
+          }
+        ]
+      },
+        {
+          "id": 15,
+          "question": "What other fields would you personally like to try yourself in?",
+          "subtitle": "Choose all that apply",
+          "hasImages": true,
+          "allowMultiple": true,
+          "gridLayout": true,
+          "gridColumns": 2,
+          "horizontalCardLayout": true,
+          "options": [
+          {
+            "text": "Graphic Design",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_topic_1.webp"
+          },
+          {
+            "text": "Content Creation",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_topic_2.webp"
+          },
+          {
+            "text": "Web Development",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_topic_3.webp"
+          },
+          {
+            "text": "Digital Marketing",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_topic_5.webp"
+          },
+          {
+            "text": "Social Media Management",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_topic_6.webp"
+          },
+          {
+            "text": "Video Editing",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_topic_7.webp"
+          },
+          {
+            "text": "Photography",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_topic_8.webp"
+          },
+          {
+            "text": "E-commerce",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_topic_9.webp"
+          },
+          {
+            "text": "Consulting",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_topic_10.webp"
+          }
+        ]
+      },
+      {
+        "id": 16,
+        "question": "Rate your readiness to master AI",
+        "subtitle": null,
+        "hasImages": true,
+        "options": [
+          {
+            "text": "All set",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_freelancing_1.webp"
+          },
+          {
+            "text": "Ready",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_freelancing_2.webp"
+          },
+          {
+            "text": "Somewhat Ready",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_freelancing_3.webp"
+          },
+          {
+            "text": "Not Ready",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_freelancing_4.webp"
+          }
+        ]
+      },
+      {
+        "id": 17,
+        "question": "Do you find it easy to maintain your focus?",
+        "subtitle": null,
+        "hasImages": true,
+        "options": [
+          {
+            "text": "Yes, I can easily stay focused",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_focus_1.webp"
+          },
+          {
+            "text": "Mostly, but I sometimes get distracted",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_focus_2.webp"
+          },
+          {
+            "text": "I often struggle",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_focus_3.webp"
+          },
+          {
+            "text": "No, I frequently procrastinate",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_focus_4.webp"
+          }
+        ]
+      },
+      {
+        "id": 18,
+        "question": "Is there something special you wish to achieve?",
+        "subtitle": "You're more likely to reach your goal if you have something important to aim for",
+        "hasImages": true,
+        "options": [
+          {
+            "text": "Saving for a home",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_wish_1.webp"
+          },
+          {
+            "text": "Plan a vacation",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_wish_3.webp"
+          },
+          {
+            "text": "Save for a car",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_wish_4.webp"
+          },
+          {
+            "text": "Smart retirement",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_wish_5.webp"
+          },
+          {
+            "text": "Support children's education",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/special-event_children.webp"
+          },
+          {
+            "text": "A perfect wedding",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_wish_2.webp"
+          },
+          {
+            "text": "Other",
+            "image": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_wish_6.webp"
+          }
+        ]
+      },
+      {
+        "id": 19,
+        "question": "How much time are you ready to spend to achieve your goal?",
+        "subtitle": null,
+        "hasImages": false,
+        "backgroundImage": "https://d3kigabz1zn79w.cloudfront.net/1-17.webp",
+        "options": [
+          "5 min/day",
+          "10 min/day",
+          "15 min/day",
+          "20 min/day"
+        ]
       }
     ]
   },
@@ -81,6 +493,132 @@
     "John from Miami just completed the quiz",
     "Sarah from New York found her match",
     "Michael from California got his results"
-  ]
+  ],
+  "teaser": {
+    "title": "Worry no more! We will help you to gain your confidence back",
+    "description": "Over 700,000 adults joined our AI challenge to improve their skills. Our challenge is backed by thousands hours of research and content carefully crafted to your needs and skills!",
+    "image": "https://d3kigabz1zn79w.cloudfront.net/Teaser_1061_2.webp",
+    "cta": "CONTINUE"
+  },
+  "quizConditions": {
+    "showTeaserOn": [
+      {
+        "questionId": 5,
+        "answer": "Always"
+      },
+      {
+        "questionId": 5,
+        "answer": "Often"
+      },
+      {
+        "questionId": 5,
+        "answer": "Sometimes"
+      }
+    ]
+  },
+  "endPage": {
+    "title": "There is nothing to worry about",
+    "description": "According to Harvard Business Review \"AI Won't Replace Humans — But Humans With AI Will Replace Humans Without AI\". By mastering AI right now you are never going to be worried about being replaced by AI anymore.",
+    "image": "https://d3kigabz1zn79w.cloudfront.net/Ed2.webp",
+    "cta": "CONTINUE"
+  },
+  "userProfile": {
+    "title": "Here's Your AI  Experience Profile",
+    "score": {
+      "title": "Readiness score",
+      "result": "Result: Perfect"
+    },
+    "support": {
+      "title": "Impressive score to succeed in AI",
+      "description": "A recent study by PwC in 2024 revealed that professionals in AI-related roles earn, on average, 25% more in the United States than their peers in similar positions without AI expertise.",
+      "icon": "https://d3kigabz1zn79w.cloudfront.net/user-profile_thumb-up-6.webp"
+    },
+    "metrics": [
+      {
+        "title": "Motivation",
+        "value": "High",
+        "icon": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_profile_1.webp"
+      },
+      {
+        "title": "Potential",
+        "value": "High",
+        "icon": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_profile_2.webp"
+      },
+      {
+        "title": "Focus",
+        "value": "Limited",
+        "icon": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_profile_3.webp"
+      },
+      {
+        "title": "AI Knowledge",
+        "value": "Low",
+        "icon": "https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_v3_quiz_profile_4.webp"
+      }
+    ],
+    "backgroundImage": "https://d3kigabz1zn79w.cloudfront.net/Ed.webp",
+    "cta": "CONTINUE"
+  },
+  "personalPlanPage": {
+    "title": "Your Personal AI Challenge",
+    "subtitle": "We expect you to gain necessary skills of",
+    "aiConfidentDate": "AI Confident by Jan, 2026",
+    "goal": "Saving for a home",
+    "disclaimer": "Individual results may vary.",
+    "cta": "CONTINUE",
+    "chart": {
+      "yAxisLabels": ["0", "50%", "100%"],
+      "xAxisLabels": ["Nov", "Dec", "Jan", "Feb"],
+      "bars": [
+        {"month": "Nov", "height": 50, "fill": "#D43333", "label": "Beginner"},
+        {"month": "Dec", "height": 80, "fill": "#E88D24"},
+        {"month": "Jan", "height": 130, "fill": "#BBD230", "label": "AI Master"},
+        {"month": "Feb", "height": 100, "fill": "#7ABF4C"}
+      ]
+    }
+  },
+  "magicPage": {
+    "title": "Creating your AI challenge...",
+    "progress": 100,
+    "socialProof": {
+      "title": "700,000+ people",
+      "subtitle": "have chosen Coursiv"
+    },
+    "reviews": [
+      {
+        "name": "Hyun",
+        "rating": 4.5,
+        "review": "\"Great interactive content! As a beginner-to-intermediate AI user, this course strengthened my foundation and gave me new ideas to get more out of AI both professionally and personally.\"",
+        "tag": "Extensive knowledge"
+      }
+    ],
+    "reviewsSource": "Featured reviews from Trustpilot."
+  },
+  "emailPage": {
+    "title": "Enter your email to get your",
+    "titleAccent": "Personal AI Challenge!",
+    "subtitle": "I'd like to receive valuable insights, exclusive offers, and the latest news straight to my inbox!",
+    "placeholder": "Your email",
+    "checkboxes": [
+      {
+        "text": "I have read and understood the",
+        "linkText": "Privacy Policy",
+        "linkHref": "#",
+        "textAfter": ", and I consent to the processing of my personal data as described."
+      },
+      {
+        "text": "I'd like to receive valuable insights, exclusive offers, and the latest news straight to my inbox!"
+      }
+    ],
+    "button": "Continue",
+    "productUpdates": {
+      "title": "Do you want to receive emails with",
+      "titleAccent": "AI",
+      "titleAfter": "tips and product updates?",
+      "buttons": {
+        "agree": "YES, I'M IN!",
+        "cancel": "I DON'T WANT TO RECEIVE TIPS OR UPDATES"
+      }
+    }
+  }
 }
 
