@@ -19,6 +19,14 @@ module.exports = {
           blue: '#5653FE',
           dark: '#24234C',
         },
+        // Quiz colors
+        'main': '#24234C',
+        'secondary': '#6B7280',
+        'accent': '#5653FE',
+        'accent-main': '#5653FE',
+        'navigation': '#F5F5F5',
+        'question-fill-unselected': '#F5F5F5',
+        'question-fill-selected': '#EEEEFF',
       },
       screens: {
         tablet: '768px',

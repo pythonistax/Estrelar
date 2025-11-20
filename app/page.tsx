@@ -2,9 +2,14 @@
 
 import { useState } from 'react'
 import CoursivHeader from '@/components/CoursivHeader'
+import QuizFlow from '@/components/QuizFlow'
 
 export default function Home() {
   const [showQuiz, setShowQuiz] = useState(false)
+
+  if (showQuiz) {
+    return <QuizFlow onBack={() => setShowQuiz(false)} />
+  }
 
   return (
     <div id="classic-social-proof" className="h-screen bg-white overflow-hidden">

@@ -21,6 +21,22 @@ body {
   background: #ffffff;
 }
 
+/* Coursiv Quiz Colors */
+:root {
+  --fill-main: #5653FE;
+  --fill-secondary: #BCBBF6;
+  --fill-accent-main: #FFFFFF;
+  --fill-accent-secondary: #6B7280;
+  --bg-accent-main: #5653FE;
+  --bg-navigation: #F5F5F5;
+  --bg-main: #FFFFFF;
+  --bg-question-fill-unselected: #F5F5F5;
+  --bg-question-fill-selected: #EEEEFF;
+  --text-main: #24234C;
+  --text-secondary: #6B7280;
+  --text-accent: #5653FE;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
