@@ -1,104 +1,78 @@
 'use client'
 
 import { useState } from 'react'
-import { motion } from 'framer-motion'
-import SocialProof from '@/components/SocialProof'
-import LiveNotifications from '@/components/LiveNotifications'
-import CountdownTimer from '@/components/CountdownTimer'
-import QuizFlow from '@/components/QuizFlow'
-import { copy } from '@/lib/config'
+import CoursivHeader from '@/components/CoursivHeader'
 
 export default function Home() {
   const [showQuiz, setShowQuiz] = useState(false)
 
   return (
-    <main className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white">
-        <div className="absolute inset-0 bg-black/10" />
-        <div className="relative max-w-7xl mx-auto px-4 py-20 sm:py-32">
-          <div className="text-center">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-5xl md:text-6xl font-bold mb-6"
-            >
-              {copy.hero.title}
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="text-xl md:text-2xl mb-8 opacity-90"
-            >
-              {copy.hero.subtitle}
-            </motion.p>
-            {!showQuiz && (
-              <motion.button
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                onClick={() => setShowQuiz(true)}
-                className="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
+    <div id="classic-social-proof" className="min-h-screen bg-white">
+      <div className="relative min-h-screen overflow-x-hidden">
+        {/* Header */}
+        <CoursivHeader />
+
+        {/* Main Content Container */}
+        <div className="mx-auto flex h-full max-w-[400px] flex-col items-center justify-center px-4 tablet:max-w-[580px] laptop:max-w-[1100px]">
+          {/* Article Container - Text and Image Side by Side */}
+          <article className="w-full space-y-4 pt-6 laptop:flex laptop:flex-grow laptop:flex-row laptop:items-center laptop:space-y-0">
+            {/* Text Container - LEFT ALIGNED */}
+            <div className="flex flex-1 flex-col items-start justify-start space-y-1 laptop:pr-8">
+              {/* Main Heading */}
+              <h1 
+                className="text-left text-[28px] font-extrabold leading-[42px]" 
+                style={{ color: '#5653FE' }}
               >
-                {copy.hero.cta}
-              </motion.button>
-            )}
-          </div>
-        </div>
-      </section>
+                More than 700,000
+              </h1>
 
-      {/* Countdown Timer */}
-      {!showQuiz && (
-        <section className="max-w-4xl mx-auto px-4 py-8">
-          <CountdownTimer hours={23} minutes={45} seconds={30} />
-        </section>
-      )}
+              {/* Secondary Text */}
+              <p 
+                className="text-left text-lg font-medium leading-[28px]" 
+                style={{ color: '#24234C' }}
+              >
+                people joined Coursiv to master AI
+              </p>
+            </div>
 
-      {/* Quiz Section */}
-      {showQuiz ? (
-        <section className="max-w-4xl mx-auto px-4 py-12">
-          <QuizFlow />
-        </section>
-      ) : (
-        <section className="max-w-4xl mx-auto px-4 py-12">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">
-              How It Works
-            </h2>
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="p-6 bg-blue-50 rounded-lg">
-                <div className="text-4xl mb-4">1️⃣</div>
-                <h3 className="font-semibold mb-2">Answer Questions</h3>
-                <p className="text-gray-600 text-sm">
-                  Quick and easy questions about your preferences
-                </p>
-              </div>
-              <div className="p-6 bg-indigo-50 rounded-lg">
-                <div className="text-4xl mb-4">2️⃣</div>
-                <h3 className="font-semibold mb-2">Get Matched</h3>
-                <p className="text-gray-600 text-sm">
-                  Our algorithm finds your perfect match
-                </p>
-              </div>
-              <div className="p-6 bg-purple-50 rounded-lg">
-                <div className="text-4xl mb-4">3️⃣</div>
-                <h3 className="font-semibold mb-2">See Results</h3>
-                <p className="text-gray-600 text-sm">
-                  Discover what's right for you
-                </p>
-              </div>
+            {/* Image Container - MUST BE VISIBLE */}
+            <div 
+              className="w-full flex-1 bg-contain bg-center bg-no-repeat laptop:max-w-[500px]"
+              style={{
+                height: '330px',
+                minHeight: '330px',
+                backgroundImage: 'url("https://d3kigabz1zn79w.cloudfront.net/male-1.webp")',
+                backgroundSize: 'contain',
+                backgroundPosition: 'center center',
+                backgroundRepeat: 'no-repeat',
+                marginTop: '16px',
+                display: 'block',
+              }}
+            />
+          </article>
+
+          {/* CTA Button Container */}
+          <div className="mx-auto w-full max-w-[400px] fixed bottom-0 left-0 right-0 z-10 laptop:static">
+            <div className="flex flex-col px-4 py-6 bg-transparent laptop:px-0 laptop:mt-[77px]">
+              <button
+                onClick={() => setShowQuiz(true)}
+                className="relative w-full select-none p-4 transition-all rounded-lg laptop:w-[368px] laptop:mx-auto"
+                style={{
+                  backgroundColor: '#5653FE',
+                  borderRadius: '8px',
+                }}
+                data-cy-id="social-proof-button"
+                data-testid="social-proof-button"
+              >
+                <span className="text-base font-semibold uppercase" style={{ color: '#FFFFFF' }}>
+                  CONTINUE
+                </span>
+              </button>
             </div>
           </div>
-        </section>
-      )}
-
-      {/* Social Proof Section */}
-      {!showQuiz && <SocialProof />}
-
-      {/* Live Notifications */}
-      <LiveNotifications />
-    </main>
+        </div>
+      </div>
+    </div>
   )
 }
 

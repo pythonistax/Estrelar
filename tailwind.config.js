@@ -15,6 +15,14 @@ module.exports = {
           600: '#0284c7',
           700: '#0369a1',
         },
+        coursiv: {
+          blue: '#5653FE',
+          dark: '#24234C',
+        },
+      },
+      screens: {
+        tablet: '768px',
+        laptop: '1024px',
       },
     },
   },
