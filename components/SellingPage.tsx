@@ -1,6 +1,7 @@
 'use client'
 
 import { copy } from '@/lib/config'
+import ReadinessChartSVG from './ReadinessChartSVG'
 
 interface SellingPageProps {
   onContinue: () => void
@@ -60,16 +61,17 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
             {sellingPage.title}
           </h1>
 
-          {/* Chart Image */}
-          {sellingPage.chartImage && (
-            <div className="w-full max-w-md flex items-center justify-center">
-              <img 
-                src={sellingPage.chartImage} 
-                alt="Readiness level chart" 
-                className="w-full h-auto"
-              />
+          {/* Chart SVG - Complete Chart */}
+          <div className="w-full max-w-lg flex items-center justify-center px-4">
+            <div className="w-full" style={{ aspectRatio: '656/460', maxHeight: '460px' }}>
+              <ReadinessChartSVG />
             </div>
-          )}
+          </div>
+          
+          {/* Disclaimer text */}
+          <p className="text-sm text-secondary text-center px-4 mt-2">
+            This chart is for illustrative purposes only.
+          </p>
 
           {/* Challenge Message */}
           <p className="text-xl font-semibold text-main text-center px-4">

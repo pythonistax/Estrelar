@@ -41,7 +41,17 @@ export default function ScratchPage({ onComplete, onBack }: ScratchPageProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const isScratching = useRef(false)
   const isRevealedRef = useRef(false)
-  const [cardSize] = useState(230) // Fixed square size matching original
+  const [cardSize, setCardSize] = useState(345) // Card size from HTML (280px on mobile)
+  
+  // Update card size based on screen width
+  useEffect(() => {
+    const updateSize = () => {
+      setCardSize(window.innerWidth < 768 ? 280 : 345)
+    }
+    updateSize()
+    window.addEventListener('resize', updateSize)
+    return () => window.removeEventListener('resize', updateSize)
+  }, [])
   const animationFrameRef = useRef<number | null>(null)
 
   // Create confetti particles
@@ -144,13 +154,22 @@ export default function ScratchPage({ onComplete, onBack }: ScratchPageProps) {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    // Set canvas size
-    canvas.width = cardSize
-    canvas.height = cardSize
+    // Set canvas size accounting for device pixel ratio
+    const dpr = window.devicePixelRatio || 1
+    canvas.width = cardSize * dpr
+    canvas.height = cardSize * dpr
+    canvas.style.width = `${cardSize}px`
+    canvas.style.height = `${cardSize}px`
+    
+    // Scale context to account for device pixel ratio
+    ctx.scale(dpr, dpr)
 
-    // Draw the gray scratch overlay
-    ctx.fillStyle = '#ddd' // Gray overlay color
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
+    // Draw the gradient scratch overlay (matching HTML design)
+    const gradient = ctx.createLinearGradient(0, 0, cardSize, cardSize)
+    gradient.addColorStop(0, '#FFD89B')
+    gradient.addColorStop(1, '#FFA751')
+    ctx.fillStyle = gradient
+    ctx.fillRect(0, 0, cardSize, cardSize)
 
     // Show canvas with transition
     setCanvasOpacity(1)
@@ -170,20 +189,27 @@ export default function ScratchPage({ onComplete, onBack }: ScratchPageProps) {
         y = touch.clientY - rect.top
       }
 
+      // Ensure coordinates are within bounds
+      x = Math.max(0, Math.min(x, cardSize))
+      y = Math.max(0, Math.min(y, cardSize))
+
       // Clear the scratched area (40x40 pixel area)
       ctx.globalCompositeOperation = 'destination-out'
-      ctx.clearRect(x - 20, y - 20, 40, 40)
+      ctx.beginPath()
+      ctx.arc(x, y, 20, 0, Math.PI * 2)
+      ctx.fill()
       ctx.globalCompositeOperation = 'source-over'
 
-      // Calculate revealed percentage
+      // Calculate revealed percentage (sample every 4th pixel for performance)
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
       let transparentPixels = 0
-      for (let i = 3; i < imageData.data.length; i += 4) {
+      const sampleRate = 4 // Sample every 4th pixel for performance
+      for (let i = 3; i < imageData.data.length; i += 4 * sampleRate) {
         if (imageData.data[i] === 0) {
-          transparentPixels++
+          transparentPixels += sampleRate
         }
       }
-      const percent = (transparentPixels / (canvas.width * canvas.height)) * 100
+      const percent = (transparentPixels / (cardSize * cardSize)) * 100
       setRevealedPercent(percent)
 
       // If more than 70% is revealed, trigger full reveal
@@ -192,7 +218,7 @@ export default function ScratchPage({ onComplete, onBack }: ScratchPageProps) {
         setIsRevealed(true)
         // Smoothly clear the rest
         ctx.globalCompositeOperation = 'destination-out'
-        ctx.fillRect(0, 0, canvas.width, canvas.height)
+        ctx.fillRect(0, 0, cardSize, cardSize)
         ctx.globalCompositeOperation = 'source-over'
         
         // Trigger confetti after reveal
@@ -336,28 +362,37 @@ export default function ScratchPage({ onComplete, onBack }: ScratchPageProps) {
 
             {/* Main Content - Centered Layout */}
             <div className="flex flex-col items-center justify-center min-h-[calc(100vh-64px)] px-4 py-8 gap-6">
-              {/* Title Section */}
-              <div className="text-center space-y-2 max-w-[400px]">
-                <h1 className="text-2xl font-bold text-main">
-                  {scratchPage.title} <span className="text-accent">{scratchPage.titleAccent}</span>
+              {/* Title Section - Matching HTML design */}
+              <div className="text-center space-y-4 max-w-[640px]">
+                <h1 className="text-[42px] font-bold text-main leading-tight">
+                  {scratchPage.title}<br />
+                  <span className="text-accent">{scratchPage.titleAccent}</span>
                 </h1>
-                <p className="text-base text-secondary whitespace-pre-line">{scratchPage.subtitle}</p>
+                <div className="text-lg text-main leading-relaxed">
+                  {scratchPage.subtitle.split('\n').map((line, i) => (
+                    <span key={i}>
+                      {line}
+                      {i < scratchPage.subtitle.split('\n').length - 1 && <br />}
+                    </span>
+                  ))}
+                </div>
               </div>
 
               {/* Scratch Prompt - Above Card */}
-              <p className="text-lg font-semibold text-main text-center">{scratchPage.scratchPrompt}</p>
+              <p className="text-base text-main text-center mb-6">{scratchPage.scratchPrompt}</p>
 
-              {/* Scratch Card - Centered, Fixed Square Size (230x230) matching original */}
+              {/* Scratch Card - Matching HTML design (345x345 desktop, 280x280 mobile) */}
               <div
                 ref={containerRef}
-                className="ScratchCard__Container animate-pulse relative flex-shrink-0 mx-auto"
+                className="ScratchCard__Container relative flex-shrink-0 mx-auto tablet:w-[345px] tablet:h-[345px] w-[280px] h-[280px]"
                 style={{
-                  width: '230px',
-                  height: '230px',
                   position: 'relative',
                   touchAction: 'none',
                   overscrollBehavior: 'contain',
                   userSelect: 'none',
+                  borderRadius: '24px',
+                  overflow: 'hidden',
+                  cursor: 'pointer',
                 }}
               >
                 {/* Canvas overlay (the scratchy part) */}
@@ -370,62 +405,49 @@ export default function ScratchPage({ onComplete, onBack }: ScratchPageProps) {
                   style={{
                     position: 'absolute',
                     top: 0,
-                    zIndex: 1,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    zIndex: 10,
                     transition: '1s',
                     opacity: canvasOpacity,
                     cursor: 'pointer',
                     touchAction: 'none',
+                    pointerEvents: 'auto',
                   }}
                 />
 
-                {/* Content underneath the scratch layer */}
+                {/* Content underneath the scratch layer - Matching HTML design */}
                 <div
-                  className="ScratchCard__Result scale-[99%]"
+                  className="ScratchCard__Result"
                   style={{
-                    visibility: 'visible',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
                     width: '100%',
                     height: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: '#FFFFFF',
+                    zIndex: 0,
+                    pointerEvents: 'none',
+                    opacity: isRevealed ? 1 : 0,
+                    transition: 'opacity 0.3s',
                   }}
                 >
+                  {/* Discount amount - Large centered text like HTML */}
                   <div 
-                    className="aspect-square w-[230px] max-w-[230px] overflow-hidden rounded-3xl"
-                    style={{
-                      backgroundColor: '#F5F5F5',
-                      color: '#24234C',
+                    className="text-center"
+                    style={{ 
+                      color: '#5653FE',
+                      fontSize: '72px',
+                      fontWeight: 700,
+                      lineHeight: 1,
                     }}
                   >
-                    {/* Discount percentage */}
-                    <div 
-                      className="flex h-[50%] items-end justify-center pb-6"
-                      style={{ color: '#24234C' }}
-                    >
-                      <div className="text-[64px] font-semibold leading-[100%]">{scratchPage.discountValue}</div>
-                      <div className="text-[28px] leading-[100%]">
-                        %
-                        <div>OFF</div>
-                      </div>
-                    </div>
-
-                    {/* Dashed line divider */}
-                    <div className="relative">
-                      <div 
-                        className="absolute left-[-16px] top-[-16px] h-[32px] w-[32px] min-w-[32px] rounded-full"
-                        style={{ backgroundColor: '#24234C' }}
-                      ></div>
-                      <div 
-                        className="border-b border-dashed"
-                        style={{ borderColor: '#24234C' }}
-                      ></div>
-                      <div 
-                        className="absolute right-[-16px] top-[-16px] h-[32px] w-[32px] min-w-[32px] rounded-full"
-                        style={{ backgroundColor: '#24234C' }}
-                      ></div>
-                    </div>
-
-                    {/* Promo code */}
-                    <div className="px-4 pb-10 pt-6">
-                      <p className="text-center text-base" style={{ color: '#24234C' }}>{scratchPage.promoCode}</p>
-                    </div>
+                    {scratchPage.discountValue}%<br />
+                    <span style={{ fontSize: '48px' }}>OFF</span>
                   </div>
                 </div>
               </div>
@@ -445,43 +467,44 @@ export default function ScratchPage({ onComplete, onBack }: ScratchPageProps) {
             onClick={() => setShowModal(false)}
           >
             <motion.div
-              className="bg-white rounded-t-3xl rounded-b-lg p-6 w-full max-w-[400px] shadow-2xl"
+              className="bg-white rounded-3xl p-12 w-full max-w-[500px] shadow-[0_20px_60px_rgba(0,0,0,0.3)] tablet:p-12 p-8"
               initial={{ y: 100, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 100, opacity: 0 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Celebration Emoji */}
+              {/* Celebration Emoji - Matching HTML */}
               <div className="text-center mb-4">
-                <div className="text-6xl">🎉</div>
+                <div className="text-[56px] leading-none">🥳</div>
               </div>
 
-              {/* Headline */}
-              <h2 className="text-2xl font-bold text-main text-center mb-2">Woo hoo!</h2>
+              {/* Headline - Matching HTML */}
+              <h2 className="text-[32px] font-bold text-main text-center mb-2">Woo hoo!</h2>
 
-              {/* Message */}
-              <p className="text-base text-secondary text-center mb-4">
+              {/* Message - Matching HTML */}
+              <p className="text-lg text-main text-center mb-4">
                 You won a promo code with
               </p>
 
-              {/* Discount */}
-              <div className="text-center mb-2">
-                <span className="text-3xl font-bold text-accent">{scratchPage.discountValue}{scratchPage.discountUnit}</span>
+              {/* Discount - Matching HTML design */}
+              <div className="text-center mb-4">
+                <div className="text-[72px] font-bold text-accent leading-none mb-4">{scratchPage.discountValue}% off</div>
               </div>
 
-              {/* Auto application message */}
-              <p className="text-sm text-secondary text-center mb-6">
+              {/* Auto application message - Matching HTML */}
+              <p className="text-base text-main text-center mb-8">
                 It will be applied automatically
               </p>
 
-              {/* CTA Button */}
+              {/* CTA Button - Matching HTML */}
               <button
                 onClick={() => {
                   setShowModal(false)
                   onComplete()
                 }}
-                className="w-full rounded-lg bg-accent-main p-4 text-base font-semibold uppercase text-white shadow-[0px_8px_24px_0px_rgba(86,83,254,0.3)] transition-all hover:opacity-90"
+                className="w-full rounded-lg bg-accent-main py-4 px-12 text-base font-semibold uppercase text-white shadow-[0px_8px_24px_0px_rgba(86,83,254,0.42)] transition-all hover:opacity-90 tablet:w-auto tablet:mx-auto"
+                style={{ letterSpacing: '0.5px' }}
               >
                 {scratchPage.cta}
               </button>
