@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
     
-    const { email, sessionId, quizAnswers, privacyConsent, marketingConsent, createdAt, submittedAt } = body
+    const { email, name, sessionId, quizAnswers, privacyConsent, marketingConsent, createdAt, submittedAt } = body
 
     // Validate required fields
     if (!email || !sessionId) {
@@ -28,6 +28,7 @@ export async function POST(request: NextRequest) {
     // await saveToDatabase({
     //   sessionId,
     //   email,
+    //   name,
     //   quizAnswers,
     //   privacyConsent,
     //   marketingConsent,
@@ -39,6 +40,7 @@ export async function POST(request: NextRequest) {
     console.log('Email submission received:', {
       sessionId,
       email,
+      name,
       quizAnswers,
       privacyConsent,
       marketingConsent,

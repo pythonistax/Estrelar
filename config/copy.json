@@ -619,6 +619,21 @@
         "cancel": "I DON'T WANT TO RECEIVE TIPS OR UPDATES"
       }
     }
+  },
+  "namePage": {
+    "title": "What is your name?",
+    "placeholder": "Enter your name",
+    "cta": "CONTINUE"
+  },
+  "scratchPage": {
+    "title": "Scratch & Save on your",
+    "titleAccent": "28-Day AI Challenge!",
+    "subtitle": "Boost your skills and master AI!\nGet your gift with us 🎁",
+    "scratchPrompt": "Scratch the card👇🏻",
+    "discountValue": "50",
+    "discountUnit": "% OFF",
+    "promoCode": "sss_nov2025",
+    "cta": "CLAIM MY DISCOUNT"
   }
 }
 

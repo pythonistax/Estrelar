@@ -5,13 +5,14 @@ import { useState } from 'react'
 import { getSessionMetadata } from '@/lib/session'
 
 interface EmailPageProps {
-  onContinue: () => void
+  onContinue: (email: string, privacyConsent: boolean, marketingConsent: boolean) => void
   onBack?: () => void
   sessionId?: string
   quizAnswers?: Record<number, string | string[]>
+  shouldSubmit?: boolean // Whether to submit immediately or just pass data
 }
 
-export default function EmailPage({ onContinue, onBack, sessionId, quizAnswers }: EmailPageProps) {
+export default function EmailPage({ onContinue, onBack, sessionId, quizAnswers, shouldSubmit = true }: EmailPageProps) {
   const emailPage = copy.emailPage
   const [email, setEmail] = useState('')
   const [privacyChecked, setPrivacyChecked] = useState(false)
@@ -23,49 +24,49 @@ export default function EmailPage({ onContinue, onBack, sessionId, quizAnswers }
     if (email && privacyChecked && !isSubmitting) {
       setIsSubmitting(true)
       
-      try {
-        // Get session metadata
-        const sessionData = getSessionMetadata()
-        
-        // Prepare data to send
-        const submissionData = {
-          email: email.trim(),
-          sessionId: sessionId || sessionData.sessionId,
-          createdAt: sessionData.createdAtISO,
-          privacyConsent: privacyChecked,
-          marketingConsent: marketingChecked,
-          quizAnswers: quizAnswers || {},
-          submittedAt: new Date().toISOString()
-        }
+      // If shouldSubmit is true, submit immediately (old behavior)
+      if (shouldSubmit) {
+        try {
+          // Get session metadata
+          const sessionData = getSessionMetadata()
+          
+          // Prepare data to send
+          const submissionData = {
+            email: email.trim(),
+            sessionId: sessionId || sessionData.sessionId,
+            createdAt: sessionData.createdAtISO,
+            privacyConsent: privacyChecked,
+            marketingConsent: marketingChecked,
+            quizAnswers: quizAnswers || {},
+            submittedAt: new Date().toISOString()
+          }
 
-        // TODO: Replace this URL with your Python backend API endpoint
-        // Example: 'https://your-api.yourdomain.com/api/save-email'
-        const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT || '/api/save-email'
-        
-        // Send to backend API
-        const response = await fetch(API_ENDPOINT, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(submissionData),
-        })
+          const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT || '/api/save-email'
+          
+          // Send to backend API
+          const response = await fetch(API_ENDPOINT, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(submissionData),
+          })
 
-        if (!response.ok) {
-          console.error('Failed to save email:', response.statusText)
-          // Continue anyway - don't block user if API fails
-        } else {
-          const result = await response.json()
-          console.log('Email saved successfully:', result)
+          if (!response.ok) {
+            console.error('Failed to save email:', response.statusText)
+          } else {
+            const result = await response.json()
+            console.log('Email saved successfully:', result)
+          }
+        } catch (error) {
+          console.error('Error saving email:', error)
+        } finally {
+          setIsSubmitting(false)
         }
-      } catch (error) {
-        console.error('Error saving email:', error)
-        // Continue anyway - don't block user if API fails
-      } finally {
-        setIsSubmitting(false)
-        // Continue to next page
-        onContinue()
       }
+      
+      // Always continue to next page (pass email and consents)
+      onContinue(email.trim(), privacyChecked, marketingChecked)
     }
   }
 

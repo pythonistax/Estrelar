@@ -9,6 +9,8 @@ import UserProfilePage from './UserProfilePage'
 import PersonalPlanPage from './PersonalPlanPage'
 import MagicPage from './MagicPage'
 import EmailPage from './EmailPage'
+import NamePage from './NamePage'
+import ScratchPage from './ScratchPage'
 
 interface QuizFlowProps {
   onBack?: () => void
@@ -25,7 +27,13 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
   const [showPersonalPlan, setShowPersonalPlan] = useState(false)
   const [showMagicPage, setShowMagicPage] = useState(false)
   const [showEmailPage, setShowEmailPage] = useState(false)
+  const [showNamePage, setShowNamePage] = useState(false)
+  const [showScratchPage, setShowScratchPage] = useState(false)
   const [sessionId, setSessionId] = useState<string>('')
+  const [userName, setUserName] = useState<string>('') // Store user name
+  const [userEmail, setUserEmail] = useState<string>('') // Store user email
+  const [privacyConsent, setPrivacyConsent] = useState(false)
+  const [marketingConsent, setMarketingConsent] = useState(false)
   const steps = copy.quiz.steps
   const totalSteps = 20 // Total quiz steps
 
@@ -205,11 +213,69 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
     setSelectedAnswer(null)
   }
 
-  const handleEmailPageContinue = () => {
-    // Continue after email page - show end page
+  const handleEmailPageContinue = (email: string, privacy: boolean, marketing: boolean) => {
+    // Store email and consent info, then show name page
+    setUserEmail(email)
+    setPrivacyConsent(privacy)
+    setMarketingConsent(marketing)
+    // Ensure all other pages are hidden
     setShowEmailPage(false)
-    setShowEndPage(true)
+    setShowEndPage(false) // Make sure end page is not shown
+    setShowNamePage(true) // Show name page
     setSelectedAnswer(null)
+  }
+
+  const handleNameSubmit = async (name: string) => {
+    // Store name
+    setUserName(name.trim())
+    
+    // Submit email + name + quiz data together after name is collected
+    if (userEmail && name.trim()) {
+      try {
+        const sessionData = getSessionMetadata()
+        const submissionData = {
+          email: userEmail.trim(),
+          name: name.trim(),
+          sessionId: sessionId || sessionData.sessionId,
+          createdAt: sessionData.createdAtISO,
+          privacyConsent: privacyConsent,
+          marketingConsent: marketingConsent,
+          quizAnswers: answers || {},
+          submittedAt: new Date().toISOString()
+        }
+
+        const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT || '/api/save-email'
+        
+        const response = await fetch(API_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(submissionData),
+        })
+
+        if (!response.ok) {
+          console.error('Failed to save email and name:', response.statusText)
+          // Continue anyway - don't block user if API fails
+        } else {
+          const result = await response.json()
+          console.log('Email and name saved successfully:', result)
+        }
+      } catch (error) {
+        console.error('Error saving email and name:', error)
+        // Continue anyway - don't block user if API fails
+      }
+    }
+    
+    // After name submission - show scratch page (only after name is entered)
+    setShowNamePage(false)
+    setShowScratchPage(true)
+  }
+
+  const handleScratchComplete = () => {
+    // After scratch page - show end page
+    setShowScratchPage(false)
+    setShowEndPage(true)
   }
 
   const getOptionValue = (option: any): string => {
@@ -217,7 +283,15 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
   }
 
   const handleBackClick = () => {
-    if (showEmailPage) {
+    if (showScratchPage) {
+      setShowScratchPage(false)
+      setShowNamePage(true)
+      setSelectedAnswers([])
+    } else if (showNamePage) {
+      setShowNamePage(false)
+      setShowEmailPage(true)
+      setSelectedAnswers([])
+    } else if (showEmailPage) {
       setShowEmailPage(false)
       setShowMagicPage(true)
       setSelectedAnswer(null)
@@ -256,6 +330,16 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
 
   const progress = ((currentStep + 1) / totalSteps) * 100
 
+  // Show scratch page after name page
+  if (showScratchPage) {
+    return <ScratchPage onComplete={handleScratchComplete} onBack={handleBackClick} />
+  }
+
+  // Show name page after email page
+  if (showNamePage) {
+    return <NamePage onSubmit={handleNameSubmit} onBack={handleBackClick} />
+  }
+
   // Show email page after magic page
   if (showEmailPage) {
     return (
@@ -264,6 +348,7 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
         onBack={handleBackClick}
         sessionId={sessionId}
         quizAnswers={answers}
+        shouldSubmit={false} // Don't submit yet, wait for name
       />
     )
   }

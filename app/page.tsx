@@ -75,11 +75,12 @@ export default function Home() {
                 style={{
                   backgroundColor: '#5653FE',
                   borderRadius: '8px',
+                  height: '56px',
                 }}
                 data-cy-id="social-proof-button"
                 data-testid="social-proof-button"
               >
-                <span className="text-base font-semibold uppercase" style={{ color: '#FFFFFF' }}>
+                <span className="text-base font-semibold uppercase" style={{ color: '#000000' }}>
                   CONTINUE
                 </span>
               </button>
