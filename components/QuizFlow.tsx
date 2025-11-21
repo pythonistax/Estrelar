@@ -11,6 +11,7 @@ import MagicPage from './MagicPage'
 import EmailPage from './EmailPage'
 import NamePage from './NamePage'
 import ScratchPage from './ScratchPage'
+import SellingPage from './SellingPage'
 
 interface QuizFlowProps {
   onBack?: () => void
@@ -29,6 +30,7 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
   const [showEmailPage, setShowEmailPage] = useState(false)
   const [showNamePage, setShowNamePage] = useState(false)
   const [showScratchPage, setShowScratchPage] = useState(false)
+  const [showSellingPage, setShowSellingPage] = useState(false)
   const [sessionId, setSessionId] = useState<string>('')
   const [userName, setUserName] = useState<string>('') // Store user name
   const [userEmail, setUserEmail] = useState<string>('') // Store user email
@@ -273,8 +275,14 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
   }
 
   const handleScratchComplete = () => {
-    // After scratch page - show end page
+    // After scratch page - show selling page
     setShowScratchPage(false)
+    setShowSellingPage(true)
+  }
+
+  const handleSellingPageContinue = () => {
+    // After selling page - show end page
+    setShowSellingPage(false)
     setShowEndPage(true)
   }
 
@@ -283,7 +291,11 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
   }
 
   const handleBackClick = () => {
-    if (showScratchPage) {
+    if (showSellingPage) {
+      setShowSellingPage(false)
+      setShowScratchPage(true)
+      setSelectedAnswers([])
+    } else if (showScratchPage) {
       setShowScratchPage(false)
       setShowNamePage(true)
       setSelectedAnswers([])
@@ -313,7 +325,13 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
       setSelectedAnswers([])
     } else if (showEndPage) {
       setShowEndPage(false)
-      setCurrentStep(steps.length - 1) // Go back to last question
+      // If we came from SellingPage, go back to SellingPage
+      // Check if we have answers to question 19 (index 18) which means we went through SellingPage
+      if (answers[18]) {
+        setShowSellingPage(true)
+      } else {
+        setCurrentStep(steps.length - 1) // Go back to last question
+      }
       setSelectedAnswers([])
     } else if (showTeaser) {
       setShowTeaser(false)
@@ -329,6 +347,11 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
   }
 
   const progress = ((currentStep + 1) / totalSteps) * 100
+
+  // Show selling page after scratch page
+  if (showSellingPage) {
+    return <SellingPage onContinue={handleSellingPageContinue} onBack={handleBackClick} />
+  }
 
   // Show scratch page after name page
   if (showScratchPage) {

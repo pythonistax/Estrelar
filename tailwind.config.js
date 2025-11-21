@@ -28,6 +28,9 @@ module.exports = {
         'question-fill-unselected': '#F5F5F5',
         'question-fill-selected': '#EEEEFF',
         'magic-page': '#FFFFFF',
+        // Scratch card colors
+        'scratching-promocode': '#F5F5F5', // Light background
+        'scratch-promocode': '#24234C', // Main text color
       },
       screens: {
         tablet: '768px',

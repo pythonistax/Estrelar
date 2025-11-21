@@ -634,6 +634,12 @@
     "discountUnit": "% OFF",
     "promoCode": "sss_nov2025",
     "cta": "CLAIM MY DISCOUNT"
+  },
+  "sellingPage": {
+    "title": "Your readiness level",
+    "chartImage": "https://d3kigabz1zn79w.cloudfront.net/readiness-chart.webp",
+    "challengeMessage": "Your 4-week Personal AI Challenge is ready!",
+    "cta": "CONTINUE"
   }
 }
 

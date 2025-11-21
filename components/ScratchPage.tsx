@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { copy } from '@/lib/config'
 
@@ -36,14 +36,16 @@ export default function ScratchPage({ onComplete, onBack }: ScratchPageProps) {
   const [showModal, setShowModal] = useState(false)
   const [confetti, setConfetti] = useState<ConfettiParticle[]>([])
   const [revealedPercent, setRevealedPercent] = useState(0)
+  const [canvasOpacity, setCanvasOpacity] = useState(0)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const isScratching = useRef(false)
-  const [cardSize] = useState(360) // Fixed square size
+  const isRevealedRef = useRef(false)
+  const [cardSize] = useState(230) // Fixed square size matching original
   const animationFrameRef = useRef<number | null>(null)
 
   // Create confetti particles
-  const createConfetti = () => {
+  const createConfetti = useCallback(() => {
     const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F']
     const particles: ConfettiParticle[] = []
     
@@ -70,7 +72,12 @@ export default function ScratchPage({ onComplete, onBack }: ScratchPageProps) {
     setTimeout(() => {
       setShowModal(true)
     }, 2000) // Show modal after 2 seconds
-  }
+  }, [])
+
+  // Keep ref in sync with state
+  useEffect(() => {
+    isRevealedRef.current = isRevealed
+  }, [isRevealed])
 
   // Animate confetti
   useEffect(() => {
@@ -141,129 +148,105 @@ export default function ScratchPage({ onComplete, onBack }: ScratchPageProps) {
     canvas.width = cardSize
     canvas.height = cardSize
 
-    // Create yellow-orange gradient background for scratch layer (matching the image)
-    const gradient = ctx.createLinearGradient(0, 0, cardSize, cardSize)
-    gradient.addColorStop(0, '#FFE4B5') // Light warm yellow-orange (top)
-    gradient.addColorStop(1, '#FFD89B') // Deeper orange-yellow (bottom)
-
-    // Fill with gradient
-    ctx.fillStyle = gradient
+    // Draw the gray scratch overlay
+    ctx.fillStyle = '#ddd' // Gray overlay color
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-    // Add squiggly wavy line pattern overlay (matching the image - one continuous wavy line)
-    ctx.globalAlpha = 0.4
-    ctx.strokeStyle = '#FFFEF0' // Very light pale yellow
-    ctx.lineWidth = 4
-    ctx.lineCap = 'round'
-    ctx.lineJoin = 'round'
-    
-    // Draw one continuous wavy/squiggly line from top-left to bottom-right
-    ctx.beginPath()
-    let startX = 30
-    let startY = 40
-    ctx.moveTo(startX, startY)
-    
-    // Create smooth wavy path
-    const points = 15
-    for (let i = 1; i <= points; i++) {
-      const t = i / points
-      const x = startX + (cardSize - 60) * t + Math.sin(t * Math.PI * 3) * 30
-      const y = startY + (cardSize - 80) * t + Math.cos(t * Math.PI * 4) * 25
-      ctx.lineTo(x, y)
-    }
-    ctx.stroke()
-    
-    // Add a few additional lighter squiggly lines for texture
-    ctx.globalAlpha = 0.25
-    for (let i = 0; i < 3; i++) {
-      ctx.beginPath()
-      let x = 20 + Math.random() * 40
-      let y = 30 + Math.random() * 40
-      ctx.moveTo(x, y)
-      for (let j = 0; j < 8; j++) {
-        x += 30 + Math.random() * 40
-        y += 30 + Math.random() * 40
-        if (x > cardSize - 20) x = cardSize - 20
-        if (y > cardSize - 20) y = cardSize - 20
-        ctx.lineTo(x, y)
+    // Show canvas with transition
+    setCanvasOpacity(1)
+
+    // Handle scratching on mouse move
+    const handleScratch = (e: MouseEvent | TouchEvent) => {
+      const rect = canvas.getBoundingClientRect()
+      let x: number, y: number
+
+      if (e instanceof MouseEvent) {
+        x = e.clientX - rect.left
+        y = e.clientY - rect.top
+      } else {
+        // Touch event
+        const touch = e.touches[0] || e.changedTouches[0]
+        x = touch.clientX - rect.left
+        y = touch.clientY - rect.top
       }
-      ctx.stroke()
-    }
-    ctx.globalAlpha = 1.0
 
-    // Simple touch/click to trigger reveal
-    const handleCardClick = (e: MouseEvent | TouchEvent) => {
-      e.preventDefault()
-      if (isRevealed) return // Don't trigger again if already revealed
-      
-      setIsRevealed(true)
-      // Start smooth reveal animation
-      animateFullReveal(ctx)
-      // Trigger confetti after reveal completes
-      setTimeout(() => {
-        createConfetti()
-      }, 1000) // Wait 1 second for reveal animation to complete
-    }
+      // Clear the scratched area (40x40 pixel area)
+      ctx.globalCompositeOperation = 'destination-out'
+      ctx.clearRect(x - 20, y - 20, 40, 40)
+      ctx.globalCompositeOperation = 'source-over'
 
-    // Animate smooth reveal of the entire card
-    const animateFullReveal = (ctx: CanvasRenderingContext2D) => {
-      let animationId: number | null = null
-      const duration = 1000 // 1 second for smooth reveal
-      const startTime = Date.now()
-      
-      const animate = () => {
-        const elapsed = Date.now() - startTime
-        const progress = Math.min(elapsed / duration, 1)
-        
-        // Use a smooth easing function (ease-out cubic)
-        const easeOut = 1 - Math.pow(1 - progress, 3)
-        
-        // Create a radial reveal from center, expanding outward
-        ctx.save()
-        ctx.globalCompositeOperation = 'destination-out'
-        
-        // Clear in expanding circles
-        const centerX = canvas.width / 2
-        const centerY = canvas.height / 2
-        const maxRadius = Math.sqrt(centerX * centerX + centerY * centerY)
-        const currentRadius = maxRadius * easeOut
-        
-        // Create a circular reveal mask
-        ctx.beginPath()
-        ctx.arc(centerX, centerY, currentRadius, 0, Math.PI * 2)
-        ctx.fill()
-        
-        ctx.restore()
-        
-        if (progress < 1) {
-          animationId = requestAnimationFrame(animate)
-        } else {
-          // Fully clear the canvas when done
-          ctx.clearRect(0, 0, canvas.width, canvas.height)
+      // Calculate revealed percentage
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+      let transparentPixels = 0
+      for (let i = 3; i < imageData.data.length; i += 4) {
+        if (imageData.data[i] === 0) {
+          transparentPixels++
         }
       }
-      
-      animationId = requestAnimationFrame(animate)
-      
-      // Store animation ID for cleanup
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current)
+      const percent = (transparentPixels / (canvas.width * canvas.height)) * 100
+      setRevealedPercent(percent)
+
+      // If more than 70% is revealed, trigger full reveal
+      if (percent > 70 && !isRevealedRef.current) {
+        isRevealedRef.current = true
+        setIsRevealed(true)
+        // Smoothly clear the rest
+        ctx.globalCompositeOperation = 'destination-out'
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
+        ctx.globalCompositeOperation = 'source-over'
+        
+        // Trigger confetti after reveal
+        setTimeout(() => {
+          createConfetti()
+        }, 500)
       }
-      animationFrameRef.current = animationId
     }
 
-    // Simple click/touch to trigger reveal
-    canvas.addEventListener('click', handleCardClick)
-    canvas.addEventListener('touchstart', handleCardClick, { passive: false })
+    // Handle mouse/touch down to start scratching
+    const handleStart = (e: MouseEvent | TouchEvent) => {
+      if (isRevealedRef.current) return
+      e.preventDefault()
+      isScratching.current = true
+      handleScratch(e)
+    }
+
+    // Handle mouse/touch move while scratching
+    const handleMove = (e: MouseEvent | TouchEvent) => {
+      if (isScratching.current && !isRevealedRef.current) {
+        e.preventDefault()
+        handleScratch(e)
+      }
+    }
+
+    // Handle mouse/touch up to stop scratching
+    const handleEnd = () => {
+      isScratching.current = false
+    }
+
+    // Add event listeners
+    canvas.addEventListener('mousedown', handleStart)
+    canvas.addEventListener('mousemove', handleMove)
+    canvas.addEventListener('mouseup', handleEnd)
+    canvas.addEventListener('mouseleave', handleEnd)
+    canvas.addEventListener('touchstart', handleStart, { passive: false })
+    canvas.addEventListener('touchmove', handleMove, { passive: false })
+    canvas.addEventListener('touchend', handleEnd)
+    canvas.addEventListener('touchcancel', handleEnd)
 
     return () => {
-      canvas.removeEventListener('click', handleCardClick)
-      canvas.removeEventListener('touchstart', handleCardClick)
+      canvas.removeEventListener('mousedown', handleStart)
+      canvas.removeEventListener('mousemove', handleMove)
+      canvas.removeEventListener('mouseup', handleEnd)
+      canvas.removeEventListener('mouseleave', handleEnd)
+      canvas.removeEventListener('touchstart', handleStart)
+      canvas.removeEventListener('touchmove', handleMove)
+      canvas.removeEventListener('touchend', handleEnd)
+      canvas.removeEventListener('touchcancel', handleEnd)
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current)
       }
     }
-  }, [cardSize, isRevealed])
+  }, [cardSize, createConfetti])
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-white">
@@ -364,108 +347,87 @@ export default function ScratchPage({ onComplete, onBack }: ScratchPageProps) {
               {/* Scratch Prompt - Above Card */}
               <p className="text-lg font-semibold text-main text-center">{scratchPage.scratchPrompt}</p>
 
-              {/* Scratch Card - Centered, Fixed Square Size (360x360) */}
+              {/* Scratch Card - Centered, Fixed Square Size (230x230) matching original */}
               <div
                 ref={containerRef}
-                className="relative flex-shrink-0 mx-auto"
+                className="ScratchCard__Container animate-pulse relative flex-shrink-0 mx-auto"
                 style={{
-                  width: '360px',
-                  height: '360px',
+                  width: '230px',
+                  height: '230px',
+                  position: 'relative',
+                  touchAction: 'none',
+                  overscrollBehavior: 'contain',
+                  userSelect: 'none',
                 }}
               >
-                {/* Underlying content (revealed when scratched) - Light yellow-green card matching the image */}
-                <div 
-                  className="absolute inset-0 rounded-lg flex flex-col items-center justify-center p-6 shadow-lg"
+                {/* Canvas overlay (the scratchy part) */}
+                <canvas
+                  ref={canvasRef}
+                  className="ScratchCard__Canvas"
+                  width={cardSize}
+                  height={cardSize}
+                  data-testid="scratching-promo-page-button"
                   style={{
-                    backgroundColor: '#FCFBF5', // Light creamy yellow-beige background
+                    position: 'absolute',
+                    top: 0,
+                    zIndex: 1,
+                    transition: '1s',
+                    opacity: canvasOpacity,
+                    cursor: 'pointer',
+                    touchAction: 'none',
+                  }}
+                />
+
+                {/* Content underneath the scratch layer */}
+                <div
+                  className="ScratchCard__Result scale-[99%]"
+                  style={{
+                    visibility: 'visible',
+                    width: '100%',
+                    height: '100%',
                   }}
                 >
-                  {/* Subtle swirl patterns in background */}
-                  <div className="absolute inset-0 overflow-hidden rounded-lg opacity-30">
-                    <svg width="100%" height="100%" className="absolute inset-0">
-                      <path
-                        d="M20,30 Q60,20 100,40 T180,35 T260,45"
-                        stroke="#E8E5D0"
-                        strokeWidth="2"
-                        fill="none"
-                      />
-                      <path
-                        d="M40,80 Q80,70 120,90 T200,85 T280,95"
-                        stroke="#E8E5D0"
-                        strokeWidth="2"
-                        fill="none"
-                      />
-                      <path
-                        d="M60,130 Q100,120 140,140 T220,135 T300,145"
-                        stroke="#E8E5D0"
-                        strokeWidth="2"
-                        fill="none"
-                      />
-                    </svg>
-                  </div>
-                  
-                  <div className="relative z-10 text-center w-full">
-                    {/* Top Section - 50% OFF */}
-                    <div className="flex items-baseline justify-center mb-4">
-                      <span 
-                        className="text-7xl font-bold leading-none"
-                        style={{ color: '#8BC34A' }} // Muted green color
-                      >
-                        {scratchPage.discountValue}
-                      </span>
-                      <span 
-                        className="text-4xl font-bold leading-none ml-1"
-                        style={{ color: '#8BC34A' }}
-                      >
-                        %
-                      </span>
-                      <span 
-                        className="text-5xl font-bold leading-none ml-2"
-                        style={{ color: '#8BC34A' }}
-                      >
-                        OFF
-                      </span>
-                    </div>
-                    
-                    {/* Dashed Divider Line */}
-                    <div className="relative my-4 flex items-center justify-center">
-                      <div 
-                        className="w-full border-t-2 border-dashed"
-                        style={{ 
-                          borderColor: '#D8D8D8',
-                          maxWidth: '90%'
-                        }}
-                      ></div>
-                      {/* Perforation circles at ends */}
-                      <div 
-                        className="absolute -left-2 w-3 h-3 rounded-full"
-                        style={{ backgroundColor: '#FCFBF5' }}
-                      ></div>
-                      <div 
-                        className="absolute -right-2 w-3 h-3 rounded-full"
-                        style={{ backgroundColor: '#FCFBF5' }}
-                      ></div>
-                    </div>
-                    
-                    {/* Bottom Section - Promo Code */}
+                  <div 
+                    className="aspect-square w-[230px] max-w-[230px] overflow-hidden rounded-3xl"
+                    style={{
+                      backgroundColor: '#F5F5F5',
+                      color: '#24234C',
+                    }}
+                  >
+                    {/* Discount percentage */}
                     <div 
-                      className="text-xl font-medium mt-2"
-                      style={{ color: '#888888' }} // Medium gray
+                      className="flex h-[50%] items-end justify-center pb-6"
+                      style={{ color: '#24234C' }}
                     >
-                      {scratchPage.promoCode}
+                      <div className="text-[64px] font-semibold leading-[100%]">{scratchPage.discountValue}</div>
+                      <div className="text-[28px] leading-[100%]">
+                        %
+                        <div>OFF</div>
+                      </div>
+                    </div>
+
+                    {/* Dashed line divider */}
+                    <div className="relative">
+                      <div 
+                        className="absolute left-[-16px] top-[-16px] h-[32px] w-[32px] min-w-[32px] rounded-full"
+                        style={{ backgroundColor: '#24234C' }}
+                      ></div>
+                      <div 
+                        className="border-b border-dashed"
+                        style={{ borderColor: '#24234C' }}
+                      ></div>
+                      <div 
+                        className="absolute right-[-16px] top-[-16px] h-[32px] w-[32px] min-w-[32px] rounded-full"
+                        style={{ backgroundColor: '#24234C' }}
+                      ></div>
+                    </div>
+
+                    {/* Promo code */}
+                    <div className="px-4 pb-10 pt-6">
+                      <p className="text-center text-base" style={{ color: '#24234C' }}>{scratchPage.promoCode}</p>
                     </div>
                   </div>
                 </div>
-
-                {/* Scratch-off layer */}
-                <canvas
-                  ref={canvasRef}
-                  className="absolute inset-0 cursor-pointer touch-none rounded-lg"
-                  style={{
-                    width: '360px',
-                    height: '360px',
-                  }}
-                />
               </div>
             </div>
           </div>
