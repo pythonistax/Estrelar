@@ -232,7 +232,7 @@ export default function UserProfilePage({ onContinue, onBack }: UserProfilePageP
                   data-cy-id="continue-quiz-button-user-profile"
                   data-testid="continue-quiz-button-user-profile"
                 >
-                  <span className="text-base font-semibold uppercase text-tertiary">{profile.cta}</span>
+                  <span className="text-base font-semibold uppercase text-white">{profile.cta}</span>
                 </button>
               </div>
             </div>

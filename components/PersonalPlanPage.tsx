@@ -174,7 +174,7 @@ export default function PersonalPlanPage({ onContinue, onBack }: PersonalPlanPag
                     data-cy-id="continue-quiz-button-personal-plan"
                     data-testid="continue-quiz-button-personal-plan"
                   >
-                    <span className="text-base font-semibold uppercase text-tertiary">{planPage.cta}</span>
+                    <span className="text-base font-semibold uppercase text-white">{planPage.cta}</span>
                   </button>
                 </div>
               </div>

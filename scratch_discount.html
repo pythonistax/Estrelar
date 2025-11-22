@@ -155,16 +155,39 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #FFFFFF;
+  background: #EBF5E4;
   z-index: 0;
+  padding: 24px;
+  border-radius: 24px;
 }
 
 .discount-text {
-  font-size: 48px;
+  font-size: 80px;
   font-weight: 700;
-  color: var(--text-accent);
-  line-height: 1;
+  color: #7ABF4C;
+  line-height: 0.9;
   text-align: center;
+  margin-bottom: 8px;
+}
+
+.discount-percent {
+  font-size: 32px;
+}
+
+.promo-divider {
+  width: 80%;
+  height: 2px;
+  background: rgba(122, 191, 76, 0.3);
+  margin: 16px 0;
+  border: none;
+  border-top: 2px dashed rgba(122, 191, 76, 0.3);
+}
+
+.promo-code {
+  font-size: 18px;
+  color: #4F981D;
+  font-weight: 500;
+  letter-spacing: 1px;
 }
 
 /* Bottom Sheet Modal */
@@ -199,14 +222,14 @@ h1 {
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Lottie Confetti Background */
+/* Lottie Confetti Background - LARGER */
 #lottieConfetti {
   position: absolute;
-  top: -150px;
+  top: -250px;
   left: 50%;
   transform: translateX(-50%);
-  width: 400px;
-  height: 400px;
+  width: 600px;
+  height: 600px;
   pointer-events: none;
   z-index: -1;
 }
@@ -219,7 +242,7 @@ h1 {
 
 .modal-title {
   font-size: 32px;
-  font-weight: 700;
+  font-weight: 900;
   color: var(--text-main);
   margin-bottom: 8px;
 }
@@ -304,9 +327,9 @@ h1 {
   }
 
   #lottieConfetti {
-    width: 300px;
-    height: 300px;
-    top: -100px;
+    width: 500px;
+    height: 500px;
+    top: -200px;
   }
 }
 </style>
@@ -353,9 +376,11 @@ h1 {
         <!-- Lottie Background Animation -->
         <div id="lottieBackground"></div>
 
-        <!-- Revealed Content (50% OFF) -->
+        <!-- Revealed Content (50% OFF + Promo Code) -->
         <div class="revealed-content">
-          <div class="discount-text">50%<br>OFF</div>
+          <div class="discount-text">50<span class="discount-percent">%</span><br>OFF</div>
+          <hr class="promo-divider">
+          <div class="promo-code">sss_nov2025</div>
         </div>
 
         <!-- Canvas for Scratching -->
@@ -372,7 +397,7 @@ h1 {
     <div id="lottieConfetti"></div>
 
     <img src="https://d3kigabz1zn79w.cloudfront.net/Heading.webp" alt="Celebration" class="heading-icon">
-    <div class="modal-title">Woo hoo!</div>
+    <div class="modal-title"><strong>Woo hoo!</strong></div>
     <div class="modal-subtitle">You won a promo code with</div>
     <div class="modal-discount">50% off</div>
     <div class="modal-note">It will be applied automatically</div>
@@ -432,9 +457,9 @@ function calculateScratchedArea() {
 
   scratchedPercentage = (transparent / (pixels.length / 4)) * 100;
 
-  // Show modal when 60% scratched
-  if (scratchedPercentage > 60 && !bottomSheet.classList.contains('show')) {
-    setTimeout(showBottomSheet, 300);
+  // Show modal when 10% scratched - immediately show confetti
+  if (scratchedPercentage > 10 && !bottomSheet.classList.contains('show')) {
+    showBottomSheet(); // Show immediately
   }
 }
 

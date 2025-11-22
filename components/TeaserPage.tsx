@@ -79,7 +79,7 @@ export default function TeaserPage({ onContinue, onBack }: TeaserPageProps) {
                     data-cy-id="continue-quiz-button-teaser"
                     data-testid="continue-quiz-button-teaser"
                   >
-                    <span className="text-base font-semibold uppercase text-tertiary">{teaser.cta}</span>
+                    <span className="text-base font-semibold uppercase text-white">{teaser.cta}</span>
                   </button>
                 </div>
               </div>

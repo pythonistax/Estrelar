@@ -12,6 +12,7 @@ import EmailPage from './EmailPage'
 import NamePage from './NamePage'
 import ScratchPage from './ScratchPage'
 import SellingPage from './SellingPage'
+import PricingPage from './PricingPage'
 
 interface QuizFlowProps {
   onBack?: () => void
@@ -31,6 +32,7 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
   const [showNamePage, setShowNamePage] = useState(false)
   const [showScratchPage, setShowScratchPage] = useState(false)
   const [showSellingPage, setShowSellingPage] = useState(false)
+  const [showPricingPage, setShowPricingPage] = useState(false)
   const [sessionId, setSessionId] = useState<string>('')
   const [userName, setUserName] = useState<string>('') // Store user name
   const [userEmail, setUserEmail] = useState<string>('') // Store user email
@@ -275,15 +277,21 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
   }
 
   const handleScratchComplete = () => {
-    // After scratch page - show selling page
+    // After scratch page - show selling page (readiness level) - this is the final page
     setShowScratchPage(false)
     setShowSellingPage(true)
   }
 
   const handleSellingPageContinue = () => {
-    // After selling page - show end page
+    // After selling page - show pricing page
     setShowSellingPage(false)
-    setShowEndPage(true)
+    setShowPricingPage(true)
+  }
+
+  const handlePricingPageContinue = () => {
+    // PricingPage is the final page - handle checkout or redirect
+    console.log('User ready to purchase')
+    // You can add redirect to payment/checkout here
   }
 
   const getOptionValue = (option: any): string => {
@@ -291,7 +299,11 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
   }
 
   const handleBackClick = () => {
-    if (showSellingPage) {
+    if (showPricingPage) {
+      setShowPricingPage(false)
+      setShowSellingPage(true)
+      setSelectedAnswers([])
+    } else if (showSellingPage) {
       setShowSellingPage(false)
       setShowScratchPage(true)
       setSelectedAnswers([])
@@ -325,13 +337,8 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
       setSelectedAnswers([])
     } else if (showEndPage) {
       setShowEndPage(false)
-      // If we came from SellingPage, go back to SellingPage
-      // Check if we have answers to question 19 (index 18) which means we went through SellingPage
-      if (answers[18]) {
-        setShowSellingPage(true)
-      } else {
-        setCurrentStep(steps.length - 1) // Go back to last question
-      }
+      // Go back to previous page based on context
+      setCurrentStep(steps.length - 1) // Go back to last question
       setSelectedAnswers([])
     } else if (showTeaser) {
       setShowTeaser(false)
@@ -348,7 +355,12 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
 
   const progress = ((currentStep + 1) / totalSteps) * 100
 
-  // Show selling page after scratch page
+  // Show pricing page - final page
+  if (showPricingPage) {
+    return <PricingPage onContinue={handlePricingPageContinue} onBack={handleBackClick} />
+  }
+
+  // Show selling page (readiness level) after scratch page
   if (showSellingPage) {
     return <SellingPage onContinue={handleSellingPageContinue} onBack={handleBackClick} />
   }

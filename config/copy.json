@@ -640,6 +640,127 @@
     "chartImage": "https://d3kigabz1zn79w.cloudfront.net/readiness-chart.webp",
     "challengeMessage": "Your 4-week Personal AI Challenge is ready!",
     "cta": "CONTINUE"
+  },
+  "pricingPage": {
+    "header": {
+      "logo": "Coursiv",
+      "ctaButton": "GET MY PLAN"
+    },
+    "nowVsGoal": {
+      "title": "Transform Your AI Journey",
+      "now": {
+        "title": "Now",
+        "image": "https://d3kigabz1zn79w.cloudfront.net/male-1.webp",
+        "aiSkills": {
+          "label": "AI skills",
+          "level": "Moderate",
+          "value": 40
+        },
+        "practicalReadiness": {
+          "label": "Practical Readiness",
+          "level": "Limited",
+          "value": 35
+        }
+      },
+      "goal": {
+        "title": "Goal",
+        "image": "https://d3kigabz1zn79w.cloudfront.net/male-1.webp",
+        "badges": ["+45%", "+15%", "+72%", "+35%"],
+        "aiSkills": {
+          "label": "AI skills",
+          "level": "High",
+          "value": 85
+        },
+        "practicalReadiness": {
+          "label": "Practical Readiness",
+          "level": "High",
+          "value": 85
+        }
+      },
+      "disclaimer": "This is not a guarantee or promise of results."
+    },
+    "aiEasier": {
+      "title": "AI is easier than you think",
+      "days": [
+        {
+          "day": 1,
+          "icon": "🚢",
+          "label": "Images"
+        },
+        {
+          "day": 2,
+          "icon": "🌀",
+          "label": "Writing"
+        },
+        {
+          "day": 3,
+          "icon": "🎙️",
+          "label": "Speech"
+        }
+      ],
+      "benefits": [
+        "No prior AI knowledge is required",
+        "No need for a university degree",
+        "Work at your own pace and terms"
+      ]
+    },
+    "benefits": {
+      "title": "Try Coursiv and you will:",
+      "items": [
+        "Master AI tools that can boost your income",
+        "Discover new professions and income sources with AI",
+        "Learn key AI terms and lessons"
+      ],
+      "goals": {
+        "yourGoal": "Gain financial skills",
+        "yourTarget": "Saving for a home"
+      }
+    },
+    "tools": {
+      "items": [
+        { "day": 1, "name": "ChatGPT", "icon": "🌀" },
+        { "day": 2, "name": "Jasper", "icon": "✨" },
+        { "day": 3, "name": "Canva", "icon": "🎨" },
+        { "day": 4, "name": "Midjourney", "icon": "🚢" },
+        { "day": 5, "name": "Synthesia", "icon": "💎" },
+        { "day": 6, "name": "Lumen5", "icon": "🤖" },
+        { "day": 7, "name": "Copy.ai", "icon": "📝" },
+        { "day": 8, "name": "Descript", "icon": "🎙️" },
+        { "day": 9, "name": "Octopus", "icon": "🐙" },
+        { "day": 10, "name": "Quillbot", "icon": "✍️" }
+      ],
+      "socialProof": "203 people purchased personal AI-learning plans in the last hour"
+    },
+    "plans": {
+      "title": "Choose the best plan for you",
+      "options": [
+        {
+          "id": "1-week",
+          "name": "1-WEEK PLAN",
+          "totalPrice": "€13.86",
+          "pricePerDay": "€1.98",
+          "popular": false
+        },
+        {
+          "id": "4-week",
+          "name": "4-WEEK PLAN",
+          "totalPrice": "€39.99",
+          "pricePerDay": "€1.43",
+          "popular": true
+        },
+        {
+          "id": "12-week",
+          "name": "12-WEEK PLAN",
+          "totalPrice": "€79.99",
+          "pricePerDay": "€0.95",
+          "popular": false
+        }
+      ],
+      "researchNote": "People using plan for 3 months achieve twice as many results as for 1 month",
+      "researchSource": "*According to a research by Coursiv, 2023",
+      "terms": "By clicking \"Get My Plan\", you agree to automatic subscription renewal to Coursiv: first 4 weeks at €39.99, then €39.99 every 4 weeks (both excluding taxes) until you cancel. You can cancel anytime via support or account settings. See Subscription Terms for details.",
+      "cta": "GET MY PLAN"
+    }
   }
 }
 

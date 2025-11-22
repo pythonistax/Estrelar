@@ -9,17 +9,6 @@ interface ScratchPageProps {
   onBack?: () => void
 }
 
-interface ConfettiParticle {
-  id: number
-  x: number
-  y: number
-  color: string
-  rotation: number
-  velocityX: number
-  velocityY: number
-  size: number
-}
-
 export default function ScratchPage({ onComplete, onBack }: ScratchPageProps) {
   const scratchPage = copy.scratchPage || {
     title: 'Scratch & Save on your',
@@ -34,134 +23,84 @@ export default function ScratchPage({ onComplete, onBack }: ScratchPageProps) {
 
   const [isRevealed, setIsRevealed] = useState(false)
   const [showModal, setShowModal] = useState(false)
-  const [confetti, setConfetti] = useState<ConfettiParticle[]>([])
   const [revealedPercent, setRevealedPercent] = useState(0)
-  const [canvasOpacity, setCanvasOpacity] = useState(0)
+  const [canvasOpacity, setCanvasOpacity] = useState(1) // Start visible
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+  const lottieBackgroundRef = useRef<HTMLDivElement>(null)
+  const lottieConfettiRef = useRef<HTMLDivElement>(null)
   const isScratching = useRef(false)
   const isRevealedRef = useRef(false)
-  const [cardSize, setCardSize] = useState(345) // Card size from HTML (280px on mobile)
-  
-  // Update card size based on screen width
-  useEffect(() => {
-    const updateSize = () => {
-      setCardSize(window.innerWidth < 768 ? 280 : 345)
-    }
-    updateSize()
-    window.addEventListener('resize', updateSize)
-    return () => window.removeEventListener('resize', updateSize)
-  }, [])
+  const cardSize = 220 // Exact size from HTML: 220x220px
   const animationFrameRef = useRef<number | null>(null)
 
-  // Create confetti particles
-  const createConfetti = useCallback(() => {
-    const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F']
-    const particles: ConfettiParticle[] = []
-    
-    // Get card position
-    const cardRect = containerRef.current?.getBoundingClientRect()
-    const centerX = cardRect ? cardRect.left + cardRect.width / 2 : window.innerWidth / 2
-    const centerY = cardRect ? cardRect.top + cardRect.height / 2 : window.innerHeight / 2
-
-    for (let i = 0; i < 60; i++) {
-      particles.push({
-        id: i,
-        x: centerX,
-        y: centerY,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        rotation: Math.random() * 360,
-        velocityX: (Math.random() - 0.5) * 12,
-        velocityY: (Math.random() - 0.5) * 12 - 8,
-        size: Math.random() * 10 + 5
+  // Load Lottie animations (matching HTML)
+  const loadLottieBackground = useCallback(() => {
+    if (typeof window !== 'undefined' && (window as any).lottie && lottieBackgroundRef.current) {
+      (window as any).lottie.loadAnimation({
+        container: lottieBackgroundRef.current,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: 'https://duskxyykp230s.cloudfront.net/Main-Scene-scratch.json'
       })
     }
-    setConfetti(particles)
-    
-    // Show modal after confetti animation completes
-    setTimeout(() => {
-      setShowModal(true)
-    }, 2000) // Show modal after 2 seconds
   }, [])
+
+  const loadLottieConfetti = useCallback(() => {
+    if (typeof window !== 'undefined' && (window as any).lottie && lottieConfettiRef.current) {
+      (window as any).lottie.loadAnimation({
+        container: lottieConfettiRef.current,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: 'https://duskxyykp230s.cloudfront.net/Animation-1749708947300.json'
+      })
+    }
+  }, [])
+
+  // Load Lottie background on mount
+  useEffect(() => {
+    // Load Lottie library if not already loaded
+    if (typeof window !== 'undefined' && !(window as any).lottie) {
+      const script = document.createElement('script')
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js'
+      script.onload = () => {
+        loadLottieBackground()
+      }
+      document.body.appendChild(script)
+    } else {
+      loadLottieBackground()
+    }
+  }, [loadLottieBackground])
 
   // Keep ref in sync with state
   useEffect(() => {
     isRevealedRef.current = isRevealed
   }, [isRevealed])
 
-  // Animate confetti
-  useEffect(() => {
-    if (confetti.length === 0) return
-
-    let animationId: number
-    const startTime = Date.now()
-    const duration = 2000 // 2 seconds
-
-    const animate = () => {
-      const elapsed = Date.now() - startTime
-      const progress = Math.min(elapsed / duration, 1)
-
-      if (progress >= 1) {
-        // Animation complete, clean up confetti
-        setConfetti([])
-        return
-      }
-
-      setConfetti((prev) => {
-        if (prev.length === 0) return prev
-
-        const updated = prev.map((particle) => {
-          // Calculate new position with gravity
-          const newX = particle.x + particle.velocityX * 0.15
-          const newY = particle.y + particle.velocityY * 0.15 + 0.5 // Gravity
-          const newRotation = particle.rotation + particle.velocityX * 0.3
-          const newVelocityY = particle.velocityY + 0.3 // Gravity effect
-
-          return {
-            ...particle,
-            x: newX,
-            y: newY,
-            rotation: newRotation,
-            velocityY: newVelocityY
-          }
-        })
-
-        // Remove particles that are off-screen
-        return updated.filter((p) => 
-          p.y < window.innerHeight + 200 && 
-          p.x > -200 && 
-          p.x < window.innerWidth + 200
-        )
-      })
-
-      animationId = requestAnimationFrame(animate)
-    }
-
-    animationId = requestAnimationFrame(animate)
-
-    return () => {
-      if (animationId) {
-        cancelAnimationFrame(animationId)
-      }
-    }
-  }, [confetti.length])
-
   // Scratch card canvas setup
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas || !containerRef.current) return
 
-    const ctx = canvas.getContext('2d')
+    const ctx = canvas.getContext('2d', { willReadFrequently: true })
     if (!ctx) return
 
     // Set canvas size accounting for device pixel ratio
     const dpr = window.devicePixelRatio || 1
-    canvas.width = cardSize * dpr
-    canvas.height = cardSize * dpr
-    canvas.style.width = `${cardSize}px`
-    canvas.style.height = `${cardSize}px`
+    const displayWidth = cardSize
+    const displayHeight = cardSize
     
-    // Scale context to account for device pixel ratio
+    // Set actual canvas size in memory (scaled by device pixel ratio)
+    canvas.width = displayWidth * dpr
+    canvas.height = displayHeight * dpr
+    
+    // Set display size (CSS pixels)
+    canvas.style.width = `${displayWidth}px`
+    canvas.style.height = `${displayHeight}px`
+    
+    // Scale the drawing context so everything draws at the correct size
     ctx.scale(dpr, dpr)
 
     // Draw the gradient scratch overlay (matching HTML design)
@@ -171,8 +110,13 @@ export default function ScratchPage({ onComplete, onBack }: ScratchPageProps) {
     ctx.fillStyle = gradient
     ctx.fillRect(0, 0, cardSize, cardSize)
 
-    // Show canvas with transition
-    setCanvasOpacity(1)
+    // Add scratch pattern overlay (matching HTML)
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.3)'
+    ctx.font = '60px Arial'
+    ctx.textAlign = 'center'
+    ctx.fillText('〰️', cardSize / 2, cardSize * 0.36)
+    ctx.fillText('〰️', cardSize / 2, cardSize * 0.59)
+    ctx.fillText('〰️', cardSize / 2, cardSize * 0.82)
 
     // Handle scratching on mouse move
     const handleScratch = (e: MouseEvent | TouchEvent) => {
@@ -190,41 +134,63 @@ export default function ScratchPage({ onComplete, onBack }: ScratchPageProps) {
       }
 
       // Ensure coordinates are within bounds
+      // Since ctx.scale(dpr, dpr) is applied, coordinates are already in the correct space
       x = Math.max(0, Math.min(x, cardSize))
       y = Math.max(0, Math.min(y, cardSize))
-
-      // Clear the scratched area (40x40 pixel area)
+      
+      // Clear the scratched area using destination-out
+      ctx.save()
       ctx.globalCompositeOperation = 'destination-out'
       ctx.beginPath()
       ctx.arc(x, y, 20, 0, Math.PI * 2)
       ctx.fill()
-      ctx.globalCompositeOperation = 'source-over'
+      ctx.restore()
 
-      // Calculate revealed percentage (sample every 4th pixel for performance)
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+      // Calculate revealed percentage (sample pixels for performance)
+      // Sample at lower resolution for better performance
+      const sampleSize = 20 // Sample 20x20 grid
+      const stepX = cardSize / sampleSize
+      const stepY = cardSize / sampleSize
       let transparentPixels = 0
-      const sampleRate = 4 // Sample every 4th pixel for performance
-      for (let i = 3; i < imageData.data.length; i += 4 * sampleRate) {
-        if (imageData.data[i] === 0) {
-          transparentPixels += sampleRate
+      let totalPixels = 0
+      
+      // Get full image data once
+      const fullImageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+      const dpr = window.devicePixelRatio || 1
+      
+      for (let sy = 0; sy < sampleSize; sy++) {
+        for (let sx = 0; sx < sampleSize; sx++) {
+          // Convert display coordinates to canvas coordinates
+          const px = Math.floor(sx * stepX * dpr)
+          const py = Math.floor(sy * stepY * dpr)
+          const index = (py * canvas.width + px) * 4
+          
+          if (index < fullImageData.data.length) {
+            totalPixels++
+            if (fullImageData.data[index + 3] < 128) { // Alpha channel < 128 means transparent
+              transparentPixels++
+            }
+          }
         }
       }
-      const percent = (transparentPixels / (cardSize * cardSize)) * 100
+      
+      const percent = totalPixels > 0 ? (transparentPixels / totalPixels) * 100 : 0
       setRevealedPercent(percent)
 
-      // If more than 70% is revealed, trigger full reveal
-      if (percent > 70 && !isRevealedRef.current) {
+      // If more than 30% is revealed, show modal immediately
+      if (percent > 30 && !isRevealedRef.current) {
         isRevealedRef.current = true
         setIsRevealed(true)
         // Smoothly clear the rest
+        ctx.save()
         ctx.globalCompositeOperation = 'destination-out'
-        ctx.fillRect(0, 0, cardSize, cardSize)
-        ctx.globalCompositeOperation = 'source-over'
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
+        ctx.restore()
         
-        // Trigger confetti after reveal
-        setTimeout(() => {
-          createConfetti()
-        }, 500)
+        // Show modal immediately (matching HTML behavior)
+        setShowModal(true)
+        // Load Lottie confetti
+        loadLottieConfetti()
       }
     }
 
@@ -249,57 +215,49 @@ export default function ScratchPage({ onComplete, onBack }: ScratchPageProps) {
       isScratching.current = false
     }
 
-    // Add event listeners
-    canvas.addEventListener('mousedown', handleStart)
-    canvas.addEventListener('mousemove', handleMove)
-    canvas.addEventListener('mouseup', handleEnd)
-    canvas.addEventListener('mouseleave', handleEnd)
-    canvas.addEventListener('touchstart', handleStart, { passive: false })
-    canvas.addEventListener('touchmove', handleMove, { passive: false })
-    canvas.addEventListener('touchend', handleEnd)
-    canvas.addEventListener('touchcancel', handleEnd)
+    // Add event listeners - ensure canvas is ready
+    const attachListeners = () => {
+      if (!canvas) return
+      
+      canvas.addEventListener('mousedown', handleStart)
+      canvas.addEventListener('mousemove', handleMove)
+      canvas.addEventListener('mouseup', handleEnd)
+      canvas.addEventListener('mouseleave', handleEnd)
+      canvas.addEventListener('touchstart', handleStart, { passive: false })
+      canvas.addEventListener('touchmove', handleMove, { passive: false })
+      canvas.addEventListener('touchend', handleEnd)
+      canvas.addEventListener('touchcancel', handleEnd)
+    }
+    
+    // Attach listeners immediately and also after a short delay to ensure canvas is ready
+    attachListeners()
+    const timeoutId = setTimeout(attachListeners, 100)
 
     return () => {
-      canvas.removeEventListener('mousedown', handleStart)
-      canvas.removeEventListener('mousemove', handleMove)
-      canvas.removeEventListener('mouseup', handleEnd)
-      canvas.removeEventListener('mouseleave', handleEnd)
-      canvas.removeEventListener('touchstart', handleStart)
-      canvas.removeEventListener('touchmove', handleMove)
-      canvas.removeEventListener('touchend', handleEnd)
-      canvas.removeEventListener('touchcancel', handleEnd)
+      clearTimeout(timeoutId)
+      if (canvas) {
+        canvas.removeEventListener('mousedown', handleStart)
+        canvas.removeEventListener('mousemove', handleMove)
+        canvas.removeEventListener('mouseup', handleEnd)
+        canvas.removeEventListener('mouseleave', handleEnd)
+        canvas.removeEventListener('touchstart', handleStart)
+        canvas.removeEventListener('touchmove', handleMove)
+        canvas.removeEventListener('touchend', handleEnd)
+        canvas.removeEventListener('touchcancel', handleEnd)
+      }
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current)
       }
     }
-  }, [cardSize, createConfetti])
+  }, [loadLottieConfetti])
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-white">
-      {/* Confetti particles */}
-      {confetti.map((particle) => (
-        <div
-          key={particle.id}
-          className="fixed pointer-events-none z-50"
-          style={{
-            left: `${particle.x}px`,
-            top: `${particle.y}px`,
-            width: `${particle.size}px`,
-            height: `${particle.size}px`,
-            backgroundColor: particle.color,
-            borderRadius: '50%',
-            transform: `rotate(${particle.rotation}deg)`,
-            transition: 'opacity 0.3s ease-out',
-            opacity: 1,
-          }}
-        />
-      ))}
-
+    <div className="page-container relative min-h-screen flex flex-col bg-white overflow-hidden">
       <div className="fixed top-0 left-0 z-10 flex h-full w-full overflow-y-auto bg-white">
         <div className="mx-auto flex w-full max-w-[400px] flex-col laptop:max-w-[1128px]">
           <div className="laptop:flex-grow" style={{ opacity: 1 }}>
-            {/* Header */}
-            <nav className="flex h-12 items-center justify-center border-b-2 border-secondary px-4 tablet:h-16">
+            {/* Header - Matching HTML */}
+            <nav className="flex h-12 items-center justify-center border-b-2 border-secondary px-4 tablet:h-16" style={{ height: '64px' }}>
               {/* Back Button */}
               {onBack && (
                 <button
@@ -360,95 +318,140 @@ export default function ScratchPage({ onComplete, onBack }: ScratchPageProps) {
               </div>
             </nav>
 
-            {/* Main Content - Centered Layout */}
-            <div className="flex flex-col items-center justify-center min-h-[calc(100vh-64px)] px-4 py-8 gap-6">
-              {/* Title Section - Matching HTML design */}
-              <div className="text-center space-y-4 max-w-[640px]">
-                <h1 className="text-[42px] font-bold text-main leading-tight">
-                  {scratchPage.title}<br />
-                  <span className="text-accent">{scratchPage.titleAccent}</span>
-                </h1>
-                <div className="text-lg text-main leading-relaxed">
-                  {scratchPage.subtitle.split('\n').map((line, i) => (
-                    <span key={i}>
-                      {line}
-                      {i < scratchPage.subtitle.split('\n').length - 1 && <br />}
-                    </span>
-                  ))}
-                </div>
+            {/* Main Content - Matching HTML exactly */}
+            <div className="content flex-1 flex flex-col items-center justify-center px-6 py-10 text-center" style={{ padding: '40px 24px 120px' }}>
+              {/* Title - Matching HTML */}
+              <h1 className="text-[42px] font-bold text-main leading-tight mb-4">
+                {scratchPage.title}<br />
+                <span className="highlight" style={{ color: 'var(--text-accent)' }}>{scratchPage.titleAccent}</span>
+              </h1>
+
+              {/* Subtitle - Matching HTML */}
+              <div className="subtitle text-lg text-main leading-relaxed mb-10">
+                {scratchPage.subtitle.split('\n').map((line, i) => (
+                  <span key={i}>
+                    {line}
+                    {i < scratchPage.subtitle.split('\n').length - 1 && <br />}
+                  </span>
+                ))}
               </div>
 
-              {/* Scratch Prompt - Above Card */}
-              <p className="text-base text-main text-center mb-6">{scratchPage.scratchPrompt}</p>
+              {/* Instruction - Matching HTML */}
+              <div className="instruction text-base text-main mb-6">{scratchPage.scratchPrompt}</div>
 
-              {/* Scratch Card - Matching HTML design (345x345 desktop, 280x280 mobile) */}
+              {/* Scratch Card - Exact 220x220px from HTML */}
               <div
                 ref={containerRef}
-                className="ScratchCard__Container relative flex-shrink-0 mx-auto tablet:w-[345px] tablet:h-[345px] w-[280px] h-[280px]"
+                className="scratch-card-wrapper relative mx-auto mb-10"
                 style={{
-                  position: 'relative',
-                  touchAction: 'none',
-                  overscrollBehavior: 'contain',
-                  userSelect: 'none',
-                  borderRadius: '24px',
-                  overflow: 'hidden',
-                  cursor: 'pointer',
+                  width: '220px',
+                  height: '220px',
                 }}
               >
-                {/* Canvas overlay (the scratchy part) */}
-                <canvas
-                  ref={canvasRef}
-                  className="ScratchCard__Canvas"
-                  width={cardSize}
-                  height={cardSize}
-                  data-testid="scratching-promo-page-button"
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    zIndex: 10,
-                    transition: '1s',
-                    opacity: canvasOpacity,
-                    cursor: 'pointer',
-                    touchAction: 'none',
-                    pointerEvents: 'auto',
-                  }}
-                />
-
-                {/* Content underneath the scratch layer - Matching HTML design */}
                 <div
-                  className="ScratchCard__Result"
+                  className="scratch-card-container relative"
                   style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: '#FFFFFF',
-                    zIndex: 0,
-                    pointerEvents: 'none',
-                    opacity: isRevealed ? 1 : 0,
-                    transition: 'opacity 0.3s',
+                    width: '220px',
+                    height: '220px',
+                    borderRadius: '24px',
+                    overflow: 'hidden',
+                    cursor: 'pointer',
                   }}
                 >
-                  {/* Discount amount - Large centered text like HTML */}
-                  <div 
-                    className="text-center"
-                    style={{ 
-                      color: '#5653FE',
-                      fontSize: '72px',
-                      fontWeight: 700,
-                      lineHeight: 1,
+                  {/* Lottie Background Animation */}
+                  <div
+                    ref={lottieBackgroundRef}
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      zIndex: 1,
+                    }}
+                  />
+
+                  {/* Revealed Content - Always visible underneath canvas */}
+                  <div
+                    className="revealed-content"
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      backgroundColor: '#EBF5E4',
+                      zIndex: 0,
+                      padding: '24px',
+                      borderRadius: '24px',
+                      opacity: 1, // Always visible
+                      visibility: 'visible', // Always visible
                     }}
                   >
-                    {scratchPage.discountValue}%<br />
-                    <span style={{ fontSize: '48px' }}>OFF</span>
+                    {/* Discount Text - Matching HTML exactly */}
+                    <div
+                      className="discount-text"
+                      style={{
+                        fontSize: '80px',
+                        fontWeight: 700,
+                        color: '#7ABF4C',
+                        lineHeight: 0.9,
+                        textAlign: 'center',
+                        marginBottom: '8px',
+                      }}
+                    >
+                      50<span style={{ fontSize: '32px' }}>%</span><br />OFF
+                    </div>
+                    
+                    {/* Promo Divider - Matching HTML */}
+                    <hr
+                      className="promo-divider"
+                      style={{
+                        width: '80%',
+                        height: '2px',
+                        background: 'transparent',
+                        border: 'none',
+                        borderTop: '2px dashed rgba(122, 191, 76, 0.3)',
+                        margin: '16px 0',
+                      }}
+                    />
+                    
+                    {/* Promo Code - Matching HTML */}
+                    <div
+                      className="promo-code"
+                      style={{
+                        fontSize: '18px',
+                        color: '#4F981D',
+                        fontWeight: 500,
+                        letterSpacing: '1px',
+                      }}
+                    >
+                      {scratchPage.promoCode}
+                    </div>
                   </div>
+
+                  {/* Canvas overlay (the scratchy part) */}
+                  <canvas
+                    ref={canvasRef}
+                    width={220}
+                    height={220}
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      zIndex: 10,
+                      cursor: 'pointer',
+                      touchAction: 'none',
+                      opacity: canvasOpacity,
+                      pointerEvents: 'auto',
+                    }}
+                  />
                 </div>
               </div>
             </div>
@@ -456,46 +459,106 @@ export default function ScratchPage({ onComplete, onBack }: ScratchPageProps) {
         </div>
       </div>
 
-      {/* Celebration Modal */}
+      {/* Bottom Sheet Modal - Matching HTML exactly */}
       <AnimatePresence>
         {showModal && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-end justify-center p-4 bg-black/30"
+            className="bottom-sheet fixed bottom-0 left-0 right-0 z-[100] flex items-end justify-center"
+            style={{
+              background: 'rgba(0, 0, 0, 0.7)',
+              width: '100%',
+              height: '100%',
+            }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
             onClick={() => setShowModal(false)}
           >
             <motion.div
-              className="bg-white rounded-3xl p-12 w-full max-w-[500px] shadow-[0_20px_60px_rgba(0,0,0,0.3)] tablet:p-12 p-8"
-              initial={{ y: 100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 100, opacity: 0 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="bottom-sheet-content relative bg-white rounded-t-3xl p-8 w-full max-w-[500px] text-center shadow-[0_-4px_20px_rgba(0,0,0,0.2)]"
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '100%' }}
+              transition={{ type: 'ease-out', duration: 0.4 }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Celebration Emoji - Matching HTML */}
-              <div className="text-center mb-4">
-                <div className="text-[56px] leading-none">🥳</div>
+              {/* Lottie Confetti Background - Matching HTML */}
+              <div
+                ref={lottieConfettiRef}
+                style={{
+                  position: 'absolute',
+                  top: '-250px',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  width: '600px',
+                  height: '600px',
+                  pointerEvents: 'none',
+                  zIndex: -1,
+                }}
+              />
+
+              {/* Heading Icon - Matching HTML */}
+              <img
+                src="https://d3kigabz1zn79w.cloudfront.net/Heading.webp"
+                alt="Celebration"
+                className="heading-icon mx-auto mb-4"
+                style={{
+                  width: '32px',
+                  height: '32px',
+                }}
+              />
+
+              {/* Modal Title - Matching HTML */}
+              <div
+                className="modal-title"
+                style={{
+                  fontSize: '32px',
+                  fontWeight: 900,
+                  color: 'var(--text-main)',
+                  marginBottom: '8px',
+                }}
+              >
+                <strong>Woo hoo!</strong>
               </div>
 
-              {/* Headline - Matching HTML */}
-              <h2 className="text-[32px] font-bold text-main text-center mb-2">Woo hoo!</h2>
-
-              {/* Message - Matching HTML */}
-              <p className="text-lg text-main text-center mb-4">
+              {/* Modal Subtitle - Matching HTML */}
+              <div
+                className="modal-subtitle"
+                style={{
+                  fontSize: '18px',
+                  color: 'var(--text-main)',
+                  marginBottom: '16px',
+                }}
+              >
                 You won a promo code with
-              </p>
-
-              {/* Discount - Matching HTML design */}
-              <div className="text-center mb-4">
-                <div className="text-[72px] font-bold text-accent leading-none mb-4">{scratchPage.discountValue}% off</div>
               </div>
 
-              {/* Auto application message - Matching HTML */}
-              <p className="text-base text-main text-center mb-8">
+              {/* Modal Discount - Matching HTML */}
+              <div
+                className="modal-discount"
+                style={{
+                  fontSize: '64px',
+                  fontWeight: 700,
+                  color: 'var(--text-accent)',
+                  lineHeight: 1,
+                  marginBottom: '16px',
+                }}
+              >
+                50% off
+              </div>
+
+              {/* Modal Note - Matching HTML */}
+              <div
+                className="modal-note"
+                style={{
+                  fontSize: '16px',
+                  color: 'var(--text-secondary)',
+                  marginBottom: '24px',
+                }}
+              >
                 It will be applied automatically
-              </p>
+              </div>
 
               {/* CTA Button - Matching HTML */}
               <button
@@ -503,8 +566,11 @@ export default function ScratchPage({ onComplete, onBack }: ScratchPageProps) {
                   setShowModal(false)
                   onComplete()
                 }}
-                className="w-full rounded-lg bg-accent-main py-4 px-12 text-base font-semibold uppercase text-white shadow-[0px_8px_24px_0px_rgba(86,83,254,0.42)] transition-all hover:opacity-90 tablet:w-auto tablet:mx-auto"
-                style={{ letterSpacing: '0.5px' }}
+                className="claim-button w-full rounded-lg bg-accent-main py-4 px-12 text-base font-semibold uppercase text-white shadow-[0px_8px_24px_0px_rgba(86,83,254,0.42)] transition-all hover:opacity-90"
+                style={{
+                  letterSpacing: '0.5px',
+                  fontFamily: "'Space Grotesk', sans-serif",
+                }}
               >
                 {scratchPage.cta}
               </button>

@@ -80,7 +80,7 @@ export default function Home() {
                 data-cy-id="social-proof-button"
                 data-testid="social-proof-button"
               >
-                <span className="text-base font-semibold uppercase" style={{ color: '#000000' }}>
+                <span className="text-base font-semibold uppercase" style={{ color: '#FFFFFF' }}>
                   CONTINUE
                 </span>
               </button>
