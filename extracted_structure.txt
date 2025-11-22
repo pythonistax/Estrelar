@@ -1,0 +1,178 @@
+===== EXTRACTED HTML STRUCTURE FROM svg_finder.txt =====
+File: c:\Users\mmsou\Documents\Estrelar\svg_finder.txt
+Extraction Date: 2025-11-22
+Total Lines in Original: 284 lines with very long line lengths
+
+===============================================================================
+SECTION 1: READINESS BLOCK WITH SVG CHART
+===============================================================================
+
+<div id="readinessBlock">
+  <div class="mx-auto max-w-[400px] px-4 tablet:max-w-[580px] laptop:px-0">
+    <p class="mb-[12px] text-lg font-bold">
+      <span class="text-main">Your readiness:&nbsp;</span>
+      <span class="text-readiness-score">83%</span>
+    </p>
+    <div class="flex items-center justify-center rounded-lg border border-sp-accent bg-secondary px-[16px] py-[24px]">
+      <p class="mr-[4px] font-medium text-secondary">
+        <span class="text-[#7ABF4C]">4-week</span> program is enough for you to start your AI journey
+      </p>
+      <img alt="" loading="lazy" width="32" height="37" decoding="async" data-nimg="1"
+           srcset="...lightbulb.webp"
+           src="...lightbulb.webp"
+           style="color: transparent; width: 32px; height: 37px;">
+    </div>
+  </div>
+</div>
+
+Key Features:
+- ID: "readinessBlock"
+- CSS Variable: --text-readiness-score: #7ABF59
+- Displays: 83% readiness level
+- Contains lightbulb icon/image
+- Responsive design with tablet/laptop breakpoints
+
+===============================================================================
+SECTION 2: AI IS EASIER THAN YOU THINK
+===============================================================================
+
+<p class="text-2xl font-semibold tablet:text-3xl laptop:text-4xl text-center">
+  AI is easier than you think
+</p>
+
+<div class="mx-auto tablet:max-w-[580px] laptop:flex laptop:max-w-[900px] laptop:py-6">
+  <div class="my-[24px] flex flex-grow items-center laptop:gap-8 justify-center">
+    <div class="relative flex items-center justify-center">
+      <img alt="" fetchpriority="high" width="150" height="210" decoding="async" data-nimg="1"
+           class="h-[210px] w-[150px] object-cover laptop:h-[280px] laptop:w-[200px]"
+           src="https://d3kigabz1zn79w.cloudfront.net/ai is easier.webp"
+           style="color: transparent;">
+    </div>
+    <img alt="" fetchpriority="high" width="150" height="210" decoding="async" data-nimg="1"
+         class="h-[210px] w-[150px] laptop:h-[280px] laptop:w-[200px]"
+         src="https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_funnel-images_c13_v3_adigp_nt_selling-page_daily-challenge_1.webp"
+         style="color: transparent;">
+  </div>
+  <div class="flex-grow laptop:flex laptop:flex-col laptop:items-center laptop:justify-center laptop:gap-4">
+    <div class="my-[4px] flex items-center text-center justify-center laptop:justify-start">
+      <p class="text-sm font-medium laptop:text-lg flex items-center">
+        <img src="https://d3kigabz1zn79w.cloudfront.net/investingcondition_emoji-6.webp"
+             class="mr-4 inline h-[34px] object-cover" alt="" height="34" width="24">
+        No prior AI knowledge is required
+      </p>
+    </div>
+  </div>
+</div>
+
+Key Features:
+- Section title: "AI is easier than you think"
+- Two main images showcasing daily challenges
+- Emoji icons for visual appeal
+- Message: "No prior AI knowledge is required"
+
+===============================================================================
+SECTION 3: NOW VS GOAL COMPARISON
+===============================================================================
+
+Image Assets Found:
+- skills-now.webp: Current skill level visualization
+- skills-goal.webp: Target skill level visualization
+- power-now.svg: Current power/capability indicator
+- power-goal.svg: Target power/capability indicator
+- now-goal_background.webp: Background image for comparison
+- now.webp: "Now" state image
+- after.webp: "After" state image
+
+All images located at: https://d3kigabz1zn79w.cloudfront.net/migrated_d2vm05b1botqyl_images_wealth-growth-funnel_selling-page_*
+
+Layout appears to show before/after transformation visualization.
+
+===============================================================================
+SECTION 4: PAYMENT/SUBSCRIPTION SECTIONS
+===============================================================================
+
+Payment Form Container:
+<div id="solid-payment-form-container_#123" class="sc-aXZVg dRTSQr">
+  <iframe id="solid-payment-form-iframe"
+          name="solid-payment-form-iframe"
+          allow="payment *"
+          src="https://form-v2.solidgate.com/version/payment-form-v1.292.0"
+          data-payment-type="payment">
+  </iframe>
+</div>
+
+Subscription Terms:
+<p class="px-1 pb-3 text-center text-xs leading-snug text-secondary mt-4">
+  You agree that <b>€39.99</b> will be as an intro offer, then <b>€39.99</b>
+  will be automatically billed every 1 month until you cancel in settings.
+  <a class="underline" href="https://legal.coursiv.io/en/subscription"
+     target="_blank" rel="noreferrer">Subscription Terms.</a>
+</p>
+
+Key Pricing:
+- Intro offer: €39.99
+- Recurring: €39.99 every 1 month (or 4 weeks depending on plan)
+- Payment processor: Solidgate
+- Additional option: PayPal buttons
+
+Refund Policy:
+- Full refund within 30 days of initial purchase
+- OR before end of first subscription period (whichever comes first)
+
+===============================================================================
+SECTION 5: PAGE METADATA & STRUCTURE
+===============================================================================
+
+Title: "Your 4-week Personal AI Challenge is ready!"
+Subtitle: "Your readiness level"
+Disclaimer: "This chart is for illustrative purposes only"
+
+Page Type: "pathway-page"
+Funnel Version: c_1061
+Language: en
+
+Next Page URL: /dynamic/selling-page
+
+Preloaded Images (in order):
+1. gift-special-discount.png
+2. skills-now.webp / skills-goal.webp
+3. power-now.svg / power-goal.svg
+4. now.webp / after.webp
+5. readiness-block_lightbulb.webp
+6. ai is easier.webp
+7. daily-challenge images
+8. appoverview_1 through _5.webp
+
+===============================================================================
+SUMMARY OF MAIN SECTIONS
+===============================================================================
+
+1. READINESS BLOCK (#readinessBlock)
+   - Shows 83% readiness score
+   - Lightbulb icon
+   - 4-week program recommendation
+
+2. AI IS EASIER SECTION
+   - Hero heading
+   - Two showcase images
+   - "No prior AI knowledge required" message
+
+3. GOAL COMPARISON (Now vs Goal)
+   - Before/after visualization
+   - Skills comparison (now vs goal)
+   - Power level comparison (now vs goal)
+
+4. DAILY CHALLENGE
+   - Visual cards showing daily activities
+   - Emoji-enhanced messaging
+
+5. PAYMENT/SUBSCRIPTION
+   - Solidgate payment form (iframe)
+   - PayPal integration
+   - €39.99 pricing
+   - Monthly/4-week billing cycles
+   - 30-day refund policy
+
+===============================================================================
+END OF EXTRACTION
+===============================================================================

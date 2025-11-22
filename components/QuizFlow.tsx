@@ -12,7 +12,6 @@ import EmailPage from './EmailPage'
 import NamePage from './NamePage'
 import ScratchPage from './ScratchPage'
 import SellingPage from './SellingPage'
-import PricingPage from './PricingPage'
 
 interface QuizFlowProps {
   onBack?: () => void
@@ -32,7 +31,6 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
   const [showNamePage, setShowNamePage] = useState(false)
   const [showScratchPage, setShowScratchPage] = useState(false)
   const [showSellingPage, setShowSellingPage] = useState(false)
-  const [showPricingPage, setShowPricingPage] = useState(false)
   const [sessionId, setSessionId] = useState<string>('')
   const [userName, setUserName] = useState<string>('') // Store user name
   const [userEmail, setUserEmail] = useState<string>('') // Store user email
@@ -283,15 +281,9 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
   }
 
   const handleSellingPageContinue = () => {
-    // After selling page - show pricing page
-    setShowSellingPage(false)
-    setShowPricingPage(true)
-  }
-
-  const handlePricingPageContinue = () => {
-    // PricingPage is the final page - handle checkout or redirect
-    console.log('User ready to purchase')
-    // You can add redirect to payment/checkout here
+    // SellingPage (readiness level) is now the final page
+    console.log('Quiz completed - readiness page is final')
+    // You can add redirect or final action here if needed
   }
 
   const getOptionValue = (option: any): string => {
@@ -299,11 +291,7 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
   }
 
   const handleBackClick = () => {
-    if (showPricingPage) {
-      setShowPricingPage(false)
-      setShowSellingPage(true)
-      setSelectedAnswers([])
-    } else if (showSellingPage) {
+    if (showSellingPage) {
       setShowSellingPage(false)
       setShowScratchPage(true)
       setSelectedAnswers([])
@@ -355,12 +343,7 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
 
   const progress = ((currentStep + 1) / totalSteps) * 100
 
-  // Show pricing page - final page
-  if (showPricingPage) {
-    return <PricingPage onContinue={handlePricingPageContinue} onBack={handleBackClick} />
-  }
-
-  // Show selling page (readiness level) after scratch page
+  // Show selling page (readiness level) - FINAL PAGE
   if (showSellingPage) {
     return <SellingPage onContinue={handleSellingPageContinue} onBack={handleBackClick} />
   }
