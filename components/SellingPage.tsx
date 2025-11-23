@@ -778,61 +778,52 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
             </h2>
             <div className="flex h-[446px] min-h-[446px] w-full flex-col items-center">
               <div className="relative mx-auto h-[446px] min-h-[446px] w-[600px] laptop:w-[1000px]">
-                {/* 5 Phone Images */}
-                <div className="flex items-center justify-center gap-6">
-                  {/* Phone 1 - Left most (phone 4) */}
-                  <div className="flex-shrink-0" style={{ width: '154px', minWidth: '154px' }}>
-                    <img
-                      alt=""
-                      width={204}
-                      height={415}
-                      src="https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_funnel-images_c13_v3_adigp_nt_selling-page_appoverview_4.webp"
-                      style={{ color: 'transparent', left: 0, minHeight: '322px', minWidth: '154px' }}
-                    />
-                  </div>
+                {/* 5 Phone Images - Sliding Carousel */}
+                <div className="relative w-full h-[400px] overflow-hidden">
+                  <div
+                    className="flex items-center absolute left-1/2 transition-transform duration-500 ease-in-out"
+                    style={{
+                      transform: `translateX(calc(-50% - ${currentSlide * 210}px))`
+                    }}
+                  >
+                    {/* Render multiple phone copies for smooth infinite scroll */}
+                    {[...Array(15)].map((_, idx) => {
+                      const phoneNum = (idx % 5) + 1
+                      const centerIndex = 7
+                      const distanceFromCenter = Math.abs(idx - centerIndex - currentSlide)
+                      const isCenter = distanceFromCenter === 0
 
-                  {/* Phone 2 (phone 5) */}
-                  <div className="flex-shrink-0" style={{ width: '154px', minWidth: '154px' }}>
-                    <img
-                      alt=""
-                      width={204}
-                      height={415}
-                      src="https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_funnel-images_c13_v3_adigp_nt_selling-page_appoverview_5.webp"
-                      style={{ color: 'transparent', left: 0, minHeight: '322px', minWidth: '154px' }}
-                    />
-                  </div>
-
-                  {/* Phone 3 - Center (phone 1) - LARGER */}
-                  <div className="flex-shrink-0" style={{ width: '204px', minWidth: '204px' }}>
-                    <img
-                      alt=""
-                      width={204}
-                      height={415}
-                      src="https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_funnel-images_c13_v3_adigp_nt_selling-page_appoverview_1.webp"
-                      style={{ color: 'transparent', left: 0, minHeight: '322px', minWidth: '154px' }}
-                    />
-                  </div>
-
-                  {/* Phone 4 (phone 2) */}
-                  <div className="flex-shrink-0" style={{ width: '154px', minWidth: '154px' }}>
-                    <img
-                      alt=""
-                      width={204}
-                      height={415}
-                      src="https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_funnel-images_c13_v3_adigp_nt_selling-page_appoverview_2.webp"
-                      style={{ color: 'transparent', left: 0, minHeight: '322px', minWidth: '154px' }}
-                    />
-                  </div>
-
-                  {/* Phone 5 - Right most (phone 3) */}
-                  <div className="flex-shrink-0" style={{ width: '154px', minWidth: '154px' }}>
-                    <img
-                      alt=""
-                      width={204}
-                      height={415}
-                      src="https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_funnel-images_c13_v3_adigp_nt_selling-page_appoverview_3.webp"
-                      style={{ color: 'transparent', left: 0, minHeight: '322px', minWidth: '154px' }}
-                    />
+                      return (
+                        <div
+                          key={idx}
+                          className="flex-shrink-0 flex items-center justify-center transition-all duration-500"
+                          style={{
+                            width: '180px',
+                            marginRight: '30px'
+                          }}
+                        >
+                          <div
+                            className="transition-transform duration-500"
+                            style={{
+                              transform: isCenter ? 'scale(1.25)' : 'scale(1)'
+                            }}
+                          >
+                            <img
+                              alt=""
+                              width={204}
+                              height={415}
+                              src={`https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_funnel-images_c13_v3_adigp_nt_selling-page_appoverview_${phoneNum}.webp`}
+                              style={{
+                                color: 'transparent',
+                                minHeight: '322px',
+                                minWidth: '154px',
+                                height: 'auto'
+                              }}
+                            />
+                          </div>
+                        </div>
+                      )
+                    })}
                   </div>
                 </div>
 
