@@ -2,6 +2,7 @@
 
 import { copy } from '@/lib/config'
 import { useEffect, useRef, useState } from 'react'
+import CheckoutModal from './CheckoutModal'
 
 interface SellingPageProps {
   onContinue: () => void
@@ -41,6 +42,7 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
   const [timeLeft, setTimeLeft] = useState(600) // 10 minutes in seconds
   const [selectedPlan, setSelectedPlan] = useState<'1week' | '4week' | '12week'>('4week')
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false)
 
   // Load SVG content
   useEffect(() => {
@@ -198,7 +200,7 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
 
           {/* GET MY PLAN Button - Right aligned */}
           <button
-            onClick={scrollToPricing}
+            onClick={() => setIsCheckoutOpen(true)}
             className="pulse-button px-6 py-2 bg-[#5653FE] text-white rounded-lg font-bold text-sm uppercase tracking-wide hover:bg-[#4442D9] transition-colors"
           >
             GET MY PLAN
@@ -719,7 +721,10 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
 
           {/* GET MY PLAN Button */}
           <div className="flex justify-center mt-8">
-            <button className="pulse-button px-12 py-4 bg-accent-main text-white rounded-lg font-bold text-base uppercase tracking-wide hover:bg-[#4442D9] transition-colors">
+            <button
+              onClick={() => setIsCheckoutOpen(true)}
+              className="pulse-button px-12 py-4 bg-accent-main text-white rounded-lg font-bold text-base uppercase tracking-wide hover:bg-[#4442D9] transition-colors"
+            >
               GET MY PLAN
             </button>
           </div>
@@ -964,6 +969,17 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
           </div>
         </div>
       </div>
+
+      {/* Checkout Modal */}
+      <CheckoutModal
+        isOpen={isCheckoutOpen}
+        onClose={() => setIsCheckoutOpen(false)}
+        selectedPlan={{
+          name: selectedPlan === '1week' ? '1-Week Challenge' : selectedPlan === '4week' ? '4-Week Challenge' : '12-Week Challenge',
+          price: selectedPlan === '1week' ? '€19.99' : selectedPlan === '4week' ? '€39.99' : '€79.99',
+          pricePerDay: selectedPlan === '1week' ? '€2.85/day' : selectedPlan === '4week' ? '€1.43/day' : '€0.95/day'
+        }}
+      />
     </div>
   )
 }
