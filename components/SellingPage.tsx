@@ -8,6 +8,31 @@ interface SellingPageProps {
   onBack?: () => void
 }
 
+// Add global styles for button pulse animation
+if (typeof document !== 'undefined') {
+  const style = document.createElement('style')
+  style.textContent = `
+    @keyframes pulse-shadow {
+      0% {
+        box-shadow: 0 0 0 0 rgba(86, 83, 254, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(86, 83, 254, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(86, 83, 254, 0);
+      }
+    }
+    .pulse-button {
+      animation: pulse-shadow 2s infinite;
+    }
+  `
+  if (!document.head.querySelector('[data-pulse-animation]')) {
+    style.setAttribute('data-pulse-animation', 'true')
+    document.head.appendChild(style)
+  }
+}
+
 export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
   const sellingPage = copy.sellingPage
   const chartContainerRef = useRef<HTMLDivElement>(null)
@@ -117,6 +142,26 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
   const seconds = timeLeft % 60
   const formattedTime = `${String(minutes).padStart(2, '0')} : ${String(seconds).padStart(2, '0')}`
 
+  // Scroll to pricing section
+  const scrollToPricing = () => {
+    pricingRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }
+
+  // Get subscription text based on selected plan
+  const getSubscriptionText = () => {
+    const baseText = {
+      '1week': 'By clicking "Get My Plan", you agree to automatic subscription renewal to Coursiv: first 1 week at €13.86, then €13.86 every week (both excluding taxes) until you cancel. You can cancel anytime via support or account settings. See ',
+      '4week': 'By clicking "Get My Plan", you agree to automatic subscription renewal to Coursiv: first 4 weeks at €39.99, then €39.99 every 4 weeks (both excluding taxes) until you cancel. You can cancel anytime via support or account settings. See ',
+      '12week': 'By clicking "Get My Plan", you agree to automatic subscription renewal to Coursiv: first 12 weeks at €79.99, then €79.99 every 12 weeks (both excluding taxes) until you cancel. You can cancel anytime via support or account settings. See ',
+    }
+    return (
+      <>
+        {baseText[selectedPlan]}
+        <span className="underline">Subscription Terms</span> for details.
+      </>
+    )
+  }
+
   return (
     <div className="w-full min-h-screen bg-white overflow-x-hidden">
       {/* Header - Desktop style */}
@@ -151,7 +196,10 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
           </div>
 
           {/* GET MY PLAN Button - Right aligned */}
-          <button className="px-6 py-2 bg-[#5653FE] text-white rounded-lg font-bold text-sm uppercase tracking-wide hover:bg-[#4442D9] transition-colors">
+          <button
+            onClick={scrollToPricing}
+            className="pulse-button px-6 py-2 bg-[#5653FE] text-white rounded-lg font-bold text-sm uppercase tracking-wide hover:bg-[#4442D9] transition-colors"
+          >
             GET MY PLAN
           </button>
         </div>
@@ -505,17 +553,24 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
         </div>
 
         {/* Choose the best plan for you Section */}
-        <div className="bg-white py-12 px-6">
+        <div ref={pricingRef} className="bg-white py-12 px-6">
           <h2 className="text-center text-2xl font-bold text-main tablet:text-3xl laptop:text-4xl mb-8">
             Choose the best plan for you
           </h2>
 
           <div className="max-w-[1200px] mx-auto grid grid-cols-1 tablet:grid-cols-3 gap-6">
             {/* 1-WEEK PLAN */}
-            <div className="relative flex w-full flex-col rounded-lg border border-main">
+            <div
+              onClick={() => setSelectedPlan('1week')}
+              className={`relative flex w-full flex-col rounded-lg border cursor-pointer transition-all ${
+                selectedPlan === '1week' ? 'border-accent-main opacity-100' : 'border-gray-300 opacity-50'
+              }`}
+            >
               <div className="flex w-full items-center justify-between py-3 px-4 laptop:min-h-[193px] laptop:flex-col laptop:items-start laptop:gap-4 laptop:py-8">
                 <div className="flex items-center justify-center gap-3 w-full laptop:w-auto">
-                  <div className="flex h-5 w-5 items-center justify-center rounded-full border border-main laptop:hidden"></div>
+                  <div className="flex h-5 w-5 items-center justify-center rounded-full border border-main laptop:hidden">
+                    {selectedPlan === '1week' && <div className="h-2.5 w-2.5 rounded-full bg-accent-main"></div>}
+                  </div>
                   <div className="flex-1 laptop:flex-none">
                     <p className="text-base font-bold uppercase tablet:pb-1 tablet:text-lg laptop:pb-2 laptop:text-2xl text-main">1-WEEK PLAN</p>
                     <div className="flex gap-1 text-sm font-medium text-secondary">
@@ -549,7 +604,13 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
             </div>
 
             {/* 4-WEEK PLAN - MOST POPULAR */}
-            <div className="relative flex w-full flex-col rounded-lg">
+            <div
+              onClick={() => setSelectedPlan('4week')}
+              className={`relative flex w-full flex-col rounded-lg cursor-pointer transition-all ${
+                selectedPlan === '4week' ? 'opacity-100 border-accent-main' : 'opacity-50 border-gray-300'
+              }`}
+              style={{ border: selectedPlan === '4week' ? '1px solid #5653FE' : '1px solid #d1d5db' }}
+            >
               <div className="flex h-[26px] w-full items-center justify-center gap-1 rounded-t-lg bg-accent-main text-xs">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" className="fill-tertiary">
                   <path d="M8.746 1.373 5.053 5.067a1.332 1.332 0 0 0-.386.94v6.66C4.667 13.4 5.266 14 6 14h6c.533 0 1.013-.32 1.226-.807L15.4 8.12c.56-1.32-.407-2.787-1.84-2.787H9.793l.634-3.053a1.005 1.005 0 0 0-.274-.913.992.992 0 0 0-1.407.006ZM2 14c.733 0 1.333-.6 1.333-1.333V7.333C3.333 6.6 2.733 6 2 6 1.266 6 .667 6.6.667 7.333v5.334C.667 13.4 1.267 14 2 14Z"></path>
@@ -558,7 +619,9 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
               </div>
               <div className="flex w-full items-center justify-between border py-3 px-4 laptop:min-h-[193px] laptop:flex-col laptop:items-start laptop:gap-4 laptop:py-8 rounded-lg border-sp-accent rounded-t-none">
                 <div className="flex items-center justify-center gap-3 w-full laptop:w-auto">
-                  <div className="flex h-5 w-5 items-center justify-center rounded-full border border-sp-accent laptop:hidden"></div>
+                  <div className="flex h-5 w-5 items-center justify-center rounded-full border border-sp-accent laptop:hidden">
+                    {selectedPlan === '4week' && <div className="h-2.5 w-2.5 rounded-full bg-accent-main"></div>}
+                  </div>
                   <div className="flex-1 laptop:flex-none">
                     <p className="text-base font-bold uppercase tablet:pb-1 tablet:text-lg laptop:pb-2 laptop:text-2xl text-secondary">4-WEEK PLAN</p>
                     <div className="flex gap-1 text-sm font-medium text-secondary">
@@ -592,11 +655,19 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
             </div>
 
             {/* 12-WEEK PLAN */}
-            <div className="relative flex w-full flex-col rounded-lg border border-accent-main" style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 8px 1px' }}>
+            <div
+              onClick={() => setSelectedPlan('12week')}
+              className={`relative flex w-full flex-col rounded-lg border cursor-pointer transition-all ${
+                selectedPlan === '12week'
+                  ? 'border-accent-main opacity-100'
+                  : 'border-gray-300 opacity-50'
+              }`}
+              style={selectedPlan === '12week' ? { boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 8px 1px' } : {}}
+            >
               <div className="flex w-full items-center justify-between py-3 px-4 laptop:min-h-[193px] laptop:flex-col laptop:items-start laptop:gap-4 laptop:py-8">
                 <div className="flex items-center justify-center gap-3 w-full laptop:w-auto">
                   <div className="flex h-5 w-5 items-center justify-center rounded-full border border-main laptop:hidden">
-                    <div className="h-2.5 w-2.5 rounded-full bg-accent-main"></div>
+                    {selectedPlan === '12week' && <div className="h-2.5 w-2.5 rounded-full bg-accent-main"></div>}
                   </div>
                   <div className="flex-1 laptop:flex-none">
                     <p className="text-base font-bold uppercase tablet:pb-1 tablet:text-lg laptop:pb-2 laptop:text-2xl text-main">12-WEEK PLAN</p>
@@ -642,14 +713,154 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
 
           {/* Subscription terms */}
           <div className="max-w-[800px] mx-auto mt-8 text-center text-sm text-secondary">
-            <p>By clicking "Get My Plan", you agree to automatic subscription renewal to Coursiv: first 4 weeks at €39.99, then €39.99 every 4 weeks (both excluding taxes) until you cancel. You can cancel anytime via support or account settings. See <span className="underline">Subscription Terms</span> for details.</p>
+            <p>{getSubscriptionText()}</p>
           </div>
 
           {/* GET MY PLAN Button */}
           <div className="flex justify-center mt-8">
-            <button className="px-12 py-4 bg-accent-main text-white rounded-lg font-bold text-base uppercase tracking-wide hover:bg-[#4442D9] transition-colors">
+            <button className="pulse-button px-12 py-4 bg-accent-main text-white rounded-lg font-bold text-base uppercase tracking-wide hover:bg-[#4442D9] transition-colors">
               GET MY PLAN
             </button>
+          </div>
+
+          {/* Pay safe & secure Section */}
+          <div className="mt-12 text-center">
+            <div className="inline-flex items-center gap-2 bg-[#E8F5E9] px-4 py-2 rounded-lg mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="M9 12l2 2 4-4"/>
+              </svg>
+              <span className="text-[#4CAF50] font-semibold">Pay safe & secure</span>
+            </div>
+
+            {/* Payment Logos */}
+            <div className="mb-4 mt-5 flex items-center justify-evenly">
+              <img alt="" className="h-auto w-[184px]" src="https://d14fbcf1p6wyzn.cloudfront.net/funnel-images/c13_selling-page_redesign/payment_methods.webp" />
+            </div>
+
+            <p className="text-sm text-secondary">Coursiv Limited, Limassol, Cyprus</p>
+          </div>
+        </div>
+
+        {/* Money-Back Guarantee Section */}
+        <div className="bg-[#E8F5E9] py-16 px-6">
+          <div className="max-w-[800px] mx-auto text-center">
+            <div className="flex justify-center mb-6">
+              <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="60" cy="40" r="35" fill="#4CAF50"/>
+                <path d="M45 40L55 50L75 30" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M60 75L45 95L60 110L75 95L60 75Z" fill="#4CAF50"/>
+                <path d="M40 95L60 110L80 95" fill="#66BB6A"/>
+              </svg>
+            </div>
+            <h2 className="text-3xl font-bold text-main mb-6">Money-Back Guarantee</h2>
+            <p className="text-base text-secondary leading-relaxed mb-4">
+              We are so confident in our service that we are ready to offer a full refund within 30 days of your initial purchase OR before the end of your first subscription period, whichever comes first. Additional terms and conditions apply.
+            </p>
+            <p className="text-sm text-secondary">
+              For full details, please review our complete refund policy <a href="#" className="underline text-accent-main">here.</a>
+            </p>
+          </div>
+        </div>
+
+        {/* Access Coursiv Anywhere Section */}
+        <div className="bg-white py-16 px-6">
+          <div className="max-w-[1200px] mx-auto">
+            <h2 className="text-3xl font-bold text-main text-center mb-12">
+              Access Coursiv anywhere<br />using your mobile device
+            </h2>
+            <div className="flex justify-center">
+              <img src="https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_funnel-images_c13_v3_adigp_nt_selling-page_appoverview_1.webp" alt="Mobile App 1" className="w-[200px] h-auto mx-2" />
+              <img src="https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_funnel-images_c13_v3_adigp_nt_selling-page_appoverview_2.webp" alt="Mobile App 2" className="w-[200px] h-auto mx-2" />
+              <img src="https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_funnel-images_c13_v3_adigp_nt_selling-page_appoverview_3.webp" alt="Mobile App 3" className="w-[200px] h-auto mx-2" />
+              <img src="https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_funnel-images_c13_v3_adigp_nt_selling-page_appoverview_4.webp" alt="Mobile App 4" className="w-[200px] h-auto mx-2" />
+              <img src="https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_funnel-images_c13_v3_adigp_nt_selling-page_appoverview_5.webp" alt="Mobile App 5" className="w-[200px] h-auto mx-2" />
+            </div>
+          </div>
+        </div>
+
+        {/* What You Get Section */}
+        <div className="bg-white py-16 px-6">
+          <div className="max-w-[800px] mx-auto">
+            <h2 className="text-4xl font-bold text-main text-center mb-12">What you get</h2>
+            <div className="space-y-6">
+              <div className="flex items-start gap-4">
+                <div className="w-6 h-6 rounded-full bg-accent-main flex-shrink-0 mt-1"></div>
+                <p className="text-lg text-main">Guides on Trending AI tools</p>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-6 h-6 rounded-full bg-accent-main flex-shrink-0 mt-1"></div>
+                <p className="text-lg text-main">Access to beginner-friendly lessons</p>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-6 h-6 rounded-full bg-accent-main flex-shrink-0 mt-1"></div>
+                <p className="text-lg text-main">Comprehensive skill-enhancing courses</p>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-6 h-6 rounded-full bg-accent-main flex-shrink-0 mt-1"></div>
+                <p className="text-lg text-main">Resources for work-life balance</p>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-6 h-6 rounded-full bg-accent-main flex-shrink-0 mt-1"></div>
+                <p className="text-lg text-main">24/7 chat with online support to get all answers and reduce mistakes</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* People Love Coursiv Section */}
+        <div className="bg-white py-16 px-6">
+          <div className="max-w-[1200px] mx-auto">
+            <h2 className="text-4xl font-bold text-main text-center mb-12">People love Coursiv</h2>
+            <div className="grid grid-cols-1 tablet:grid-cols-3 gap-8">
+              {/* Testimonial 1 */}
+              <div className="bg-white border border-gray-200 rounded-lg p-6">
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="text-2xl">😎</span>
+                  <span className="font-semibold text-main">@der_kennndy1</span>
+                </div>
+                <p className="text-sm text-secondary mb-4">
+                  "The learning is straightforward and has all the necessary information! It serves as a great starting point if you are new to AI."
+                </p>
+                <div className="flex gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="text-yellow-500 text-xl">★</span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Testimonial 2 */}
+              <div className="bg-white border border-gray-200 rounded-lg p-6">
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="text-2xl">😎</span>
+                  <span className="font-semibold text-main">@dexter_brechtefeld</span>
+                </div>
+                <p className="text-sm text-secondary mb-4">
+                  "Coursiv's wide range of educational materials and interactive features enables users of all levels to easily understand complicated AI principles. Kudos to Coursiv for pioneering a new approach to AI learning!"
+                </p>
+                <div className="flex gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="text-yellow-500 text-xl">★</span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Testimonial 3 */}
+              <div className="bg-white border border-gray-200 rounded-lg p-6">
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="text-2xl">😎</span>
+                  <span className="font-semibold text-main">@pattykivuva</span>
+                </div>
+                <p className="text-sm text-secondary mb-4">
+                  "Coursiv has simplified understanding complex topics and enhancing my skills across subjects. The customized learning tailored to my needs has significantly boosted my progress towards achieving my goals."
+                </p>
+                <div className="flex gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="text-yellow-500 text-xl">★</span>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
