@@ -781,10 +781,10 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
             <h2 className="text-3xl font-bold text-main text-center mb-12">
               Access Coursiv anywhere<br />using your mobile device
             </h2>
-            <div className="flex h-[446px] min-h-[446px] w-full flex-col items-center">
-              <div className="relative mx-auto h-[446px] min-h-[446px] w-[600px] laptop:w-[1000px]">
+            <div className="flex h-[540px] min-h-[540px] w-full flex-col items-center justify-center">
+              <div className="relative h-[540px] min-h-[540px] w-[1050px] overflow-hidden">
                 {/* 5 Phone Images - Sliding Carousel */}
-                <div className="relative w-full h-[400px] overflow-hidden">
+                <div className="relative w-full h-[490px] pt-8">
                   <div
                     className="flex items-center absolute left-1/2 transition-transform duration-500 ease-in-out"
                     style={{
