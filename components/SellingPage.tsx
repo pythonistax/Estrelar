@@ -12,6 +12,7 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
   const sellingPage = copy.sellingPage
   const chartContainerRef = useRef<HTMLDivElement>(null)
   const [svgContent, setSvgContent] = useState<string>('')
+  const [timeLeft, setTimeLeft] = useState(600) // 10 minutes in seconds
 
   // Load SVG content
   useEffect(() => {
@@ -24,6 +25,21 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
       .catch((err) => {
         console.error('Failed to load SVG:', err)
       })
+  }, [])
+
+  // Countdown timer
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 0) {
+          clearInterval(timer)
+          return 0
+        }
+        return prev - 1
+      })
+    }, 1000)
+
+    return () => clearInterval(timer)
   }, [])
 
   // Animate the chart curve and add vertical line
@@ -94,13 +110,31 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
     }
   }, [svgContent])
 
+  // Format time as MM : SS
+  const minutes = Math.floor(timeLeft / 60)
+  const seconds = timeLeft % 60
+  const formattedTime = `${String(minutes).padStart(2, '0')} : ${String(seconds).padStart(2, '0')}`
+
   return (
     <div className="w-full min-h-screen bg-white overflow-x-hidden">
       {/* Header - Desktop style */}
       <div className="fixed top-0 left-0 right-0 z-20 h-[64px] w-full flex items-center justify-center bg-white border-b border-[#E8E8E8]">
         <div className="flex max-w-[1128px] w-full items-center justify-between px-6 laptop:px-8">
-          {/* Logo - Left aligned */}
-          <div className="flex items-center">
+          {/* Left side - Countdown Timer and Logo */}
+          <div className="flex items-center gap-6">
+            {/* Countdown Timer */}
+            <div className="text-main">
+              <p className="text-[9px] font-medium">Discount expires in</p>
+              <p className="min-w-[82px] text-2xl font-semibold" data-visual-test="blackout">
+                {formattedTime}
+              </p>
+              <div className="flex flex-row justify-evenly text-[9px] font-medium">
+                <p>min</p>
+                <p style={{ paddingLeft: '20px' }}>sec</p>
+              </div>
+            </div>
+
+            {/* Logo */}
             <svg xmlns="http://www.w3.org/2000/svg" width="99" height="30" viewBox="0 0 99 30">
             <path fill="#5653FE" d="M20.233 21.254c-2.068 0-3.822-1.225-4.541-3.17-.764-2.027-.495-4.858.674-7.816.45-1.057.945-2.028 1.529-2.916 2.113 1.057 4.406 1.902 6.97 1.902 3.012 0 6.025-1.48 6.069-4.733C30.979 2.24 28.596 0 25.224 0c-2.878 0-5.755 1.268-8.048 3.507C14.208 1.817 11.016 0 7.464 0 3.642 0 0 2.62 0 6.507c0 3.043 2.473 5.62 5.8 5.62 2.968 0 5.396-2.113 5.396-4.944 0-1.14-.764-2.282-1.664-2.789L7.644 6.296c.27.254.405.718.405 1.014 0 1.014-1.125 1.86-2.339 1.86-1.484 0-2.562-1.184-2.562-2.663 0-2.24 2.247-3.55 4.316-3.55 2.652 0 5.126 1.437 7.733 2.916a17.74 17.74 0 0 0-2.023 3.972c-1.484 4.099-1.439 7.564-.09 10.141 1.574 3 4.631 4.015 7.014 4.015 3.867 0 8.004-2.24 10.162-7.31l-2.608-.592c-.944 2.493-3.867 5.155-7.419 5.155Zm4.811-18.508c1.979 0 2.923.972 2.923 1.86 0 1.098-1.26 1.859-3.058 1.859-1.663 0-3.282-.634-4.99-1.48 1.573-1.436 3.416-2.239 5.125-2.239Z"></path>
             <path fill="#5653FE" d="M41.19 16.098c-.45 1.48-1.439 2.029-2.338 2.029-.135 0-.225 0-.36-.043 1.259-4.056.135-7.31-2.922-8.113-.36-.084-.855-.169-1.17-.169-3.057 0-5.665 2.155-6.879 5.832-1.349 4.183-.045 7.436 3.058 8.24.404.084.809.126 1.214.126 1.978 0 4.091-1.141 5.53-3.38.405.126.854.168 1.484.168 1.664 0 3.911-.718 5.036-4.098l-2.654-.592Zm-5.126-.084c-1.214.295-1.978 2.366-1.169 3.127-.99 1.52-2.293 2.324-3.327 2.155-1.574-.296-2.248-2.198-1.17-5.113.945-2.535 2.969-4.099 4.452-3.592.99.338 1.529 1.564 1.214 3.423Z"></path>
