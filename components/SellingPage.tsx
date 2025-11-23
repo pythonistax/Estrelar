@@ -40,6 +40,7 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
   const [svgContent, setSvgContent] = useState<string>('')
   const [timeLeft, setTimeLeft] = useState(600) // 10 minutes in seconds
   const [selectedPlan, setSelectedPlan] = useState<'1week' | '4week' | '12week'>('4week')
+  const [currentSlide, setCurrentSlide] = useState(0)
 
   // Load SVG content
   useEffect(() => {
@@ -746,11 +747,17 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
         <div className="bg-[#E8F5E9] py-16 px-6">
           <div className="max-w-[800px] mx-auto text-center">
             <div className="flex justify-center mb-6">
-              <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="60" cy="40" r="35" fill="#4CAF50"/>
-                <path d="M45 40L55 50L75 30" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M60 75L45 95L60 110L75 95L60 75Z" fill="#4CAF50"/>
-                <path d="M40 95L60 110L80 95" fill="#66BB6A"/>
+              <svg xmlns="http://www.w3.org/2000/svg" width="96" height="132" fill="none">
+                <path fill="#7ABF4C" d="m96 118.891-19.037-4.377-8.498 17.484-18.826-39.054L48 89.539l-1.64 3.405-18.826 39.054-8.499-17.484L0 118.891l18.193-37.743 4.024-8.351 1.91-3.96 23.872 11.365 23.875-11.365 1.909 3.96 4.024 8.35L96 118.892Z"></path>
+                <path fill="#7ABF4C" d="m27.535 132-8.498-17.486L0 118.891l24.126-50.054 27.535 13.11L27.535 132Z"></path>
+                <path fill="#7ABF4C" d="m68.467 132 8.499-17.486L96 118.891 71.874 68.837 44.34 81.947 68.467 132Z"></path>
+                <path fill="#D1D3D4" d="M73.783 72.797c-6.511 6.738-15.663 10.94-25.784 10.94a35.72 35.72 0 0 1-14.395-3.009 35.887 35.887 0 0 1-11.387-7.931l-4.024 8.35c2.343.308 5.4-.239 7.079.875 1.216.808 1.894 2.643 2.635 4.371.68 1.588 1.42 3.08 2.675 3.603 2.585 1.066 6.622-2.454 9.43-1.903 2.196.432 4.16 3.62 6.346 4.851l1.64-3.405 1.641 3.405c2.188-1.228 4.153-4.419 6.348-4.85 2.809-.552 6.843 2.968 9.428 1.902 2.63-1.084 2.974-6.42 5.313-7.974 1.676-1.114 4.736-.567 7.08-.874l-4.025-8.351Z" style={{ mixBlendMode: 'multiply' }}></path>
+                <path fill="#fff" d="M48.001 81.662c20.253 0 36.672-16.317 36.672-36.445C84.673 25.09 68.254 8.773 48 8.773c-20.253 0-36.671 16.317-36.671 36.445 0 20.127 16.418 36.444 36.671 36.444Z"></path>
+                <path fill="#7ABF4C" d="M48.001 77.65c18.024 0 32.635-14.52 32.635-32.433 0-17.912-14.611-32.432-32.635-32.432-18.023 0-32.634 14.52-32.634 32.433C15.367 63.13 29.977 77.65 48 77.65Z"></path>
+                <path fill="#D1D3D4" d="M16.62 46.715c0-17.912 14.61-32.432 32.635-32.432 9.74 0 18.479 4.241 24.458 10.965a32.655 32.655 0 0 0-25.714-12.463c-18.025 0-32.635 14.52-32.635 32.432 0 8.234 3.09 15.751 8.177 21.47a32.162 32.162 0 0 1-6.92-19.972Z" style={{ mixBlendMode: 'multiply' }}></path>
+                <path fill="#D1D3D4" d="m38.362 61.068-9.953-9.891a4.271 4.271 0 0 1 0-6.067l.063-.062a4.336 4.336 0 0 1 6.104 0l6.188 6.149c.452.45 1.185.45 1.638 0L62.936 30.79a4.336 4.336 0 0 1 6.104 0l.063.062a4.271 4.271 0 0 1 0 6.067l-24.3 24.15a4.572 4.572 0 0 1-6.438 0h-.003Z" style={{ mixBlendMode: 'multiply' }}></path>
+                <path fill="#fff" d="m37.608 60.32-9.952-9.892a4.271 4.271 0 0 1 0-6.067l.062-.062a4.336 4.336 0 0 1 6.105 0l6.187 6.149c.452.45 1.186.45 1.638 0L62.182 30.04a4.336 4.336 0 0 1 6.104 0l.063.062a4.271 4.271 0 0 1 0 6.067l-24.3 24.15a4.572 4.572 0 0 1-6.438 0h-.002Z"></path>
+                <path fill="#7ABF4C" d="M88.132 53.151c.543-2.708 5.368-5.068 5.368-7.934 0-2.866-4.825-5.225-5.368-7.936-.555-2.791 2.987-6.803 1.914-9.372-.522-1.256-2.027-1.985-3.625-2.661-1.736-.737-3.58-1.409-4.398-2.62-1.578-2.341.148-7.402-1.85-9.386-.83-.827-2.195-1.014-3.674-1.056-2.08-.068-4.39.137-5.768-.78-.787-.524-1.347-1.472-1.844-2.546-.985-2.117-1.724-4.71-3.47-5.43-2.584-1.066-6.619 2.454-9.43 1.903C53.26 4.798 50.885 0 48.001 0c-2.884 0-5.258 4.796-7.986 5.333a3.38 3.38 0 0 1-.957.045c-2.71-.205-6.167-2.899-8.473-1.948-2.63 1.086-2.975 6.421-5.313 7.977-2.354 1.568-7.446-.148-9.443 1.835-1.998 1.984-.272 7.045-1.85 9.387-1.564 2.324-6.933 2.663-8.023 5.277-.955 2.292 1.754 5.725 1.96 8.421.027.332.017.65-.046.954-.542 2.711-5.368 5.07-5.368 7.937 0 2.865 4.826 5.225 5.368 7.933.555 2.792-2.987 6.806-1.914 9.375.724 1.735 3.334 2.472 5.464 3.445 1.078.5 2.035 1.056 2.56 1.835.92 1.366.716 3.663.784 5.732.05 1.473.236 2.829 1.065 3.653 1.994 1.984 7.086.27 9.443 1.837 1.218.81 1.894 2.644 2.635 4.372.68 1.587 1.42 3.08 2.678 3.602 2.585 1.066 6.62-2.454 9.43-1.902 2.728.537 5.102 5.335 7.986 5.335 2.884 0 5.258-4.8 7.986-5.335 2.809-.552 6.846 2.968 9.43 1.902 2.63-1.086 2.975-6.42 5.314-7.974 2.354-1.568 7.446.147 9.443-1.837 1.997-1.985.271-7.046 1.849-9.385 1.565-2.324 6.933-2.666 8.023-5.28 1.073-2.569-2.47-6.58-1.914-9.375Zm-40.13 27.592a35.71 35.71 0 0 1-14.395-3.008 35.907 35.907 0 0 1-13.133-9.874 35.557 35.557 0 0 1-4.346-6.568 35.153 35.153 0 0 1-3.874-16.075A35.139 35.139 0 0 1 17.35 26.95a35.884 35.884 0 0 1 12.27-12.193A35.69 35.69 0 0 1 48 9.69a35.674 35.674 0 0 1 16.176 3.852 36.027 36.027 0 0 1 6.609 4.32 35.776 35.776 0 0 1 9.935 13.051 35.116 35.116 0 0 1 3.027 14.306c0 19.59-16.034 35.525-35.747 35.525Z"></path>
               </svg>
             </div>
             <h2 className="text-3xl font-bold text-main mb-6">Money-Back Guarantee</h2>
@@ -758,7 +765,7 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
               We are so confident in our service that we are ready to offer a full refund within 30 days of your initial purchase OR before the end of your first subscription period, whichever comes first. Additional terms and conditions apply.
             </p>
             <p className="text-sm text-secondary">
-              For full details, please review our complete refund policy <a href="#" className="underline text-accent-main">here.</a>
+              For full details, please review our complete refund policy <span className="underline">here</span>.
             </p>
           </div>
         </div>
@@ -769,12 +776,104 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
             <h2 className="text-3xl font-bold text-main text-center mb-12">
               Access Coursiv anywhere<br />using your mobile device
             </h2>
-            <div className="flex justify-center">
-              <img src="https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_funnel-images_c13_v3_adigp_nt_selling-page_appoverview_1.webp" alt="Mobile App 1" className="w-[200px] h-auto mx-2" />
-              <img src="https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_funnel-images_c13_v3_adigp_nt_selling-page_appoverview_2.webp" alt="Mobile App 2" className="w-[200px] h-auto mx-2" />
-              <img src="https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_funnel-images_c13_v3_adigp_nt_selling-page_appoverview_3.webp" alt="Mobile App 3" className="w-[200px] h-auto mx-2" />
-              <img src="https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_funnel-images_c13_v3_adigp_nt_selling-page_appoverview_4.webp" alt="Mobile App 4" className="w-[200px] h-auto mx-2" />
-              <img src="https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_funnel-images_c13_v3_adigp_nt_selling-page_appoverview_5.webp" alt="Mobile App 5" className="w-[200px] h-auto mx-2" />
+            <div className="flex h-[446px] min-h-[446px] w-full flex-col items-center">
+              <div className="relative mx-auto h-[446px] min-h-[446px] w-[600px] laptop:w-[1000px]">
+                {/* 5 Phone Images */}
+                <div className="flex items-center justify-center gap-6">
+                  {/* Phone 1 - Left most (phone 4) */}
+                  <div className="flex-shrink-0" style={{ width: '154px', minWidth: '154px' }}>
+                    <img
+                      alt=""
+                      width={204}
+                      height={415}
+                      src="https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_funnel-images_c13_v3_adigp_nt_selling-page_appoverview_4.webp"
+                      style={{ color: 'transparent', left: 0, minHeight: '322px', minWidth: '154px' }}
+                    />
+                  </div>
+
+                  {/* Phone 2 (phone 5) */}
+                  <div className="flex-shrink-0" style={{ width: '154px', minWidth: '154px' }}>
+                    <img
+                      alt=""
+                      width={204}
+                      height={415}
+                      src="https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_funnel-images_c13_v3_adigp_nt_selling-page_appoverview_5.webp"
+                      style={{ color: 'transparent', left: 0, minHeight: '322px', minWidth: '154px' }}
+                    />
+                  </div>
+
+                  {/* Phone 3 - Center (phone 1) - LARGER */}
+                  <div className="flex-shrink-0" style={{ width: '204px', minWidth: '204px' }}>
+                    <img
+                      alt=""
+                      width={204}
+                      height={415}
+                      src="https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_funnel-images_c13_v3_adigp_nt_selling-page_appoverview_1.webp"
+                      style={{ color: 'transparent', left: 0, minHeight: '322px', minWidth: '154px' }}
+                    />
+                  </div>
+
+                  {/* Phone 4 (phone 2) */}
+                  <div className="flex-shrink-0" style={{ width: '154px', minWidth: '154px' }}>
+                    <img
+                      alt=""
+                      width={204}
+                      height={415}
+                      src="https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_funnel-images_c13_v3_adigp_nt_selling-page_appoverview_2.webp"
+                      style={{ color: 'transparent', left: 0, minHeight: '322px', minWidth: '154px' }}
+                    />
+                  </div>
+
+                  {/* Phone 5 - Right most (phone 3) */}
+                  <div className="flex-shrink-0" style={{ width: '154px', minWidth: '154px' }}>
+                    <img
+                      alt=""
+                      width={204}
+                      height={415}
+                      src="https://d3kigabz1zn79w.cloudfront.net/migrated_d14fbcf1p6wyzn_funnel-images_c13_v3_adigp_nt_selling-page_appoverview_3.webp"
+                      style={{ color: 'transparent', left: 0, minHeight: '322px', minWidth: '154px' }}
+                    />
+                  </div>
+                </div>
+
+                {/* Navigation and Pagination */}
+                <div className="absolute bottom-0 right-0 left-0 z-10 my-0 mx-auto flex h-6 min-h-[24px] w-[244px] flex-row justify-between">
+                  {/* Left Arrow */}
+                  <img
+                    alt=""
+                    width={24}
+                    height={24}
+                    className="swiper-button-prev mr-10 h-6 w-6 cursor-pointer"
+                    src="/assets/icons/arrow-left.svg"
+                    style={{ color: 'transparent' }}
+                    onClick={() => setCurrentSlide((prev) => (prev === 0 ? 4 : prev - 1))}
+                  />
+
+                  {/* Pagination Dots */}
+                  <span className="absolute top-2 right-0 left-0 my-0 mx-auto flex w-[132px] flex-row items-center justify-between">
+                    {[0, 1, 2, 3, 4].map((index) => (
+                      <span
+                        key={index}
+                        onClick={() => setCurrentSlide(index)}
+                        className={`carousel-bullet h-2 w-2 rounded-lg cursor-pointer ${
+                          currentSlide === index ? 'bg-accent-main' : 'bg-accent-secondary'
+                        }`}
+                      />
+                    ))}
+                  </span>
+
+                  {/* Right Arrow */}
+                  <img
+                    alt=""
+                    width={24}
+                    height={24}
+                    className="swiper-button-next ml-10 h-6 w-6 rotate-180 cursor-pointer"
+                    src="/assets/icons/arrow-left.svg"
+                    style={{ color: 'transparent' }}
+                    onClick={() => setCurrentSlide((prev) => (prev === 4 ? 0 : prev + 1))}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -785,23 +884,33 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
             <h2 className="text-4xl font-bold text-main text-center mb-12">What you get</h2>
             <div className="space-y-6">
               <div className="flex items-start gap-4">
-                <div className="w-6 h-6 rounded-full bg-accent-main flex-shrink-0 mt-1"></div>
+                <span className="mr-3 flex h-5 min-h-[20px] w-5 min-w-[20px] flex-row items-center justify-center rounded-full bg-[rgba(86,83,254,0.2)]">
+                  <span className="block h-[10px] w-[10px] rounded-full bg-accent-main"></span>
+                </span>
                 <p className="text-lg text-main">Guides on Trending AI tools</p>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-6 h-6 rounded-full bg-accent-main flex-shrink-0 mt-1"></div>
+                <span className="mr-3 flex h-5 min-h-[20px] w-5 min-w-[20px] flex-row items-center justify-center rounded-full bg-[rgba(86,83,254,0.2)]">
+                  <span className="block h-[10px] w-[10px] rounded-full bg-accent-main"></span>
+                </span>
                 <p className="text-lg text-main">Access to beginner-friendly lessons</p>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-6 h-6 rounded-full bg-accent-main flex-shrink-0 mt-1"></div>
+                <span className="mr-3 flex h-5 min-h-[20px] w-5 min-w-[20px] flex-row items-center justify-center rounded-full bg-[rgba(86,83,254,0.2)]">
+                  <span className="block h-[10px] w-[10px] rounded-full bg-accent-main"></span>
+                </span>
                 <p className="text-lg text-main">Comprehensive skill-enhancing courses</p>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-6 h-6 rounded-full bg-accent-main flex-shrink-0 mt-1"></div>
+                <span className="mr-3 flex h-5 min-h-[20px] w-5 min-w-[20px] flex-row items-center justify-center rounded-full bg-[rgba(86,83,254,0.2)]">
+                  <span className="block h-[10px] w-[10px] rounded-full bg-accent-main"></span>
+                </span>
                 <p className="text-lg text-main">Resources for work-life balance</p>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-6 h-6 rounded-full bg-accent-main flex-shrink-0 mt-1"></div>
+                <span className="mr-3 flex h-5 min-h-[20px] w-5 min-w-[20px] flex-row items-center justify-center rounded-full bg-[rgba(86,83,254,0.2)]">
+                  <span className="block h-[10px] w-[10px] rounded-full bg-accent-main"></span>
+                </span>
                 <p className="text-lg text-main">24/7 chat with online support to get all answers and reduce mistakes</p>
               </div>
             </div>
@@ -816,7 +925,7 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
               {/* Testimonial 1 */}
               <div className="bg-white border border-gray-200 rounded-lg p-6">
                 <div className="flex items-center gap-2 mb-4">
-                  <span className="text-2xl">😎</span>
+                  <img src="https://d3kigabz1zn79w.cloudfront.net/user-review_staring-emoji-6.webp" width="32" height="32" alt="" />
                   <span className="font-semibold text-main">@der_kennndy1</span>
                 </div>
                 <p className="text-sm text-secondary mb-4">
@@ -832,7 +941,7 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
               {/* Testimonial 2 */}
               <div className="bg-white border border-gray-200 rounded-lg p-6">
                 <div className="flex items-center gap-2 mb-4">
-                  <span className="text-2xl">😎</span>
+                  <img src="https://d3kigabz1zn79w.cloudfront.net/user-review_staring-emoji-6.webp" width="32" height="32" alt="" />
                   <span className="font-semibold text-main">@dexter_brechtefeld</span>
                 </div>
                 <p className="text-sm text-secondary mb-4">
@@ -848,7 +957,7 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
               {/* Testimonial 3 */}
               <div className="bg-white border border-gray-200 rounded-lg p-6">
                 <div className="flex items-center gap-2 mb-4">
-                  <span className="text-2xl">😎</span>
+                  <img src="https://d3kigabz1zn79w.cloudfront.net/user-review_staring-emoji-6.webp" width="32" height="32" alt="" />
                   <span className="font-semibold text-main">@pattykivuva</span>
                 </div>
                 <p className="text-sm text-secondary mb-4">
