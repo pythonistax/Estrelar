@@ -571,35 +571,25 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
                 selectedPlan === '1week' ? 'border-accent-main opacity-100' : 'border-gray-300 opacity-50'
               }`}
             >
-              <div className="flex w-full items-center justify-between py-3 px-4 laptop:min-h-[193px] laptop:flex-col laptop:items-start laptop:gap-4 laptop:py-8">
-                <div className="flex items-center justify-center gap-3 w-full laptop:w-auto">
-                  <div className="flex h-5 w-5 items-center justify-center rounded-full border border-main laptop:hidden">
+              <div className="flex w-full items-start justify-between py-3 px-4 gap-2 laptop:min-h-[193px] laptop:flex-col laptop:items-start laptop:gap-4 laptop:py-8">
+                <div className="flex items-center gap-3 flex-1 min-w-0">
+                  <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border border-main laptop:hidden">
                     {selectedPlan === '1week' && <div className="h-2.5 w-2.5 rounded-full bg-accent-main"></div>}
                   </div>
-                  <div className="flex-1 laptop:flex-none">
-                    <p className="text-base font-bold uppercase tablet:pb-1 tablet:text-lg laptop:pb-2 laptop:text-2xl text-main">1-WEEK PLAN</p>
-                    <div className="flex flex-col gap-1">
-                      <span className="text-sm font-medium text-secondary line-through">$13.86</span>
-                      <span className="text-lg font-bold text-[#4F981D]">$6.93</span>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-bold uppercase laptop:text-2xl text-main">1-WEEK PLAN</p>
+                    <div className="flex flex-col gap-0.5">
+                      <span className="text-xs font-medium text-secondary line-through">$13.86</span>
+                      <span className="text-base font-bold text-[#4F981D]">$6.93</span>
+                    </div>
+                    {/* Per day pricing - mobile */}
+                    <div className="mt-2 laptop:hidden">
+                      <span className="text-2xl font-bold text-main">$0.99</span>
+                      <span className="text-sm text-secondary ml-1">per day</span>
                     </div>
                   </div>
                 </div>
                 <div className="flex flex-col gap-1 laptop:w-full">
-                  <div className="relative laptop:hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="48" aria-hidden="true" viewBox="0 0 18 48" className="absolute -left-[23px] top-1/2 -translate-y-1/2 fill-secondary">
-                      <path d="M17.54.225A.584.584 0 0 1 18 0v48a.584.584 0 0 1-.46-.225L1.877 27.69a6 6 0 0 1 0-7.38L17.54.225Z"></path>
-                    </svg>
-                    <div className="flex items-stretch justify-start gap-0.5 rounded py-1 text-end bg-secondary px-2 text-main">
-                      <div className="font-bold">$</div>
-                      <div className="flex flex-col text-[36px] font-bold leading-10">
-                        <span>0</span>
-                      </div>
-                      <div className="flex min-w-[32px] flex-col justify-center">
-                        <div className="text-start font-bold leading-6">99</div>
-                        <div className="whitespace-nowrap text-[10px] font-medium leading-3">per day</div>
-                      </div>
-                    </div>
-                  </div>
                   <div className="mb-4 hidden h-[1px] w-full bg-[#F1F1F1] laptop:block"></div>
                   <div className="hidden items-end gap-1 font-bold laptop:flex">
                     <div className="text-3xl leading-none text-main">$0.99</div>
@@ -618,40 +608,30 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
               style={{ border: selectedPlan === '4week' ? '1px solid #5653FE' : '1px solid #d1d5db' }}
             >
               <div className="flex h-[26px] w-full items-center justify-center gap-1 rounded-t-lg bg-accent-main text-xs">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" className="fill-tertiary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" className="fill-white">
                   <path d="M8.746 1.373 5.053 5.067a1.332 1.332 0 0 0-.386.94v6.66C4.667 13.4 5.266 14 6 14h6c.533 0 1.013-.32 1.226-.807L15.4 8.12c.56-1.32-.407-2.787-1.84-2.787H9.793l.634-3.053a1.005 1.005 0 0 0-.274-.913.992.992 0 0 0-1.407.006ZM2 14c.733 0 1.333-.6 1.333-1.333V7.333C3.333 6.6 2.733 6 2 6 1.266 6 .667 6.6.667 7.333v5.334C.667 13.4 1.267 14 2 14Z"></path>
                 </svg>
-                <p className="text-center font-semibold uppercase text-tertiary">MOST POPULAR</p>
+                <p className="text-center font-semibold uppercase text-white">MOST POPULAR</p>
               </div>
-              <div className="flex w-full items-center justify-between border py-3 px-4 laptop:min-h-[193px] laptop:flex-col laptop:items-start laptop:gap-4 laptop:py-8 rounded-lg border-sp-accent rounded-t-none">
-                <div className="flex items-center justify-center gap-3 w-full laptop:w-auto">
-                  <div className="flex h-5 w-5 items-center justify-center rounded-full border border-sp-accent laptop:hidden">
+              <div className="flex w-full items-start justify-between border py-3 px-4 gap-2 laptop:min-h-[193px] laptop:flex-col laptop:items-start laptop:gap-4 laptop:py-8 rounded-lg border-sp-accent rounded-t-none">
+                <div className="flex items-center gap-3 flex-1 min-w-0">
+                  <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border border-sp-accent laptop:hidden">
                     {selectedPlan === '4week' && <div className="h-2.5 w-2.5 rounded-full bg-accent-main"></div>}
                   </div>
-                  <div className="flex-1 laptop:flex-none">
-                    <p className="text-base font-bold uppercase tablet:pb-1 tablet:text-lg laptop:pb-2 laptop:text-2xl text-secondary">4-WEEK PLAN</p>
-                    <div className="flex flex-col gap-1">
-                      <span className="text-sm font-medium text-secondary line-through">$39.99</span>
-                      <span className="text-lg font-bold text-[#4F981D]">$19.99</span>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-bold uppercase laptop:text-2xl text-secondary">4-WEEK PLAN</p>
+                    <div className="flex flex-col gap-0.5">
+                      <span className="text-xs font-medium text-secondary line-through">$39.99</span>
+                      <span className="text-base font-bold text-[#4F981D]">$19.99</span>
+                    </div>
+                    {/* Per day pricing - mobile */}
+                    <div className="mt-2 laptop:hidden">
+                      <span className="text-2xl font-bold text-secondary">$0.71</span>
+                      <span className="text-sm text-secondary ml-1">per day</span>
                     </div>
                   </div>
                 </div>
                 <div className="flex flex-col gap-1 laptop:w-full">
-                  <div className="relative laptop:hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="48" aria-hidden="true" viewBox="0 0 18 48" className="absolute -left-[23px] top-1/2 -translate-y-1/2 fill-secondary">
-                      <path d="M17.54.225A.584.584 0 0 1 18 0v48a.584.584 0 0 1-.46-.225L1.877 27.69a6 6 0 0 1 0-7.38L17.54.225Z"></path>
-                    </svg>
-                    <div className="flex items-stretch justify-start gap-0.5 rounded py-1 text-end bg-secondary px-2 text-secondary">
-                      <div className="font-bold">$</div>
-                      <div className="flex flex-col text-[36px] font-bold leading-10">
-                        <span>0</span>
-                      </div>
-                      <div className="flex min-w-[32px] flex-col justify-center">
-                        <div className="text-start font-bold leading-6">71</div>
-                        <div className="whitespace-nowrap text-[10px] font-medium leading-3">per day</div>
-                      </div>
-                    </div>
-                  </div>
                   <div className="mb-4 hidden h-[1px] w-full bg-[#F1F1F1] laptop:block"></div>
                   <div className="hidden items-end gap-1 font-bold laptop:flex">
                     <div className="text-3xl leading-none text-secondary">$0.71</div>
@@ -671,35 +651,25 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
               }`}
               style={selectedPlan === '12week' ? { boxShadow: 'rgba(0, 0, 0, 0.2) 0px 0px 8px 1px' } : {}}
             >
-              <div className="flex w-full items-center justify-between py-3 px-4 laptop:min-h-[193px] laptop:flex-col laptop:items-start laptop:gap-4 laptop:py-8">
-                <div className="flex items-center justify-center gap-3 w-full laptop:w-auto">
-                  <div className="flex h-5 w-5 items-center justify-center rounded-full border border-main laptop:hidden">
+              <div className="flex w-full items-start justify-between py-3 px-4 gap-2 laptop:min-h-[193px] laptop:flex-col laptop:items-start laptop:gap-4 laptop:py-8">
+                <div className="flex items-center gap-3 flex-1 min-w-0">
+                  <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border border-main laptop:hidden">
                     {selectedPlan === '12week' && <div className="h-2.5 w-2.5 rounded-full bg-accent-main"></div>}
                   </div>
-                  <div className="flex-1 laptop:flex-none">
-                    <p className="text-base font-bold uppercase tablet:pb-1 tablet:text-lg laptop:pb-2 laptop:text-2xl text-main">12-WEEK PLAN</p>
-                    <div className="flex flex-col gap-1">
-                      <span className="text-sm font-medium text-secondary line-through">$79.99</span>
-                      <span className="text-lg font-bold text-[#4F981D]">$39.99</span>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-bold uppercase laptop:text-2xl text-main">12-WEEK PLAN</p>
+                    <div className="flex flex-col gap-0.5">
+                      <span className="text-xs font-medium text-secondary line-through">$79.99</span>
+                      <span className="text-base font-bold text-[#4F981D]">$39.99</span>
+                    </div>
+                    {/* Per day pricing - mobile */}
+                    <div className="mt-2 laptop:hidden">
+                      <span className="text-2xl font-bold text-main">$0.48</span>
+                      <span className="text-sm text-secondary ml-1">per day</span>
                     </div>
                   </div>
                 </div>
                 <div className="flex flex-col gap-1 laptop:w-full">
-                  <div className="relative laptop:hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="48" aria-hidden="true" viewBox="0 0 18 48" className="absolute -left-[23px] top-1/2 -translate-y-1/2 fill-secondary">
-                      <path d="M17.54.225A.584.584 0 0 1 18 0v48a.584.584 0 0 1-.46-.225L1.877 27.69a6 6 0 0 1 0-7.38L17.54.225Z"></path>
-                    </svg>
-                    <div className="flex items-stretch justify-start gap-0.5 rounded py-1 text-end bg-secondary px-2 text-main">
-                      <div className="font-bold">$</div>
-                      <div className="flex flex-col text-[36px] font-bold leading-10">
-                        <span>0</span>
-                      </div>
-                      <div className="flex min-w-[32px] flex-col justify-center">
-                        <div className="text-start font-bold leading-6">48</div>
-                        <div className="whitespace-nowrap text-[10px] font-medium leading-3">per day</div>
-                      </div>
-                    </div>
-                  </div>
                   <div className="mb-4 hidden h-[1px] w-full bg-[#F1F1F1] laptop:block"></div>
                   <div className="hidden items-end gap-1 font-bold laptop:flex">
                     <div className="text-3xl leading-none text-main">$0.48</div>

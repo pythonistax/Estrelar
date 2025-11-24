@@ -8,6 +8,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server'
+import { saveSessionToLocalDB, saveSessionToExcel } from '@/lib/local-db'
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,30 +24,23 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // TODO: Save to your database here
-    // Example structure:
-    // await saveToDatabase({
-    //   sessionId,
-    //   email,
-    //   name,
-    //   quizAnswers,
-    //   privacyConsent,
-    //   marketingConsent,
-    //   createdAt,
-    //   submittedAt
-    // })
-
-    // For now, just log the data (you'll replace this with database save)
-    console.log('Email submission received:', {
+    const sessionData = {
       sessionId,
       email,
       name,
-      quizAnswers,
-      privacyConsent,
-      marketingConsent,
-      createdAt,
-      submittedAt
-    })
+      quizAnswers: quizAnswers || {},
+      privacyConsent: privacyConsent || false,
+      marketingConsent: marketingConsent || false,
+      createdAt: createdAt || new Date().toISOString(),
+      submittedAt: submittedAt || new Date().toISOString()
+    }
+
+    // Log the data first (always show in terminal)
+    console.log('Email submission received:', sessionData)
+
+    // Save to local database using OS file operations (fs.writeFileSync)
+    // This uses direct OS file system calls - simple and effective
+    saveSessionToLocalDB(sessionData)
 
     // Return success response
     return NextResponse.json({
