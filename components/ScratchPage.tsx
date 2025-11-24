@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { copy } from '@/lib/config'
+import confetti from 'canvas-confetti'
 
 interface ScratchPageProps {
   onComplete: () => void
@@ -186,7 +187,37 @@ export default function ScratchPage({ onComplete, onBack }: ScratchPageProps) {
         ctx.globalCompositeOperation = 'destination-out'
         ctx.fillRect(0, 0, canvas.width, canvas.height)
         ctx.restore()
-        
+
+        // Trigger canvas-confetti animation
+        const duration = 1575 // 75% of 2100ms (52.5% of original 3000ms)
+        const end = Date.now() + duration
+        const colors = ['#FF6B9D', '#C0FFEB', '#FFF568', '#5653FE', '#FFD93D']
+
+        const frame = () => {
+          confetti({
+            particleCount: 5,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0, y: 0.6 },
+            colors: colors,
+            ticks: 105 // 75% of 140 ticks = even faster fall
+          })
+          confetti({
+            particleCount: 5,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1, y: 0.6 },
+            colors: colors,
+            ticks: 105 // 75% of 140 ticks = even faster fall
+          })
+
+          if (Date.now() < end) {
+            requestAnimationFrame(frame)
+          }
+        }
+
+        frame()
+
         // Show modal immediately (matching HTML behavior)
         setShowModal(true)
         // Load Lottie confetti

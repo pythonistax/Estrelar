@@ -403,3 +403,4 @@ config/
 **The logic is centralized in `QuizFlow.tsx`** - all state, navigation, and conditional rendering happens there. Other components are "dumb" presentation components that receive props and call callbacks.
 
 
+

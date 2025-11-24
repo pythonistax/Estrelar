@@ -96,46 +96,48 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
     })
 
     if (curvePath) {
-      const pathLength = curvePath.getTotalLength()
+      const pathLength = (curvePath as SVGPathElement).getTotalLength()
       curvePath.style.strokeDasharray = `${pathLength}`
       curvePath.style.strokeDashoffset = `${pathLength}`
       
       // Animate the path
       setTimeout(() => {
-        curvePath!.style.transition = 'stroke-dashoffset 2s ease-in-out'
-        curvePath!.style.strokeDashoffset = '0'
+        if (curvePath) {
+          curvePath.style.transition = 'stroke-dashoffset 2s ease-in-out'
+          curvePath.style.strokeDashoffset = '0'
         
-        // After curve animation completes, add vertical line to SVG
-        setTimeout(() => {
-          // Create vertical dashed line element - perfectly vertical from green dot
-          const verticalLine = document.createElementNS('http://www.w3.org/2000/svg', 'line')
-          verticalLine.setAttribute('x1', '619.466')
-          verticalLine.setAttribute('y1', '45.925')
-          verticalLine.setAttribute('x2', '619.466')
-          verticalLine.setAttribute('y2', '270')
-          verticalLine.setAttribute('stroke', '#E5E7EB')
-          verticalLine.setAttribute('stroke-width', '1')
-          verticalLine.setAttribute('stroke-dasharray', '5,5')
-          verticalLine.style.opacity = '0'
-          verticalLine.style.transition = 'opacity 0.3s ease-in'
-
-          // Find the main group to append the line
-          const mainGroup = svg.querySelector('g[clip-path]') || svg.querySelector('g') || svg
-          mainGroup.appendChild(verticalLine)
-
-          // Animate the line appearance
+          // After curve animation completes, add vertical line to SVG
           setTimeout(() => {
-            verticalLine.style.opacity = '1'
-            // Calculate line length for animation (vertical distance)
-            const lineLength = 270 - 45.925
-            verticalLine.style.strokeDasharray = `${lineLength}`
-            verticalLine.style.strokeDashoffset = `${lineLength}`
-            verticalLine.style.transition = 'stroke-dashoffset 0.5s linear'
+            // Create vertical dashed line element - perfectly vertical from green dot
+            const verticalLine = document.createElementNS('http://www.w3.org/2000/svg', 'line')
+            verticalLine.setAttribute('x1', '619.466')
+            verticalLine.setAttribute('y1', '45.925')
+            verticalLine.setAttribute('x2', '619.466')
+            verticalLine.setAttribute('y2', '270')
+            verticalLine.setAttribute('stroke', '#E5E7EB')
+            verticalLine.setAttribute('stroke-width', '1')
+            verticalLine.setAttribute('stroke-dasharray', '5,5')
+            verticalLine.style.opacity = '0'
+            verticalLine.style.transition = 'opacity 0.3s ease-in'
+
+            // Find the main group to append the line
+            const mainGroup = svg.querySelector('g[clip-path]') || svg.querySelector('g') || svg
+            mainGroup.appendChild(verticalLine)
+
+            // Animate the line appearance
             setTimeout(() => {
-              verticalLine.style.strokeDashoffset = '0'
-            }, 50)
-          }, 100)
-        }, 2000)
+              verticalLine.style.opacity = '1'
+              // Calculate line length for animation (vertical distance)
+              const lineLength = 270 - 45.925
+              verticalLine.style.strokeDasharray = `${lineLength}`
+              verticalLine.style.strokeDashoffset = `${lineLength}`
+              verticalLine.style.transition = 'stroke-dashoffset 0.5s linear'
+              setTimeout(() => {
+                verticalLine.style.strokeDashoffset = '0'
+              }, 50)
+            }, 100)
+          }, 2000)
+        }
       }, 300)
     }
   }, [svgContent])
