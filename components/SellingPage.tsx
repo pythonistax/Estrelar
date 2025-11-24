@@ -323,7 +323,7 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
               {/* Guy image on the left */}
               <img
                 alt=""
-                fetchpriority="high"
+                fetchPriority="high"
                 width="150"
                 height="210"
                 decoding="async"
@@ -336,7 +336,7 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
               {/* Day 1-4 cards in the middle */}
               <img
                 alt=""
-                fetchpriority="high"
+                fetchPriority="high"
                 width="150"
                 height="210"
                 decoding="async"
