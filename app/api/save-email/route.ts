@@ -8,7 +8,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server'
-import { saveSessionToLocalDB, saveSessionToExcel } from '@/lib/local-db'
+import { saveSessionToLocalDB } from '@/lib/local-db'
 
 export async function POST(request: NextRequest) {
   try {
@@ -38,8 +38,8 @@ export async function POST(request: NextRequest) {
     // Log the data first (always show in terminal)
     console.log('Email submission received:', sessionData)
 
-    // Save to local database using OS file operations (fs.writeFileSync)
-    // This uses direct OS file system calls - simple and effective
+    // Save to SQLite database using OS file operations
+    // Simple, reliable, and efficient - one row per submission
     saveSessionToLocalDB(sessionData)
 
     // Return success response

@@ -36,4 +36,5 @@ next-env.d.ts
 # data files
 test_1_database.xlsx
 test_1_database.json
+test_1_database.db
 
