@@ -96,15 +96,17 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
     })
 
     if (curvePath) {
-      const pathLength = (curvePath as SVGPathElement).getTotalLength()
-      curvePath.style.strokeDasharray = `${pathLength}`
-      curvePath.style.strokeDashoffset = `${pathLength}`
+      const pathElement = curvePath as SVGPathElement
+      const pathLength = pathElement.getTotalLength()
+      pathElement.style.strokeDasharray = `${pathLength}`
+      pathElement.style.strokeDashoffset = `${pathLength}`
       
       // Animate the path
       setTimeout(() => {
         if (curvePath) {
-          curvePath.style.transition = 'stroke-dashoffset 2s ease-in-out'
-          curvePath.style.strokeDashoffset = '0'
+          const pathEl = curvePath as SVGPathElement
+          pathEl.style.transition = 'stroke-dashoffset 2s ease-in-out'
+          pathEl.style.strokeDashoffset = '0'
         
           // After curve animation completes, add vertical line to SVG
           setTimeout(() => {
