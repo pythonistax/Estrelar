@@ -30,7 +30,7 @@ export default function PaymentSection() {
 
       {/* Subscription Terms */}
       <p className="px-1 pb-3 text-center text-xs leading-snug text-secondary mt-4">
-        You agree that <b>€39.99</b> will be as an intro offer, then <b>€39.99</b> will be automatically billed every 1 month until you cancel in settings.{' '}
+        You agree that <b>$19.99</b> will be as an intro offer, then <b>$19.99</b> will be automatically billed every 1 month until you cancel in settings.{' '}
         <a className="underline" href="https://legal.coursiv.io/en/subscription" target="_blank" rel="noreferrer">
           Subscription Terms.
         </a>

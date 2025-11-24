@@ -20,8 +20,9 @@ export default function CheckoutModal({ isOpen, onClose, selectedPlan }: Checkou
 
   if (!isOpen) return null
 
-  // Extract numeric price from string like "€39.99"
-  const basePrice = parseFloat(selectedPlan.price.replace('€', ''))
+  // Extract numeric price from string like "€39.99" or "$43.99"
+  const basePrice = parseFloat(selectedPlan.price.replace(/[€$]/g, ''))
+  const symbol = selectedPlan.price.match(/[€$]/)?.[0] || '€'
   const total = basePrice
 
   return (
@@ -69,7 +70,7 @@ export default function CheckoutModal({ isOpen, onClose, selectedPlan }: Checkou
               {/* Product Line */}
               <div className="flex justify-between items-center mb-2.5">
                 <span className="text-base text-gray-600">AI-Driven Income Challenge</span>
-                <span className="text-base font-semibold text-[#24234C]">€{basePrice.toFixed(2)}</span>
+                <span className="text-base font-semibold text-[#24234C]">{symbol}{basePrice.toFixed(2)}</span>
               </div>
 
               {/* Divider */}
@@ -79,7 +80,7 @@ export default function CheckoutModal({ isOpen, onClose, selectedPlan }: Checkou
               {/* Total */}
               <div className="flex items-center justify-between text-base font-bold leading-normal text-[#24234C] mb-1">
                 <span>Total</span>
-                <span className="text-2xl">€{total.toFixed(2)}</span>
+                <span className="text-2xl">{symbol}{total.toFixed(2)}</span>
               </div>
             </div>
 
@@ -148,8 +149,8 @@ export default function CheckoutModal({ isOpen, onClose, selectedPlan }: Checkou
               {/* Terms */}
               <div className="text-center text-sm text-gray-600 mt-4">
                 <p>
-                  You agree that <span className="font-semibold">€{basePrice.toFixed(2)}</span> will be as an intro offer, then{' '}
-                  <span className="font-semibold">€{basePrice.toFixed(2)}</span> will be automatically billed every {selectedPlan.duration} until
+                  You agree that <span className="font-semibold">{symbol}{basePrice.toFixed(2)}</span> will be as an intro offer, then{' '}
+                  <span className="font-semibold">{symbol}{basePrice.toFixed(2)}</span> will be automatically billed every {selectedPlan.duration} until
                   you cancel in settings.{' '}
                   <a href="#" className="text-[#5653FE] underline hover:text-[#4442D9]">
                     Subscription Terms.
