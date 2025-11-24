@@ -191,7 +191,7 @@ export default function UserProfilePage({ onContinue, onBack }: UserProfilePageP
                   </div>
                   {/* Decorative SVG Element */}
                   <div className="absolute -right-7 bottom-0 -z-10">
-                    <div height="60" style={{ height: '160px' }}>
+                    <div style={{ height: '160px' }}>
                       <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 800" width="400" height="800" preserveAspectRatio="xMidYMid meet" style={{ width: '100%', height: '100%', transform: 'translate3d(0px, 0px, 0px)', contentVisibility: 'visible' }}>
                         <defs>
                           <clipPath id="__lottie_element_43">
