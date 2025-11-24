@@ -1,0 +1,25 @@
+Hi! I need you to implement IP-based currency detection for my Coursiv quiz application.
+
+CURRENT SITUATION:
+- My quiz currently shows all prices in Euro (€) hardcoded
+- I need it to automatically detect the user's location from their IP address
+- If IP is from US → show prices in $ (USD)
+- If IP is from EU → show prices in € (EUR)
+- Default to EUR if detection fails
+
+I have a detailed implementation guide already created in the file: IP_CURRENCY_DETECTION_IMPLEMENTATION.md
+
+Please read that file and implement the IP-based currency detection system according to the guide. The guide includes:
+- API endpoint for IP detection
+- Currency context/hook for React
+- Step-by-step instructions to update all pricing components
+- All necessary code snippets
+
+The main files that need updating are:
+- components/SellingPage.tsx (has hardcoded € prices)
+- components/PaymentSection.tsx (has hardcoded €39.99)
+- components/CheckoutModal.tsx (has hardcoded € prices)
+- app/api/save-email/route.ts (should capture IP)
+
+Please follow the implementation guide and make sure all prices dynamically change based on the user's IP location. Thank you!
+

@@ -155,9 +155,9 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
   // Get subscription text based on selected plan
   const getSubscriptionText = () => {
     const baseText = {
-      '1week': 'By clicking "Get My Plan", you agree to automatic subscription renewal to Coursiv: first 1 week at €13.86, then €13.86 every week (both excluding taxes) until you cancel. You can cancel anytime via support or account settings. See ',
-      '4week': 'By clicking "Get My Plan", you agree to automatic subscription renewal to Coursiv: first 4 weeks at €39.99, then €39.99 every 4 weeks (both excluding taxes) until you cancel. You can cancel anytime via support or account settings. See ',
-      '12week': 'By clicking "Get My Plan", you agree to automatic subscription renewal to Coursiv: first 12 weeks at €79.99, then €79.99 every 12 weeks (both excluding taxes) until you cancel. You can cancel anytime via support or account settings. See ',
+      '1week': 'By clicking "Get My Plan", you agree to automatic subscription renewal to Coursiv: first 1 week at €6.93, then €6.93 every week (both excluding taxes) until you cancel. You can cancel anytime via support or account settings. See ',
+      '4week': 'By clicking "Get My Plan", you agree to automatic subscription renewal to Coursiv: first 4 weeks at €19.99, then €19.99 every 4 weeks (both excluding taxes) until you cancel. You can cancel anytime via support or account settings. See ',
+      '12week': 'By clicking "Get My Plan", you agree to automatic subscription renewal to Coursiv: first 12 weeks at €39.99, then €39.99 every 12 weeks (both excluding taxes) until you cancel. You can cancel anytime via support or account settings. See ',
     }
     return (
       <>
@@ -578,8 +578,9 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
                   </div>
                   <div className="flex-1 laptop:flex-none">
                     <p className="text-base font-bold uppercase tablet:pb-1 tablet:text-lg laptop:pb-2 laptop:text-2xl text-main">1-WEEK PLAN</p>
-                    <div className="flex gap-1 text-sm font-medium text-secondary">
-                      <span>€13.86</span>
+                    <div className="flex flex-col gap-1">
+                      <span className="text-sm font-medium text-secondary line-through">€13.86</span>
+                      <span className="text-lg font-bold text-[#4F981D]">€6.93</span>
                     </div>
                   </div>
                 </div>
@@ -591,17 +592,17 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
                     <div className="flex items-stretch justify-start gap-0.5 rounded py-1 text-end bg-secondary px-2 text-main">
                       <div className="font-bold">€</div>
                       <div className="flex flex-col text-[36px] font-bold leading-10">
-                        <span>1</span>
+                        <span>0</span>
                       </div>
                       <div className="flex min-w-[32px] flex-col justify-center">
-                        <div className="text-start font-bold leading-6">98</div>
+                        <div className="text-start font-bold leading-6">99</div>
                         <div className="whitespace-nowrap text-[10px] font-medium leading-3">per day</div>
                       </div>
                     </div>
                   </div>
                   <div className="mb-4 hidden h-[1px] w-full bg-[#F1F1F1] laptop:block"></div>
                   <div className="hidden items-end gap-1 font-bold laptop:flex">
-                    <div className="text-3xl leading-none text-main">€1.98</div>
+                    <div className="text-3xl leading-none text-main">€0.99</div>
                     <div className="text-base leading-none text-main">per day</div>
                   </div>
                 </div>
@@ -629,8 +630,9 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
                   </div>
                   <div className="flex-1 laptop:flex-none">
                     <p className="text-base font-bold uppercase tablet:pb-1 tablet:text-lg laptop:pb-2 laptop:text-2xl text-secondary">4-WEEK PLAN</p>
-                    <div className="flex gap-1 text-sm font-medium text-secondary">
-                      <span>€39.99</span>
+                    <div className="flex flex-col gap-1">
+                      <span className="text-sm font-medium text-secondary line-through">€39.99</span>
+                      <span className="text-lg font-bold text-[#4F981D]">€19.99</span>
                     </div>
                   </div>
                 </div>
@@ -642,17 +644,17 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
                     <div className="flex items-stretch justify-start gap-0.5 rounded py-1 text-end bg-secondary px-2 text-secondary">
                       <div className="font-bold">€</div>
                       <div className="flex flex-col text-[36px] font-bold leading-10">
-                        <span>1</span>
+                        <span>0</span>
                       </div>
                       <div className="flex min-w-[32px] flex-col justify-center">
-                        <div className="text-start font-bold leading-6">43</div>
+                        <div className="text-start font-bold leading-6">71</div>
                         <div className="whitespace-nowrap text-[10px] font-medium leading-3">per day</div>
                       </div>
                     </div>
                   </div>
                   <div className="mb-4 hidden h-[1px] w-full bg-[#F1F1F1] laptop:block"></div>
                   <div className="hidden items-end gap-1 font-bold laptop:flex">
-                    <div className="text-3xl leading-none text-secondary">€1.43</div>
+                    <div className="text-3xl leading-none text-secondary">€0.71</div>
                     <div className="text-base leading-none text-secondary">per day</div>
                   </div>
                 </div>
@@ -676,8 +678,9 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
                   </div>
                   <div className="flex-1 laptop:flex-none">
                     <p className="text-base font-bold uppercase tablet:pb-1 tablet:text-lg laptop:pb-2 laptop:text-2xl text-main">12-WEEK PLAN</p>
-                    <div className="flex gap-1 text-sm font-medium text-secondary">
-                      <span>€79.99</span>
+                    <div className="flex flex-col gap-1">
+                      <span className="text-sm font-medium text-secondary line-through">€79.99</span>
+                      <span className="text-lg font-bold text-[#4F981D]">€39.99</span>
                     </div>
                   </div>
                 </div>
@@ -692,14 +695,14 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
                         <span>0</span>
                       </div>
                       <div className="flex min-w-[32px] flex-col justify-center">
-                        <div className="text-start font-bold leading-6">95</div>
+                        <div className="text-start font-bold leading-6">47</div>
                         <div className="whitespace-nowrap text-[10px] font-medium leading-3">per day</div>
                       </div>
                     </div>
                   </div>
                   <div className="mb-4 hidden h-[1px] w-full bg-[#F1F1F1] laptop:block"></div>
                   <div className="hidden items-end gap-1 font-bold laptop:flex">
-                    <div className="text-3xl leading-none text-main">€0.95</div>
+                    <div className="text-3xl leading-none text-main">€0.47</div>
                     <div className="text-base leading-none text-main">per day</div>
                   </div>
                 </div>
@@ -978,8 +981,9 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
         onClose={() => setIsCheckoutOpen(false)}
         selectedPlan={{
           name: selectedPlan === '1week' ? '1-Week Challenge' : selectedPlan === '4week' ? '4-Week Challenge' : '12-Week Challenge',
-          price: selectedPlan === '1week' ? '€19.99' : selectedPlan === '4week' ? '€39.99' : '€79.99',
-          pricePerDay: selectedPlan === '1week' ? '€2.85/day' : selectedPlan === '4week' ? '€1.43/day' : '€0.95/day'
+          price: selectedPlan === '1week' ? '€6.93' : selectedPlan === '4week' ? '€19.99' : '€39.99',
+          pricePerDay: selectedPlan === '1week' ? '€0.99/day' : selectedPlan === '4week' ? '€0.71/day' : '€0.47/day',
+          duration: selectedPlan === '1week' ? '1 week' : selectedPlan === '4week' ? '4 weeks' : '12 weeks'
         }}
       />
     </div>

@@ -9,6 +9,7 @@ interface CheckoutModalProps {
     name: string
     price: string
     pricePerDay: string
+    duration: string
   }
 }
 
@@ -19,9 +20,9 @@ export default function CheckoutModal({ isOpen, onClose, selectedPlan }: Checkou
 
   if (!isOpen) return null
 
-  const basePrice = 79.99
-  const vat = 18.40
-  const total = 98.39
+  // Extract numeric price from string like "€39.99"
+  const basePrice = parseFloat(selectedPlan.price.replace('€', ''))
+  const total = basePrice
 
   return (
     <>
@@ -80,11 +81,6 @@ export default function CheckoutModal({ isOpen, onClose, selectedPlan }: Checkou
                 <span>Total</span>
                 <span className="text-2xl">€{total.toFixed(2)}</span>
               </div>
-
-              {/* VAT breakdown */}
-              <p className="text-end text-[10px] text-[#6B7280] mb-1">
-                €{basePrice.toFixed(2)} + €{vat.toFixed(2)} VAT
-              </p>
             </div>
 
             {/* PayPal Button */}
@@ -153,7 +149,7 @@ export default function CheckoutModal({ isOpen, onClose, selectedPlan }: Checkou
               <div className="text-center text-sm text-gray-600 mt-4">
                 <p>
                   You agree that <span className="font-semibold">€{basePrice.toFixed(2)}</span> will be as an intro offer, then{' '}
-                  <span className="font-semibold">€{basePrice.toFixed(2)}</span> will be automatically billed every 1 month until
+                  <span className="font-semibold">€{basePrice.toFixed(2)}</span> will be automatically billed every {selectedPlan.duration} until
                   you cancel in settings.{' '}
                   <a href="#" className="text-[#5653FE] underline hover:text-[#4442D9]">
                     Subscription Terms.
