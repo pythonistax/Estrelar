@@ -14,9 +14,9 @@ export default function PricingPage({ onContinue, onBack }: PricingPageProps) {
   const [showCheckout, setShowCheckout] = useState(false)
 
   const plans = {
-    '1-week': { name: '1-WEEK PLAN', price: '€13.86', pricePerDay: '€1.98' },
-    '4-week': { name: '4-WEEK PLAN', price: '€39.99', pricePerDay: '€1.43' },
-    '12-week': { name: '12-WEEK PLAN', price: '€79.99', pricePerDay: '€0.95' },
+    '1-week': { name: '1-WEEK PLAN', price: '€13.86', pricePerDay: '€1.98', duration: 'week' },
+    '4-week': { name: '4-WEEK PLAN', price: '€39.99', pricePerDay: '€1.43', duration: '4 weeks' },
+    '12-week': { name: '12-WEEK PLAN', price: '€79.99', pricePerDay: '€0.95', duration: '12 weeks' },
   }
 
   const handleGetPlan = () => {
