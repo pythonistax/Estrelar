@@ -1,0 +1,949 @@
+================================================================================
+                    ESTRELAR DEPLOYMENT - COMPLETE OVERVIEW
+                    Comprehensive Technical Explanation
+================================================================================
+
+TABLE OF CONTENTS
+================================================================================
+1. WHAT WE BUILT - The Application
+2. WHAT IS DOCKER - Containerization Explained
+3. DOCKERFILE - Line-by-Line Explanation
+4. DOCKER COMPOSE - Orchestration Explained
+5. NGINX - Reverse Proxy Explained
+6. DEPLOYMENT ARCHITECTURE - How Everything Connects
+7. DATABASE SETUP - SQLite Integration
+8. THE COMPLETE REQUEST FLOW - Step-by-Step
+9. FILE STRUCTURE - What Goes Where
+10. DEPLOYMENT PROCESS - What We Did
+11. KEY CONCEPTS - Important Terms Explained
+
+
+================================================================================
+1. WHAT WE BUILT - The Application
+================================================================================
+
+WHAT IS THIS PROJECT?
+----------------------
+You built a Next.js web application - a modern, full-stack web framework built on
+React. This is a landing page with an interactive quiz that collects user emails
+and stores them in a database.
+
+TECHNOLOGY STACK:
+-----------------
+- Next.js 14.0.4: React framework for building web applications
+- React 18.2.0: JavaScript library for building user interfaces
+- TypeScript 5.3.3: Typed JavaScript (adds type safety)
+- Tailwind CSS 3.4.0: Utility-first CSS framework for styling
+- SQLite (better-sqlite3): Lightweight database for storing submissions
+- Framer Motion: Animation library for smooth UI transitions
+- Canvas Confetti: Visual effects library
+
+WHAT THE APP DOES:
+------------------
+1. User visits the landing page
+2. User goes through an interactive quiz
+3. User submits their email and name
+4. Data is saved to SQLite database
+5. User sees personalized results/profile
+
+WHY NEXT.JS?
+------------
+- Server-side rendering (faster page loads)
+- Built-in API routes (no separate backend needed)
+- Automatic code splitting (optimized performance)
+- Production-ready optimizations
+- Easy deployment options
+
+
+================================================================================
+2. WHAT IS DOCKER - Containerization Explained
+================================================================================
+
+WHAT IS DOCKER?
+---------------
+Docker is a platform that packages your application and all its dependencies into
+a "container" - a lightweight, portable unit that runs consistently anywhere.
+
+ANALOGY:
+--------
+Think of Docker like a shipping container:
+- A shipping container holds everything needed (cargo, packaging, etc.)
+- It can be moved from ship to truck to warehouse without opening
+- It works the same way everywhere
+- Docker containers hold your app + all dependencies (Node.js, libraries, etc.)
+- They run the same way on your laptop, server, or cloud
+
+WHY USE DOCKER?
+---------------
+1. CONSISTENCY: App runs the same on your machine and the server
+2. ISOLATION: App doesn't interfere with other apps on the server
+3. PORTABILITY: Easy to move between servers
+4. SIMPLICITY: One command to build, one command to run
+5. DEPENDENCIES: All dependencies are included (Node.js, npm packages, etc.)
+
+KEY DOCKER CONCEPTS:
+--------------------
+- IMAGE: A read-only template (like a blueprint)
+  Example: node:20-alpine (Node.js version 20 on Alpine Linux)
+  
+- CONTAINER: A running instance of an image (like a house built from blueprint)
+  Example: Your Next.js app running in a container
+  
+- DOCKERFILE: Instructions for building an image
+  Example: "Start with Node.js, copy files, install packages, build app"
+  
+- DOCKER COMPOSE: Tool for running multiple containers together
+  Example: Run your app container + database container together
+
+
+================================================================================
+3. DOCKERFILE - Line-by-Line Explanation
+================================================================================
+
+LOCATION: /Dockerfile (in your project root)
+
+WHAT IT DOES:
+-------------
+The Dockerfile is a recipe that tells Docker how to build your application image.
+It's a step-by-step instruction manual.
+
+COMPLETE BREAKDOWN:
+-------------------
+
+# Build stage
+FROM node:20-alpine AS builder
+--------------------------------
+- FROM: Start with a base image
+- node:20-alpine: Use Node.js version 20 on Alpine Linux (small, fast)
+- AS builder: Name this stage "builder" (we'll use it later)
+- Alpine Linux: Minimal Linux distribution (smaller = faster)
+
+WORKDIR /app
+------------
+- WORKDIR: Set the working directory inside the container
+- /app: All commands will run from this directory
+- Like doing "cd /app" in a terminal
+
+# Copy package files
+COPY package*.json ./
+------------------------
+- COPY: Copy files from your computer into the container
+- package*.json: Copy package.json and package-lock.json
+- ./: Copy to current directory (/app)
+- WHY FIRST? Docker caches layers - if package.json doesn't change,
+  it can reuse the cached "npm ci" step (saves time)
+
+# Install dependencies
+RUN npm ci
+------------------------
+- RUN: Execute a command during image build
+- npm ci: Clean install (faster, more reliable than npm install)
+- Installs all packages listed in package.json
+- This happens ONCE during build, not every time container starts
+
+# Copy source code
+COPY . .
+------------------
+- COPY . .: Copy everything from current directory to /app in container
+- This includes: components, pages, styles, config files, etc.
+- Only happens after dependencies are installed (optimization)
+
+# Build the application
+RUN npm run build
+-------------------
+- RUN: Execute build command
+- npm run build: Runs "next build" (from package.json scripts)
+- This compiles TypeScript, optimizes React, creates production files
+- Creates .next/ folder with optimized code
+- This is the SLOW step (takes 30-60 seconds)
+
+# Production stage
+FROM node:20-alpine AS runner
+------------------------------
+- FROM: Start a NEW, fresh image (multi-stage build)
+- AS runner: Name this stage "runner"
+- WHY? Builder stage has build tools we don't need in production
+- Smaller final image = faster deployment
+
+WORKDIR /app
+------------
+- Set working directory again (in the new, clean image)
+
+ENV NODE_ENV production
+------------------------
+- ENV: Set environment variable
+- NODE_ENV=production: Tells Node.js this is production mode
+- Enables optimizations, disables debug features
+
+# Copy necessary files from builder
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+----------------------------------------------------------------
+- COPY --from=builder: Copy files FROM the builder stage
+- /app/public: Static files (images, fonts, etc.)
+- .next/standalone: Optimized server code (Next.js standalone mode)
+- .next/static: Static assets (CSS, JS bundles)
+- We DON'T copy source code or node_modules (not needed in production)
+
+EXPOSE 3000
+-----------
+- EXPOSE: Document which port the app uses (doesn't actually open it)
+- 3000: Port your Next.js app listens on
+- Documentation for other developers/Docker
+
+ENV PORT 3000
+ENV HOSTNAME "0.0.0.0"
+----------------------
+- PORT 3000: Tell the app to use port 3000
+- HOSTNAME "0.0.0.0": Listen on all network interfaces
+- 0.0.0.0 means "accept connections from anywhere" (not just localhost)
+
+CMD ["node", "server.js"]
+--------------------------
+- CMD: Command to run when container starts
+- node server.js: Start the Next.js server
+- server.js is created by Next.js during build (in .next/standalone)
+
+MULTI-STAGE BUILD BENEFIT:
+---------------------------
+- Builder stage: ~500MB (has build tools, source code, node_modules)
+- Runner stage: ~150MB (only production files)
+- Smaller = faster to download, deploy, start
+
+
+================================================================================
+4. DOCKER COMPOSE - Orchestration Explained
+================================================================================
+
+LOCATION: /docker-compose.yml (in your project root)
+
+WHAT IT DOES:
+-------------
+Docker Compose is a tool for defining and running multi-container Docker
+applications. It's like a conductor for an orchestra - it coordinates
+everything to work together.
+
+COMPLETE BREAKDOWN:
+-------------------
+
+version: '3.8'
+---------------
+- Version of Docker Compose file format
+- 3.8 is a stable, widely-supported version
+- (Note: This is now optional in newer Docker versions)
+
+services:
+---------
+- services: Define the containers you want to run
+- You can have multiple services (app, database, cache, etc.)
+- In your case: just one service (landing-page)
+
+landing-page:
+-------------
+- Name of your service (you can call it anything)
+- This becomes the container name prefix
+
+build:
+  context: .
+  dockerfile: Dockerfile
+--------------------------
+- build: How to build the image
+- context: .: Build context is current directory (where docker-compose.yml is)
+- dockerfile: Dockerfile: Use the Dockerfile in the current directory
+- This tells Docker: "Build an image using the Dockerfile here"
+
+ports:
+  - "3000:3000"
+--------------
+- ports: Map ports between host (server) and container
+- "3000:3000": Host port 3000 → Container port 3000
+- Format: "HOST:CONTAINER"
+- This makes your app accessible on the server's port 3000
+- Without this, the app would only be accessible inside the container
+
+environment:
+  - NODE_ENV=production
+------------------------
+- environment: Set environment variables in the container
+- NODE_ENV=production: Tell the app it's in production mode
+- You can add more: DATABASE_URL, API_KEYS, etc.
+
+restart: unless-stopped
+------------------------
+- restart: What to do if container stops
+- unless-stopped: Restart automatically unless you manually stopped it
+- If server reboots, container starts automatically
+- If app crashes, Docker restarts it
+
+healthcheck:
+  test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000"]
+  interval: 30s
+  timeout: 10s
+  retries: 3
+----------------------------------------------------------------
+- healthcheck: Monitor if app is working
+- test: Command to check health (wget checks if app responds)
+- interval: Check every 30 seconds
+- timeout: Wait 10 seconds for response
+- retries: Try 3 times before marking unhealthy
+- Docker uses this to know if container is working
+
+WHY DOCKER COMPOSE?
+-------------------
+- Single command to start everything: docker-compose up
+- Single command to stop everything: docker-compose down
+- Easy configuration in one file
+- Can add more services later (database, Redis, etc.)
+
+
+================================================================================
+5. NGINX - Reverse Proxy Explained
+================================================================================
+
+WHAT IS NGINX?
+--------------
+Nginx (pronounced "engine-x") is a web server and reverse proxy. It's one of the
+most popular web servers in the world, used by millions of websites.
+
+WHAT IS A REVERSE PROXY?
+-------------------------
+A reverse proxy sits between the internet and your application. It receives
+requests from users and forwards them to your app.
+
+ANALOGY:
+--------
+Think of a restaurant:
+- Customers (internet users) come to the front door (port 80)
+- Host (Nginx) greets them and takes their order
+- Host gives order to kitchen (your Next.js app on port 3000)
+- Kitchen prepares food (app processes request)
+- Host brings food to customer (Nginx returns response)
+
+WHY USE NGINX?
+--------------
+1. PORT 80: Standard HTTP port (users expect http://, not http://:3000)
+2. SSL/HTTPS: Nginx handles SSL certificates (secure connections)
+3. LOAD BALANCING: Can distribute traffic to multiple app instances
+4. STATIC FILES: Can serve static files directly (faster)
+5. SECURITY: Hides your app's internal structure
+6. CACHING: Can cache responses (faster for users)
+
+NGINX CONFIGURATION BREAKDOWN:
+-------------------------------
+
+LOCATION: /etc/nginx/sites-available/estrelar
+
+server {
+    listen 80 default_server;
+    server_name _;
+--------------------------------
+- server: Define a virtual server (can have multiple)
+- listen 80: Listen on port 80 (HTTP)
+- default_server: Handle requests that don't match other servers
+- server_name _: Accept any domain name or IP address
+  (underscore = catch-all, perfect for IP address testing)
+
+client_max_body_size 10M;
+--------------------------
+- Maximum size of request body (for file uploads)
+- 10M = 10 megabytes
+- Prevents huge uploads from crashing server
+
+location / {
+    proxy_pass http://localhost:3000;
+----------------------------------------
+- location /: Handle all requests (the / means "everything")
+- proxy_pass: Forward requests to another server
+- http://localhost:3000: Your Next.js app (running in Docker)
+- localhost:3000 works because Docker mapped port 3000 to host
+
+proxy_http_version 1.1;
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection 'upgrade';
+----------------------------------------
+- HTTP/1.1: Use HTTP version 1.1 (supports WebSockets)
+- Upgrade/Connection: Enable WebSocket support
+- WebSockets: For real-time features (chat, live updates)
+
+proxy_set_header Host $host;
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+proxy_set_header X-Forwarded-Proto $scheme;
+----------------------------------------------------------------
+- Set headers: Pass information to your app
+- Host: Original hostname (domain or IP)
+- X-Real-IP: User's real IP address (not Nginx's IP)
+- X-Forwarded-For: Chain of proxies (if any)
+- X-Forwarded-Proto: http or https
+- Your app needs these to know who made the request
+
+proxy_connect_timeout 60s;
+proxy_send_timeout 60s;
+proxy_read_timeout 60s;
+--------------------------
+- Timeouts: How long to wait
+- connect: Time to establish connection to app
+- send: Time to send request to app
+- read: Time to wait for app's response
+- 60 seconds is generous (prevents timeouts)
+
+THE FLOW:
+---------
+1. User visits http://65.20.96.127
+2. Request goes to Nginx (port 80)
+3. Nginx sees "location /" matches
+4. Nginx forwards to http://localhost:3000
+5. Your Next.js app processes request
+6. App sends response back to Nginx
+7. Nginx sends response to user
+
+
+================================================================================
+6. DEPLOYMENT ARCHITECTURE - How Everything Connects
+================================================================================
+
+VISUAL ARCHITECTURE:
+--------------------
+
+    INTERNET
+       |
+       | (HTTP request to port 80)
+       |
+    [NGINX] ← Port 80 (Web Server)
+       |
+       | (forwards to localhost:3000)
+       |
+    [DOCKER HOST]
+       |
+       | (port mapping 3000:3000)
+       |
+    [DOCKER CONTAINER]
+       |
+       | (Next.js app running)
+       |
+    [NEXT.JS APP] ← Port 3000
+       |
+       | (reads/writes)
+       |
+    [SQLITE DATABASE] ← /app/test_1_database.db
+
+COMPONENT BREAKDOWN:
+--------------------
+
+1. VULTR SERVER (65.20.96.127)
+   - Ubuntu Linux operating system
+   - Runs Docker Engine
+   - Runs Nginx
+   - Has your project files in /root/Estrelar
+
+2. NGINX (Web Server)
+   - Listens on port 80 (HTTP)
+   - Receives all incoming web requests
+   - Forwards to Docker container
+   - Handles SSL (when you add it)
+
+3. DOCKER ENGINE
+   - Manages containers
+   - Runs your app in isolation
+   - Handles networking between containers and host
+
+4. DOCKER CONTAINER (estrelar-landing-page-1)
+   - Contains your Next.js application
+   - Has Node.js runtime
+   - Has all npm packages
+   - Runs on port 3000 (inside container)
+   - Has SQLite database file
+
+5. NEXT.JS APPLICATION
+   - Serves web pages
+   - Handles API requests
+   - Processes quiz logic
+   - Saves data to database
+
+6. SQLITE DATABASE
+   - Stores user submissions
+   - File: test_1_database.db
+   - Location: /app/test_1_database.db (inside container)
+
+NETWORK FLOW:
+-------------
+
+User's Browser → Internet → Vultr Server (Port 80) → Nginx → Docker (Port 3000) → Next.js App
+
+PORT EXPLANATION:
+-----------------
+- Port 80: Standard HTTP port (what users connect to)
+- Port 3000: Your Next.js app port (internal, not exposed to internet)
+- Port mapping: Docker maps host:3000 → container:3000
+- Nginx bridges: Internet:80 → App:3000
+
+WHY THIS ARCHITECTURE?
+----------------------
+- SECURITY: App not directly exposed to internet
+- FLEXIBILITY: Can add SSL, load balancing, caching
+- SCALABILITY: Can run multiple app instances
+- STANDARDS: Uses standard ports (80, 443)
+
+
+================================================================================
+7. DATABASE SETUP - SQLite Integration
+================================================================================
+
+WHAT IS SQLITE?
+---------------
+SQLite is a lightweight, file-based database. Unlike MySQL or PostgreSQL, it
+doesn't need a separate server - it's just a file.
+
+WHY SQLITE?
+-----------
+- Simple: No database server to manage
+- Fast: For small to medium applications
+- Portable: Just a file, easy to backup
+- Perfect for: Single-server deployments, small apps
+
+DATABASE FILE LOCATION:
+----------------------
+- Inside container: /app/test_1_database.db
+- On server (after copy): /root/test_1_database.db
+- Local machine: C:\Users\mmsou\Documents\Estrelar\test_1_database.db
+
+HOW IT WORKS:
+-------------
+
+1. DATABASE INITIALIZATION (lib/local-db.ts)
+   - When app starts, it checks if database file exists
+   - If not, creates it
+   - Creates "submissions" table with columns:
+     * id: Auto-incrementing primary key
+     * session_id: Unique session identifier
+     * email: User's email address
+     * name: User's name (optional)
+     * quiz_answers: JSON string of quiz responses
+     * privacy_consent: Boolean
+     * marketing_consent: Boolean
+     * created_at: Timestamp
+     * submitted_at: Timestamp
+
+2. SAVING DATA (app/api/save-email/route.ts)
+   - User submits email on frontend
+   - Frontend sends POST request to /api/save-email
+   - API route receives data
+   - Opens database connection
+   - Inserts new row into submissions table
+   - Returns success response
+
+3. DATABASE PERSISTENCE
+   - Database file is stored in container's filesystem
+   - When container restarts, file persists (if using volumes)
+   - Currently: File is in container, lost if container is deleted
+   - RECOMMENDATION: Add volume mount to persist data
+
+DATABASE STRUCTURE:
+-------------------
+Table: submissions
+- id: INTEGER PRIMARY KEY (auto-increment)
+- session_id: TEXT (unique identifier for user session)
+- email: TEXT (user's email)
+- name: TEXT (user's name, optional)
+- quiz_answers: TEXT (JSON string of quiz responses)
+- privacy_consent: INTEGER (0 or 1, boolean)
+- marketing_consent: INTEGER (0 or 1, boolean)
+- created_at: TEXT (ISO timestamp)
+- submitted_at: TEXT (ISO timestamp)
+- created_timestamp: DATETIME (auto-set on insert)
+
+VIEWING DATA:
+-------------
+- On server: sqlite3 /root/test_1_database.db "SELECT * FROM submissions;"
+- In container: docker exec -it estrelar-landing-page-1 sqlite3 /app/test_1_database.db
+- Download: docker cp estrelar-landing-page-1:/app/test_1_database.db /root/test_1_database.db
+
+
+================================================================================
+8. THE COMPLETE REQUEST FLOW - Step-by-Step
+================================================================================
+
+EXAMPLE: User visits http://65.20.96.127 and submits email
+
+STEP 1: DNS RESOLUTION (if using domain)
+----------------------------------------
+- User types domain name (or IP address)
+- DNS server resolves to IP: 65.20.96.127
+- Browser connects to that IP
+
+STEP 2: REQUEST TO SERVER
+--------------------------
+- Browser sends HTTP GET request to 65.20.96.127:80
+- Request headers include: User-Agent, Accept, etc.
+- Server receives request on port 80
+
+STEP 3: NGINX RECEIVES REQUEST
+------------------------------
+- Nginx is listening on port 80
+- Checks configuration: /etc/nginx/sites-available/estrelar
+- Matches "location /" rule
+- Prepares to forward to http://localhost:3000
+
+STEP 4: NGINX FORWARDS TO DOCKER
+--------------------------------
+- Nginx sends request to localhost:3000
+- Docker has mapped port 3000:3000
+- Request enters Docker container
+
+STEP 5: NEXT.JS RECEIVES REQUEST
+---------------------------------
+- Next.js app is listening on port 3000 (inside container)
+- Receives HTTP request
+- Determines route: "/" (home page)
+
+STEP 6: NEXT.JS PROCESSES REQUEST
+----------------------------------
+- Renders React components
+- Generates HTML
+- Includes CSS and JavaScript
+- Returns complete HTML page
+
+STEP 7: RESPONSE TRAVELS BACK
+------------------------------
+- Next.js → Docker container → Host port 3000
+- Host → Nginx
+- Nginx → Internet → User's browser
+
+STEP 8: BROWSER RENDERS PAGE
+------------------------------
+- Browser receives HTML
+- Downloads CSS and JavaScript
+- Renders page
+- User sees landing page
+
+STEP 9: USER INTERACTS (Quiz Flow)
+-----------------------------------
+- User clicks through quiz
+- JavaScript (React) handles interactions
+- No server requests needed (client-side)
+
+STEP 10: USER SUBMITS EMAIL
+----------------------------
+- User fills form and clicks submit
+- JavaScript sends POST request to /api/save-email
+- Request goes: Browser → Internet → Server → Nginx → Docker → Next.js API
+
+STEP 11: API PROCESSES SUBMISSION
+----------------------------------
+- Next.js API route receives POST request
+- Extracts email, name, session_id, quiz answers
+- Opens SQLite database connection
+- Inserts new row into submissions table
+- Returns JSON response: { success: true }
+
+STEP 12: DATABASE SAVES DATA
+-----------------------------
+- SQLite writes data to /app/test_1_database.db
+- File is updated on disk
+- Transaction committed
+
+STEP 13: RESPONSE TO USER
+--------------------------
+- API returns success response
+- Response travels back: Next.js → Docker → Nginx → Internet → Browser
+- JavaScript receives response
+- Shows success message to user
+
+COMPLETE FLOW DIAGRAM:
+----------------------
+Browser → Internet → Vultr Server:80 → Nginx → Docker:3000 → Next.js → SQLite
+                                                                         ↓
+Browser ← Internet ← Vultr Server:80 ← Nginx ← Docker:3000 ← Next.js ← (save)
+
+
+================================================================================
+9. FILE STRUCTURE - What Goes Where
+================================================================================
+
+ON YOUR LOCAL MACHINE:
+---------------------
+C:\Users\mmsou\Documents\Estrelar\
+├── app/                    # Next.js app directory
+│   ├── api/               # API routes
+│   │   └── save-email/    # Email submission endpoint
+│   ├── page.tsx           # Home page
+│   └── ...
+├── components/            # React components
+│   ├── PricingPage.tsx
+│   ├── SellingPage.tsx
+│   └── ...
+├── lib/                   # Utility libraries
+│   └── local-db.ts        # Database functions
+├── public/                # Static files (images, etc.)
+├── Dockerfile             # Docker build instructions
+├── docker-compose.yml     # Docker orchestration
+├── next.config.js         # Next.js configuration
+├── package.json           # Dependencies and scripts
+└── test_1_database.db     # SQLite database (local copy)
+
+ON THE SERVER:
+--------------
+/root/Estrelar/
+├── (same structure as local)
+├── .next/                 # Build output (created during build)
+└── node_modules/           # Dependencies (inside container, not on host)
+
+INSIDE DOCKER CONTAINER:
+------------------------
+/app/
+├── public/                # Static files
+├── .next/                 # Built application
+│   ├── standalone/        # Server code
+│   └── static/            # Static assets
+├── server.js              # Entry point (created by Next.js)
+└── test_1_database.db     # Database file
+
+NGINX CONFIGURATION:
+-------------------
+/etc/nginx/
+├── sites-available/
+│   └── estrelar           # Your site configuration
+└── sites-enabled/
+    └── estrelar -> ../sites-available/estrelar  # Symlink
+
+KEY FILES EXPLAINED:
+-------------------
+- Dockerfile: Instructions for building app image
+- docker-compose.yml: How to run the container
+- next.config.js: Next.js settings (standalone mode for Docker)
+- package.json: All dependencies and scripts
+- lib/local-db.ts: Database connection and operations
+- app/api/save-email/route.ts: API endpoint for saving emails
+
+
+================================================================================
+10. DEPLOYMENT PROCESS - What We Did
+================================================================================
+
+PHASE 1: SERVER SETUP
+---------------------
+1. Created Vultr server (Ubuntu 22.04)
+2. Installed Docker and Docker Compose
+3. Installed Nginx
+4. Configured firewall (opened ports 80, 443, 22)
+
+PHASE 2: CODE DEPLOYMENT
+------------------------
+1. Cloned Git repository to /root/Estrelar
+2. This brought all your code to the server
+3. Code is now on server, ready to build
+
+PHASE 3: DOCKER BUILD
+---------------------
+1. Created Dockerfile (instructions for building)
+2. Created docker-compose.yml (how to run)
+3. Ran: docker-compose up -d --build
+4. Docker:
+   - Read Dockerfile
+   - Built image (installed dependencies, compiled code)
+   - Created container from image
+   - Started container
+   - App now running on port 3000
+
+PHASE 4: NGINX CONFIGURATION
+----------------------------
+1. Created config file: /etc/nginx/sites-available/estrelar
+2. Configured reverse proxy (port 80 → port 3000)
+3. Enabled site (created symlink)
+4. Tested configuration: nginx -t
+5. Restarted Nginx: systemctl restart nginx
+6. Nginx now forwarding requests to app
+
+PHASE 5: TESTING
+----------------
+1. Tested locally: curl http://localhost:3000
+2. Tested via IP: http://65.20.96.127
+3. Tested quiz flow
+4. Tested email submission
+5. Verified database saves data
+
+PHASE 6: DATABASE VERIFICATION
+------------------------------
+1. Copied database from container: docker cp
+2. Downloaded to local machine: scp
+3. Opened database locally
+4. Verified data was saved correctly
+
+WHAT HAPPENS WHEN YOU UPDATE CODE:
+----------------------------------
+1. Make changes locally
+2. Commit to Git: git commit
+3. Push to GitHub: git push
+4. On server: git pull (downloads new code)
+5. Rebuild: docker-compose up -d --build
+6. Docker rebuilds image with new code
+7. New container starts with updated app
+8. Changes are live!
+
+
+================================================================================
+11. KEY CONCEPTS - Important Terms Explained
+================================================================================
+
+CONTAINER vs IMAGE:
+-------------------
+- IMAGE: Blueprint, template, read-only
+  Example: "estrelar-landing-page" image
+- CONTAINER: Running instance of image, read-write
+  Example: "estrelar-landing-page-1" container
+- Analogy: Image = Class, Container = Object instance
+
+PORT MAPPING:
+-------------
+- Format: "HOST:CONTAINER"
+- "3000:3000" means: Host port 3000 → Container port 3000
+- Allows external access to container's internal port
+- Without mapping, container port is only accessible inside Docker network
+
+REVERSE PROXY:
+--------------
+- Proxy: Middleman between client and server
+- Reverse: Sits in front of server (not client)
+- Benefits: SSL termination, load balancing, security, caching
+- Your setup: Nginx (reverse proxy) → Next.js (application server)
+
+STANDALONE MODE (Next.js):
+---------------------------
+- next.config.js has: output: 'standalone'
+- Creates minimal production build
+- Only includes necessary files
+- Smaller Docker image
+- Faster deployments
+
+ENVIRONMENT VARIABLES:
+----------------------
+- NODE_ENV=production: Tells Node.js it's production
+- Enables optimizations, disables debug features
+- Set in docker-compose.yml or Dockerfile
+
+VOLUMES (Not Currently Used):
+------------------------------
+- Volumes: Persistent storage outside container
+- Currently: Database is inside container (lost if container deleted)
+- Future: Add volume to persist database
+- Example: volumes: - ./data:/app/data
+
+HEALTH CHECKS:
+--------------
+- Docker checks if container is working
+- Runs command periodically (every 30s)
+- Marks container as healthy/unhealthy
+- Can auto-restart unhealthy containers
+
+SYMLINK (Nginx sites-enabled):
+-------------------------------
+- Symlink: Shortcut/pointer to another file
+- /etc/nginx/sites-enabled/estrelar → /etc/nginx/sites-available/estrelar
+- Nginx reads from sites-enabled
+- Easy to enable/disable sites
+
+GIT WORKFLOW:
+-------------
+- Local: Make changes, commit, push
+- Server: Pull changes, rebuild container
+- This is how you update the live site
+
+SSL/HTTPS (Future):
+-------------------
+- SSL: Secure Socket Layer (encryption)
+- HTTPS: HTTP over SSL (secure HTTP)
+- Certbot: Tool to get free SSL certificates
+- Let's Encrypt: Free SSL certificate authority
+- When you add domain, you'll set up SSL
+
+
+================================================================================
+12. COMMON QUESTIONS ANSWERED
+================================================================================
+
+Q: Why not just run Node.js directly on the server?
+A: Docker provides isolation, consistency, and easier deployment. Your app
+   runs the same everywhere, and you don't need to install Node.js on the
+   server directly.
+
+Q: Why use Nginx instead of exposing port 3000 directly?
+A: Port 80 is standard HTTP, Nginx handles SSL, and it provides additional
+   features like caching and load balancing. Also, you can't easily add
+   SSL to a Node.js app directly.
+
+Q: What happens if the server reboots?
+A: Docker Compose has "restart: unless-stopped", so containers start
+   automatically. Nginx is a system service, so it also starts automatically.
+
+Q: Where is the database stored?
+A: Currently inside the Docker container at /app/test_1_database.db.
+   If you delete the container, you lose the database. Consider adding a
+   volume mount for persistence.
+
+Q: How do I update the website?
+A: 1. Make changes locally, 2. git commit & push, 3. On server: git pull,
+   4. docker-compose up -d --build
+
+Q: Can I run multiple apps on this server?
+A: Yes! Each app gets its own Docker container and Nginx configuration.
+   They can run on different ports or domains.
+
+Q: What if the app crashes?
+A: Docker will restart it automatically (restart: unless-stopped). You can
+   check logs with: docker-compose logs
+
+Q: How do I see what's happening?
+A: - Container logs: docker-compose logs -f
+   - Nginx logs: tail -f /var/log/nginx/error.log
+   - System logs: journalctl -xe
+
+
+================================================================================
+13. SUMMARY - The Big Picture
+================================================================================
+
+WHAT YOU HAVE:
+--------------
+A fully deployed, production-ready Next.js application running on a Vultr
+server, accessible via IP address, with database persistence.
+
+HOW IT WORKS:
+-------------
+1. User visits IP address → Nginx receives request
+2. Nginx forwards to Docker container → Next.js app processes
+3. App serves pages and handles API requests
+4. Data saved to SQLite database
+5. Everything runs automatically and restarts if needed
+
+KEY TECHNOLOGIES:
+-----------------
+- Next.js: Web application framework
+- Docker: Containerization platform
+- Nginx: Web server and reverse proxy
+- SQLite: File-based database
+- Git: Version control and deployment
+
+WHAT'S NEXT:
+------------
+- Add domain name (update Nginx config, configure DNS)
+- Add SSL/HTTPS (secure connections)
+- Consider database volume for persistence
+- Monitor and maintain the application
+
+YOU'VE BUILT:
+-------------
+A complete, production-ready web application deployment with:
+✓ Automated containerization
+✓ Reverse proxy setup
+✓ Database integration
+✓ Deployment workflow
+✓ Production optimizations
+
+Congratulations! You now have a live, working website! 🎉
+
+
+================================================================================
+END OF DOCUMENT
+================================================================================
+
