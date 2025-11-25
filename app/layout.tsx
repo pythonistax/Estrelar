@@ -12,8 +12,8 @@ const pacifico = Pacifico({
 })
 
 export const metadata: Metadata = {
-  title: 'Estrelar Landing Pages',
-  description: 'Affiliate marketing landing pages and quiz offers',
+  title: '28Days AI Challenge',
+  description: 'Join over 700,000 people who mastered AI in 28 days',
 }
 
 export default function RootLayout({
