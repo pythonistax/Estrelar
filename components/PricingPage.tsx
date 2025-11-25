@@ -196,10 +196,10 @@ export default function PricingPage({ onContinue, onBack }: PricingPageProps) {
           </div>
         </section>
 
-        {/* Section 3: Try Coursiv benefits */}
+        {/* Section 3: Try 28Day benefits */}
         <section className="max-w-5xl mx-auto">
           <h2 className="text-4xl font-bold text-center text-[#1E1B4B] mb-12">
-            Try Coursiv and you will:
+            Try 28Day and you will:
           </h2>
           <div className="space-y-4 mb-12">
             <div className="flex items-center gap-4">
@@ -328,12 +328,12 @@ export default function PricingPage({ onContinue, onBack }: PricingPageProps) {
                 People using plan for 3 months achieve twice as many results as for 1 month
               </p>
             </div>
-            <p className="text-sm text-gray-500">*According to a research by Coursiv, 2023</p>
+            <p className="text-sm text-gray-500">*According to a research by 28Day, 2023</p>
           </div>
 
           <div className="bg-gray-50 rounded-xl p-6 max-w-3xl mx-auto mb-8">
             <p className="text-sm text-gray-600 text-center">
-              By clicking "Get My Plan", you agree to automatic subscription renewal to Coursiv: first 4 weeks at
+              By clicking "Get My Plan", you agree to automatic subscription renewal to 28Day: first 4 weeks at
               €39.99, then €39.99 every 4 weeks (both excluding taxes) until you cancel. You can cancel
               anytime via support or account settings. See <a href="#" className="text-[#5653FE] underline">Subscription Terms</a> for details.
             </p>

@@ -581,7 +581,7 @@
     "progress": 100,
     "socialProof": {
       "title": "700,000+ people",
-      "subtitle": "have chosen Coursiv"
+      "subtitle": "have chosen 28Day"
     },
     "reviews": [
       {
@@ -643,7 +643,7 @@
   },
   "pricingPage": {
     "header": {
-      "logo": "Coursiv",
+      "logo": "28Day",
       "ctaButton": "GET MY PLAN"
     },
     "nowVsGoal": {
@@ -705,7 +705,7 @@
       ]
     },
     "benefits": {
-      "title": "Try Coursiv and you will:",
+      "title": "Try 28Day and you will:",
       "items": [
         "Master AI tools that can boost your income",
         "Discover new professions and income sources with AI",
@@ -757,8 +757,8 @@
         }
       ],
       "researchNote": "People using plan for 3 months achieve twice as many results as for 1 month",
-      "researchSource": "*According to a research by Coursiv, 2023",
-      "terms": "By clicking \"Get My Plan\", you agree to automatic subscription renewal to Coursiv: first 4 weeks at €39.99, then €39.99 every 4 weeks (both excluding taxes) until you cancel. You can cancel anytime via support or account settings. See Subscription Terms for details.",
+      "researchSource": "*According to a research by 28Day, 2023",
+      "terms": "By clicking \"Get My Plan\", you agree to automatic subscription renewal to 28Day: first 4 weeks at €39.99, then €39.99 every 4 weeks (both excluding taxes) until you cancel. You can cancel anytime via support or account settings. See Subscription Terms for details.",
       "cta": "GET MY PLAN"
     }
   }

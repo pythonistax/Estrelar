@@ -1,9 +1,15 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Pacifico } from 'next/font/google'
 import './globals.css'
 import { Toaster } from 'react-hot-toast'
 
 const inter = Inter({ subsets: ['latin'] })
+const pacifico = Pacifico({ 
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-pacifico',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Estrelar Landing Pages',
@@ -17,7 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} ${pacifico.variable}`}>
         {children}
         <Toaster position="top-right" />
       </body>

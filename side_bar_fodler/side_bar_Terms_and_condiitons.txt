@@ -1,0 +1,718 @@
+Terms and Conditions
+
+
+
+
+
+Welcome to Coursiv! We've simplified our Terms and Conditions to make them more user-friendly. Please take a moment to read these terms, as they form the agreement between you, as a user of Coursiv, and us, as the provider of Coursiv services.
+
+
+
+
+
+Please read these terms and conditions of use (the "Terms") carefully (in particular, Section 6 "Subscription plans") before starting a trial or completing a purchase for our app's auto-renewing subscription service. To avoid being charged you must affirmatively cancel your subscription at least 24 hours before the end of the trial or then-current subscription period. When purchasing a subscription that automatically renews, you agree to its auto-renewal nature and to its terms defined near the point of purchase and acknowledge that to avoid charges you would need to affirmatively cancel it.
+
+
+
+PLEASE NOTE: THESE TERMS CONTAIN A BINDING ARBITRATION PROVISION IN SECTION 17 THAT AFFECTS YOUR RIGHTS UNDER THESE TERMS. THE ARBITRATION PROVISION REQUIRES THAT DISPUTES BE RESOLVED IN ARBITRATION ON AN INDIVIDUAL BASIS. EXCEPT AS SPECIFIED BELOW IN SECTION 17, UNLESS YOU OPT OUT WITHIN 30 DAYS OF FIRST USE OF OUR SERVICE AS PROVIDED FOR IN SECTION 17, ARBITRATION IS THE EXCLUSIVE VENUE FOR ANY AND ALL DISPUTES AND IS MANDATORY.
+
+
+
+FURTHERMORE, THESE TERMS CONTAIN DISCLAIMERS OF WARRANTIES AND LIABILITIES (SECTION 14) LIMITATION OF LIABILITY (SECTION 15).
+
+
+
+
+
+Sections of most attention
+
+
+
+
+
+Agreement Overview
+
+
+
+Eligibility, what we offer
+
+
+
+Privacy and Data
+
+
+
+Subscription Plans
+
+
+
+Billing and Cancellation
+
+
+
+  Methods of payment
+
+
+
+  The period of automatic renewal
+
+
+
+  Cancellation and refunds
+
+
+
+Copyright Statement
+
+
+
+Limitation of liability
+
+
+
+Contact us
+
+
+
+1. Who We Are
+
+We Coursiv™, COURSIV LIMITED, a company registered at Georgiou A, 83, Shop 17, Potamos Germasogeias 4047, Limassol, the Republic of Cyprus and/or its affiliates or its authorized representatives/resellers ("we", "us", "our" or the "Company"), aim is to provide you with valuable learning materials and related services through our website, www.coursiv.io ("Website"), which serves as our main service platform, or through designated domains such as www.coursiv.com that may redirect you to our Website, as well as through other designated platforms.
+
+
+
+2. Agreement Overview
+
+By using our product Coursiv ("Service"), you agree to abide by these Terms and Conditions (referred to as the "Terms" or the "Agreement").  Also our Privacy Terms and Subscription Terms are incorporated to these Terms by reference, which means they are part of the Terms.
+
+
+
+
+
+Any translation of the Terms from the English version is provided for your convenience only. You may always find the English version of the Terms at the following link https://legal.coursiv.io/terms. Please understand that In case of any discrepancies, the English version of the Terms will prevail.
+
+
+
+3. Eligibility
+
+If you do not agree with any part of these Terms and any related documents or you are not eligible to use our Services, please do not access any part of our Service.
+
+
+
+
+
+To use Coursiv, you must be at least 16 years old and have the legal capacity to enter into an agreement. If you're under 18, you need your parent's permission. If you don't agree with these terms or you're not eligible, please do not use our Service.
+
+
+
+4. What We Offer
+
+Coursiv provides a range of educational materials, including articles, reading materials, and test questions. We also offer an AI Chat feature for educational purposes. All the materials and services are collectively referred to as "Digital Content". Please read carefully the disclaimers and warranties below with regards to this Digital Content.
+
+
+
+You will have access to the Digital Content and our product Coursiv only after registering for the Service, which means you will have to register and pay for the introductory offer (trial) or subscription plan (4 weeks, 12 weeks or otherwise) depending on what you select at the time of purchase.
+
+
+
+After the purchase and while using the Service you may be offered additional paid features. Please read carefully any offers you receive from us.
+
+5. AI Chat mentor
+
+While using our Service you will also have access to the Mentor chat powered by Artificial Intelligence (we call it "AI Chat"). AI Chat is implemented for educational purposes only and is not intended to provide financial advice.
+
+
+
+How is your Content regulated while using AI Chat?
+
+While using our AI Chat, you may provide your information (we call it "Input"), and we'll generate responses based on your Input (such responses are called "Output"). You own your Input and we assign you all the rights permitted by law on the Output (collectively Input and Output are called "Content"). However, we may use such Content to improve our services, but you can opt out of this if you contact us.
+
+
+
+An important note with regards to the nature of AI Content
+
+Due to the nature of machine learning, Output may not be unique across users and the Services may generate the same or similar output for Coursiv or a third party. For example, you may provide input to a model such as "How many days in January?" and receive output such as "There are 31 days in January." Other users may also ask similar questions and receive the same response. Responses that are requested by and generated for other users are not considered your Content.
+
+
+
+6. Subscription Plans
+
+What we may offer
+
+Based on the option you select at the time of purchase we may offer you:
+
+
+
+
+
+Introductory offer is a short term offer that provides limited access to the basic features and content of our Service. It is usually designed for new users to try out the platform before it automatically converts into subscription. You can cancel the introductory offer 24 hours before it ends. If you do not cancel, it automatically converts into the subscription and you will be automatically charged a full price for the subscription plan without notice.  
+
+
+
+Subscription plan is an arrangement that grants you ongoing access to the Service for a specified period (4 weeks, 12 weeks or otherwise, depending on what you select at the time of purchase) after payment for the subscription services. Subscription plans are automatically renewed at the end of each period. You can cancel anytime 24 hours before the end of the current billing period in your account settings.
+
+
+
+Additional paid features are optional functionalities or services that we may offer to you in addition to the introductory offer or subscription plan on subscription or one-time purchases bases.
+
+
+
+Important note! Some offers may be renewed at the full, not discounted price. Therefore, please read carefully the terms of the introductory offer or subscription plan that you choose when you purchase the Service.
+
+
+
+
+
+Important note! Regarding the change of price. The prices and the amount of Digital Content available through your introductory offer or subscription may be changed from time to time by territory with no obligation of Coursiv to clearly notify you (except when is obligatory by the applicable law). We will give you a reasonable notice of any such price change by posting the new prices on or through the Website and (or) by sending you a notification, or in any other prominent way. If you do not agree with the new price and you do not want to pay, please, cancel your subscription before it becomes applicable to you.  
+
+
+
+7. Billing and Cancellation
+
+We bill for our services through PayPal or other payment providers (Visa, Mastercard and others). Your payment method will be charged according to your subscription plan. It's your responsibility to cancel your subscription in time.
+
+
+
+Methods of payment
+
+Payment methods for the Services are billed by Coursiv via PayPal or other payment providers.
+
+
+
+Coursiv charges the applicable fees to the payment card you submit at the time of purchase (after you confirm by single-touch identification, facial recognition, or entering your payment method details on the web, or otherwise accepting subscription terms provided on the payment screen on our web page).
+
+
+
+You authorize us to store your payment method(s) and automatically charge the applicable subscription fees to the payment card that you submit as a primary payment method for the renewal term. In the event of a failed attempt to charge to your primary payment method (e.g. if your payment method has expired), you agree that we have a right to retry billing your payment method or to use any other stored payment method associated with your account. If a payment is not successfully authorized due to expiration, insufficient funds, or otherwise, we may suspend or terminate your subscription. You will remain responsible for any amounts you fail to pay in connection with your subscription.
+
+The period of automatic renewal
+
+The period of auto-renewal will be the same as your initial subscription period unless otherwise disclosed to you on the Service. The renewal rate will be no more than the rate for the immediately prior subscription period, excluding any promotional and discount pricing, unless we notify you of a rate change prior to your auto-renewal.
+
+
+
+In some cases, your payment date may change, such as when your payment method fails to settle or when you change your subscription plan. To view your next payment date, go to the website and click on the "Subscription" link on the "Account" page.
+
+Cancellation and refunds
+
+You must cancel your subscription in accordance with the cancellation procedures disclosed to you when purchased and in Subscription Terms.
+
+
+
+Please refer to Subscription Terms to find out whether you might be eligible for a refund.
+
+
+
+Coursiv may also initiate the cancellation of your subscription and provide refunds at its own discretion and subject to Subscription Terms.
+
+8. Data Protection
+
+We collect, store, and process your data in accordance with its Privacy Policy. By using the Service you agree to the collection, storage, and processing of the data in the manner and for the purpose described in the Privacy Policy.
+
+
+
+9. Use of Information and Intellectual Property
+
+All the information, text, images, graphics, marks, logos, compilations (meaning the collection, arrangement or assembly of information), data, other content, software and materials available through or at our Website constitutes our property or property of third parties.
+
+
+
+You're granted a non-exclusive license to use our Service for personal, non-commercial purposes only. No other rights or use with regards to the Services is available to you unless otherwise expressly written in these Terms. Please don't infringe on our intellectual property rights.
+
+
+
+Information you provide us when you sign up to Coursiv, your "User Content," belongs to you, and we do not obtain any proprietary right over it. However, you agree that we may retain copies of all registration information and User Content and use all such information as reasonably required or incidental to the operation of Services and as described in these Terms.
+
+
+
+ If you believe your intellectual property rights have been violated, contact us through the Support Center. We may request additional information and delete or disable content alleged to be infringing and we may also terminate accounts of repeat infringers.
+
+
+
+Trademark: All brand assets, including the "Coursiv" name, logos, graphics, and service marks used on our platform are the exclusive property of Coursiv Limited or their respective owners, and certain of them are registered with the United States Patent and Trademark Office or other trademark authorities. Using our Service does not grant you any license or permission to reproduce or use the Courisv name or any other trademarks.
+
+
+
+10. Third-Party Ads
+
+Our Service may contain links to third-party websites and advertisements for third-party products or services. We're not responsible for these third-party ads, and you use them at your own risk. When you link to a third-party website, the terms and conditions of such a website will apply to your relationship with the owner of that website. Please be careful and conduct your own investigation about any such advertisements.
+
+
+
+
+
+You hereby release us, our officers, employees, agents and successors from any claims, demands and any losses, damages and action of any kind whatsoever directly or indirectly related to such third-party advertisements, products and services.
+
+
+
+11. Compliance
+
+The Services are provided in accordance with the laws of the Republic of Cyprus. We make no representation or warranty that a Service or the Digital Content are applicable or available for use in other locations.
+
+
+
+If you use the Services from a jurisdiction other than the Republic of Cyprus you agree to do so at your own risk, and you are responsible for complying with any and all local laws applicable to your use of a Service.
+
+12. Copyright Statement
+
+Coursiv copyrighted the product, including but not limited to all materials, logo, etc.
+
+
+
+
+
+Any redistribution or reproduction of part or all the Services and/or Digital content available through subscription services in any form is prohibited. Any other proposed use of Services and/or Digital Content shall be granted by Coursiv in the form of formal written permission.
+
+
+
+13. User Representations and Restrictions
+
+Representations and Warranties
+
+By using the Service, you represent and warrant that:
+
+
+
+you have the legal capacity and you agree to comply with these Terms;
+
+you are not under the age of 16;
+
+you will not access the Service through automated or non-human means, including without limitation, any spider, robot, cheat utility, scraper, or offline reader that accesses the Service, or using or launching any unauthorized script or other software;
+
+you will not use the Service for any illegal or unauthorized purpose;
+
+you are not located in a country that is subject to a U.S. government embargo, or that has been designated by the U.S. government as a "terrorist supporting" country;
+
+you are not listed on any U.S. government list of prohibited or restricted parties; and
+
+your use of the Service will not violate any applicable law or regulation.
+
+
+
+If you provide any information that is untrue, inaccurate, not current, or incomplete, we have the right to refuse any and all current or future use of the Service (or any portion thereof).
+
+
+
+
+
+You may not access or use the Service for any purpose other than that for which we make the Service available. The Service may not be used in connection with any revenue generating endeavor, commercial enterprise, or other purpose for which it is not designed or intended except those that are specifically authorized or approved by us.
+
+
+
+Restrictions
+
+As a user of the Service, you agree not to:
+
+
+
+
+
+systematically retrieve data or other content from the Service to create or compile, directly or indirectly, a collection, compilation, database, or directory without written permission from us;
+
+make any modification, adaptation, improvement, enhancement, translation, or derivative work from the Service;
+
+use the Service for creating a product, service, or software that is, directly or indirectly, competitive with or in any way a substitute for the Service;
+
+circumvent, disable, or otherwise interfere with security-related features of the Service;
+
+engage in unauthorized framing of or linking to the Service;
+
+decipher, decompile, disassemble, or reverse engineer any of the software comprising or in any way making up a part of the Service;
+
+attempt to bypass any measures of the Service designed to prevent or restrict access to the Service, or any portion of the Service;
+
+use the Service to send automated queries to any website or to send any unsolicited commercial e-mail;
+
+disparage, tarnish, or otherwise harm, in our opinion, us and/or the Service;
+
+use the Service in a manner inconsistent with any applicable laws or regulations; or
+
+otherwise infringe these Terms.
+
+14. Disclaimers of warranties and liabilities
+
+As for information on the Service. Any statement or information that may be posted on the Service is for informational and educational purposes only and is not intended to replace or substitute for any professional financial, legal, or other advice.
+
+
+
+As for any advice. Coursiv does not provide investment or financial advice or advocate the purchase or sale of any security or investment via the Service.
+
+
+
+As for expectations. There is no guarantee that the Digital Content will meet your or any other person's needs or requirements. The Service may not be appropriate for all persons and is not a substitute for professional financial advice.
+
+
+
+As for any results. We make no guarantees about the level of success you will have, and you accept the risk that results will vary from person to person. The Service may provide examples of exceptional results that do not apply to the average person and are not intended to represent or guarantee that anyone will achieve the same or similar result.
+
+
+
+As with any learning program or service, your results will vary and will be based on a number of factors, including but not limited to your individual capacity, life experience, financial status, starting point, expertise, and level of commitment. You agree that Coursiv is not liable for any success or failure of your financial risk that is directly or indirectly related to the purchase and use of the Service.
+
+
+
+
+
+As for capital risk. Coursiv is an education platform, you can not invest with us. You should acknowledge if you decide to invest yourself there is a risk of capital loss and income is not guaranteed and will depend on various factors. Your decision to make an investment should be made at your own discretion and upon your own will only.
+
+
+
+As for any representations. Coursiv makes no representations or warranties and, to the fullest extent permitted by law, expressly disclaims any and all liability relating to your reliance on the statements or other information offered or provided within or through the Service. If you have specific concerns or a situation arises in which you require professional advice, you should consult with an appropriately appropriate, trained and qualified specialist.
+
+
+
+As for other products used. The inclusion of any sites or other product information to Service does not imply a recommendation but merely brings possible options. It is your own responsibility to conduct appropriate investigations and inquiries concerning indicated information before taking any decisions.
+
+
+
+As for information. We specifically disclaim any representations or warranties, express or implied, including, without limitation:
+
+
+
+Warranties relating to the accuracy, reliability, correctness, timeliness or completeness of information made available on the website or otherwise by us, including any advice, opinion, statement, or other material or database displayed, uploaded or distributed and available through the website, and warranties otherwise relating to performance, nonperformance, or other acts or omissions by us or any third party.
+
+
+
+Coursiv disclaims responsibility for any loss, damage, or injury arising out of or in connection with the Service information usage.
+
+
+
+Coursiv will not be liable to the User for any indirect, consequential, special, incidental, punitive, or exemplary damages resulting from access or use of the website's Services or such Digital content, tools, or prizes, or in connection with any failure of performance, error, transmission, computer virus, or line or system failure, including, without limitation, lost profits, lost savings, and lost revenues.
+
+
+
+15. Limitation of liability
+
+IN NO EVENT SHALL WE (AND OUR AFFILIATES) BE LIABLE TO YOU OR ANY THIRD PARTY FOR ANY LOST PROFIT OR ANY INDIRECT, CONSEQUENTIAL, EXEMPLARY, INCIDENTAL, SPECIAL OR PUNITIVE DAMAGES ARISING FROM THESE TERMS OR YOUR USE OF, OR INABILITY TO USE, THE SERVICE (INCLUDING THE DIGITAL CONTENT) AND PRODUCTS, OR THIRD PARTY ADS, EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. ACCESS TO, AND USE OF, THE SERVICE (INCLUDING THE DIGITAL, CONTENT AND USER CONTENT), AND THIRD PARTY ADS ARE AT YOUR OWN DISCRETION AND RISK, AND YOU WILL BE SOLELY RESPONSIBLE FOR ANY DAMAGE TO YOUR COMPUTING SYSTEM OR LOSS OF DATA RESULTING THEREFROM.
+
+
+
+
+
+NOTWITHSTANDING ANYTHING TO THE CONTRARY CONTAINED HEREIN, YOU AGREE THAT THE AGGREGATE LIABILITY OF COURSIV TO YOU FOR ANY AND ALL CLAIMS ARISING FROM THE USE OF THE APP, CONTENT, SERVICE OR PRODUCTS, IS LIMITED TO THE AMOUNTS YOU HAVE PAID TO COURSIV FOR ACCESS TO AND USE OF THE SERVICE. THE LIMITATIONS OF DAMAGES SET FORTH ABOVE ARE FUNDAMENTAL ELEMENTS OF THE BASIS OF THE TERMS BETWEEN COURSIV AND YOU.
+
+
+
+
+
+SOME JURISDICTIONS DO NOT ALLOW THE LIMITATION OR EXCLUSION OF LIABILITY FOR INCIDENTAL OF CONSEQUENTIAL DAMAGES, SO THE ABOVE LIMITATION OR EXCLUSION MAY NOT APPLY TO YOU AND YOU MAY ALSO HAVE OTHER LEGAL RIGHTS THAT VARY FROM JURISDICTION TO JURISDICTION.
+
+
+
+15.1. If you are an Australian resident:
+
+
+
+For Australian residents, this Service is provided with guarantees under the Australian Consumer Law, which cannot be excluded. In case of a major failure, you are entitled to:
+
+
+
+(a) terminate the agreement for the provision of the Service; and
+
+
+
+(b) receive either a refund for the unused portion of the Service or compensation for its reduced value.
+
+
+
+
+
+If the failure is not considered major, we will remedy the issue within a reasonable timeframe. Should we fail to do so, you may terminate the agreement and request a refund for the portion of the Service not used. You may also be entitled to compensation for any other reasonably foreseeable loss or damage arising as a result of the Service's failure.
+
+
+
+16. Indemnification
+
+In no event will Coursiv be liable for any loss, damage, or injury, including, without limitation, any indirect, consequential, special, incidental, or punitive damages arising out of, or in connection with, the use of the Services, including but not limited to any decision made or action taken in reliance on the information contained in the Services, or any errors or omissions in the Services.
+
+
+
+
+
+By using the Services, you agree to indemnify, defend, and hold harmless Coursiv from and against any and all claims, complaints, lawsuits, or other liabilities, including reasonable attorneys' fees, that may arise from your use of the Services or your decision to follow any advice, recommendation, or instruction provided therein.
+
+
+
+
+
+You agree to indemnify and hold Coursiv, its successors, subsidiaries, affiliates, any related companies, its suppliers, licensors and partners, and the officers, directors, employees, agents and representatives of each of them harmless, including costs and attorneys' fees, from any claim or demand made by any third party due to or arising out of (i) your use of the Service or Digital Products, (ii) your User Content, or (ii) your violation of these Terms.
+
+
+
+17. Informal Dispute Resolution Procedures
+
+
+
+PLEASE READ THIS PROVISION CAREFULLY TO ENSURE THAT YOU UNDERSTAND—THIS SECTION CONTROLS HOW DISPUTES BETWEEN YOU AND THE COMPANY WILL BE ADDRESSED.
+
+
+
+BY AGREEING TO THIS PROVISION, YOU ARE WAIVING YOUR RIGHT TO PARTICIPATE IN A CLASS ACTION LAWSUIT AND YOU ARE WAIVING YOUR RIGHT TO A JURY TRIAL.
+
+
+
+YOU ARE ALSO AGREEING TO RESOLVE ALL DISPUTES BETWEEN YOU AND THE COMPANY THROUGH BINDING ARBITRATION UNLESS YOU EXERCISE YOUR RIGHT TO REJECT ARBITRATION AS PROVIDED BELOW.
+
+
+
+You and Сoursiv ("we" or the "Company") agree to resolve all Disputes (including any related disputes involving the Company, its subsidiaries, or its affiliates) through binding arbitration, as described below, except for: (i) claims that fall within the jurisdiction of a small claims court, provided such claims are not class action disputes and also meet the court's jurisdictional and monetary limits; and (ii) disputes related to intellectual property rights. A "Dispute" means any claim, controversy, or legal action—whether arising from past, present, or future events, and based on contract, tort, statute, or common law—between you and the Company regarding the Website, Services, or this agreement (the "Arbitration Agreement"). "Dispute" also includes disputes about the interpretation, applicability, or enforceability of these terms or the formation of this Arbitration Agreement, including whether any part of it is invalid or unenforceable.
+
+
+
+Mandatory Pre-Filing Notice Procedure
+
+You and we agree that good faith, informal efforts to resolve disputes often result in a faster, inexpensive outcome. Therefore, if you intend to assert a claim for any Dispute (as defined above) against the Company, you must first send the Company a written notice of the Dispute ("Notice") that gives the Company some basic information about you and the Dispute. Any Notice must include (i) your name, address, and email address, (ii) a detailed description of your Dispute; (iii) any relevant facts regarding your use of the Website and Service (including your account ID, profile screenshots, and anything else that will help us identify your account; (iv) a detailed description of the relief you are seeking, including a calculation of any money damages you are seeking; and (v) a personally signed statement from you (and not your attorney) verifying the accuracy of the information in Notice. The Notice must be individualized, meaning it can concern only your dispute and no other person's dispute. If you are filling out a Notice for another person, you must include all information described above, and also a statement describing your relationship to the person and why the person is unable to fill out the Notice for themselves.
+
+
+
+You must send the Notice to the Company at the following address:
+
+
+
+Georgiou A, 83, Shop 17, Potamos Germasogeias 4047, Limassol, the Republic of Cyprus
+
+
+
+Attention: Legal
+
+
+
+If we need to send you a Notice, we will send the Notice to you at the contact information we have available for you, which may include, if applicable, the contact information associated with your account.
+
+
+
+After we receive a Notice, you and us agree to engage in good faith efforts to resolve the Dispute between us for a period of 60 days through informal negotiation. The 60-day period can be extended if you and we agree that such an extension is likely to lead to resolution. As part of the informal negotiation process, you and we agree that we will both attend at least one individualized video conference ("Video Conference"). The Video Conference can be via Zoom, Microsoft Teams, WhatsApp, or any other similar platform that you and we agree on and that we both have access to. The Video Conference can be held after the 60-day period, if necessary. If you are represented by an attorney in your Dispute, your attorney may participate in the Video Conference, but you are still required to attend and participate in good faith. The Company is also required to participate in the Video Conference by sending one or more of its representatives, and the Company may also send one or more of its attorneys. If you are unable to participate in the Video Conference by video, you may attend telephonically if you certify in writing that circumstances exist that prevent you from appearing by video (such as your lack of access to phone with a working camera or your inability to connect to a stable internet connection). You and we agree that we (and our attorneys, if represented) shall work cooperatively to schedule the Video Conference at the earliest mutually-convenient time after we receive a Notice. You and we also agree to use our best efforts to resolve the Dispute at the Video Conference. If you and we cannot resolve the issues identified in the Notice within 60 days after the completed Notice is received (or a longer time if agreed), you or we may commence an arbitration proceeding or a small claims court proceeding.
+
+
+
+Compliance with these Informal Dispute Resolution Procedures is Mandatory and Pre-Filing Notice procedures (including the Video Conference requirement) are a condition precedent to initiating any arbitration or small claims court action. Failure to follow the procedures is a breach of this Arbitration Agreement.
+
+
+
+The Mandatory Pre-Filing Notice procedures are essential so that you and the Company have a meaningful opportunity to resolve Disputes in an inexpensive and efficient manner. Unless prohibited by applicable law, the arbitration provider shall not accept or administer any demand for arbitration unless the party bringing the demand for arbitration certifies in writing that the Mandatory Pre-Filing Notice procedures (including the Video Conference requirement) were fully satisfied. If the party bringing the demand for arbitration fails to include a written certification that the Pre-Filing Notice procedures (including the Video Conference) were met, then the arbitration forum shall administratively close the demand for arbitration and no fees shall be due from the responding party. A court of competent jurisdiction shall have authority to enforce this provision and to enjoin any arbitration proceeding or small claims court action accordingly.
+
+
+
+All offers, promises, conduct, and statements made in the course of the Mandatory Pre-Filing Notice process by any party, its agents, employees, and attorneys are confidential and not admissible for any purpose in any subsequent proceeding (except as required to certify in writing that the Mandatory Pre-Filing Notice procedures were completed before submitting a demand for arbitration). Evidence that is otherwise admissible or discoverable shall not be rendered inadmissible or non-discoverable by this section.
+
+
+
+Small Claims Court
+
+Subject to applicable jurisdictional requirements and Mandatory Pre-Filing Notice requirements explained above, you or the Company may elect to pursue a Dispute in a local small claims court rather than through arbitration, so long as the matter remains in small claims court and proceeds only on an individual basis. If a party has already submitted an arbitration demand, the other party may, in its sole discretion, inform the arbitral forum that it chooses to have the Dispute heard in small claims court. At that time, the arbitral forum will administratively close the arbitration and the Dispute will be heard in the appropriate small claims court, with no fees due from the arbitration respondent.
+
+
+
+What is Arbitration?
+
+Arbitration is a more informal way to resolve our disagreements than a lawsuit in court. For instance, arbitration uses a neutral arbitrator instead of a judge or jury, involves more limited discovery, and is subject to very limited review by courts. Although the process is more informal, arbitrators can award some of the same individualized damages and relief that a court can award. An arbitrator cannot, however, order a party to act or stop doing something—this is known as "equitable relief." Either you or we can go to court and seek equitable relief, including by filing a motion to compel the other party to follow this Arbitration Agreement. However, you and we agree that the only courts where we will seek equitable relief are the state and federal courts in Delaware. This exception for equitable relief does not waive this Arbitration Agreement. You and we agree that the U.S. Federal Arbitration Act and federal arbitration law govern the interpretation and enforcement of this provision. A court of competent jurisdiction has exclusive authority to resolve any dispute relating to the interpretation, applicability, or enforceability of this binding arbitration agreement. This arbitration provision shall survive termination of these terms and the termination of your account.
+
+
+
+CLASS ACTION AND JURY TRIAL WAIVER
+
+TO THE FULLEST EXTENT ALLOWABLE BY LAW, YOU AND THE COMPANY WAIVE THE RIGHT TO A JURY TRIAL AND THE RIGHT TO LITIGATE DISPUTES IN COURT IN FAVOR OF ARBITRATION (EXCEPT FOR SMALL CLAIMS COURT DESCRIBED ABOVE). YOU AND THE COMPANY EACH WAIVE THE RIGHT TO FILE OR PARTICIPATE IN A CLASS ACTION LAWSUIT AGAINST THE OTHER, INCLUDING ANY CURRENTLY PENDING ACTIONS AGAINST THE COMPANY. TO THE FULLEST EXTENT ALLOWABLE BY LAW, THERE SHALL BE NO RIGHT OR AUTHORITY FOR ANY CLAIMS TO BE LITIGATED IN COURT ON A CLASS, COLLECTIVE, REPRESENTATIVE, OR CONSOLIDATED BASIS.
+
+
+
+EXCEPT FOR THE MASS FILING PROCEDURES DESCRIBED BELOW, YOU AND WE AGREE THAT
+
+
+
+THE ARBITRATOR MAY ONLY AWARD FINAL RELIEF IN FAVOR OF THE INDIVIDUAL PARTY SEEKING RELIEF AND ONLY TO THE EXTENT NECESSARY TO PROVIDE FINAL RELIEF WARRANTED BY THAT INDIVIDUAL PARTY'S CLAIM.
+
+THE ARBITRATOR MAY NOT AWARD FINAL RELIEF FOR, AGAINST, OR ON BEHALF OF ANYONE WHO IS NOT A PARTY TO THE ARBITRATION ON A CLASS, COLLECTIVE, OR REPRESENTATIVE BASIS.
+
+IF A COURT DETERMINES THAT ANY OF THE PROHIBITIONS IN THIS PARAGRAPH ARE UNENFORCEABLE FOR A PARTICULAR CLAIM OR REQUEST FOR RELIEF, AND ALL APPEALS OF THAT DECISION ARE AFFIRMED AND SUCH DECISION BECOMES FINAL, THEN YOU AND THE COMPANY AGREE THAT THAT PARTICULAR CLAIM OR REQUEST FOR RELIEF SHALL PROCEED IN COURT BUT SHALL BE STAYED PENDING INDIVIDUAL ARBITRATION OF THE REMAINING CLAIMS FOR RELIEF THAT YOU HAVE BROUGHT. IF THIS SPECIFIC PARAGRAPH IS FOUND TO BE UNENFORCEABLE, THEN THE ENTIRETY OF THIS ARBITRATION PROVISION (EXCEPT FOR THE JURY TRIAL WAIVER AND THE INFORMAL DISPUTE RESOLUTION PROCEDURE) SHALL BE NULL AND VOID.
+
+
+
+Arbitration Procedure
+
+
+
+The arbitration will be governed by applicable rules of National Arbitration & Mediation ("NAM") (including the Comprehensive Dispute Resolution Rules and Procedures and the Supplemental Rules for Mass Arbitration Filings, as applicable) ("NAM Rules"), as modified by this Arbitration Agreement, and will be administered by NAM. The NAM Rules are available online at www.namadr.com or by requesting them in writing at the Notice address listed above. You may obtain a form to initiate arbitration with NAM at: https://www.namadr.com/content/uploads/2024/03/Comprehensive-Demand-for-Arb-revised-3.21.2024.pdf or by contacting NAM.
+
+
+
+If NAM is unavailable or unwilling to do so, another arbitration provider shall be selected by the parties that will do so, or if the parties are unable to agree on an alternative administrator, by the court pursuant to 9 U.S.C. §5.
+
+
+
+You and we agree that the party initiating arbitration must submit a written certification that they have complied with and completed the Mandatory Pre-Filing Notice and Informal Dispute Resolution Procedures requirements enclosed with any demand for arbitration. The demand for arbitration and certification must be personally signed by the party initiating arbitration (and their attorney, if represented).
+
+
+
+The arbitration will be in English. A single independent and impartial arbitrator will be appointed remotely pursuant to the NAM Rules, as modified herein. You and the Company agree to comply with the following rules, which are intended to streamline the dispute resolution process and reduce the costs and burdens on the parties: (i) the arbitration will be conducted online and/or be solely based on written submissions, the specific manner to be chosen by the party initiating the arbitration; (ii) the arbitration will not require any personal appearance by the parties or witnesses unless otherwise mutually agreed in writing by the parties or the arbitrator decides that a formal hearing is necessary.; and (iii) any judgment on the award the arbitrator renders may be entered in any court of competent jurisdiction.
+
+
+
+If an in-person hearing is required and you reside in the United States, the hearing will take place in either Delaware, unless the arbitrator determines that this would pose a hardship for you, in which case the in-person hearing may be conducted in the claimant's state and county of residence. If you reside outside the United States, the site of any in-person hearing will be determined by the NAM Rules.
+
+
+
+The award of the arbitrator will be in writing and will include a statement setting forth the reasons for the disposition of any claim. The arbitrator will apply the laws of the State of Florida in conducting the arbitration. You acknowledge that these terms and your use of the Service evidences a transaction involving interstate commerce. The United States Federal Arbitration Act will govern the interpretation, enforcement, and proceedings.
+
+
+
+The Arbitrator is bound by and shall adhere to this Arbitration Agreement. In the event NAM Rules conflict with this Arbitration Agreement, the terms of this Arbitration Agreement shall control. If the Arbitrator determines that strict application of any term of this Arbitration Agreement would result in a fundamentally unfair arbitration, then the Arbitrator shall have the authority to modify such term to the extent necessary to ensure a fundamentally fair arbitration that is consistent with  efficient and inexpensive resolution of Disputes.
+
+
+
+Unless you and Сompany otherwise agree, the arbitration will be conducted virtually via video or teleconference.
+
+
+
+Decision of the Arbitrator
+
+Barring extraordinary circumstances, the arbitrator will issue their decision within 120 days from the date the arbitrator is appointed. The arbitrator may extend this time limit for an additional 30 days in the interests of justice. All arbitration proceedings will be closed to the public and confidential, and all records relating thereto will be permanently sealed, except as necessary to obtain court confirmation of the arbitration award. The award of the arbitrator will be in writing and will include a statement setting forth the reasons for the disposition of any claim.
+
+
+
+The arbitration award is binding only between you and the Company and will not have any preclusive effect in another arbitration or proceeding that involves a different party.
+
+
+
+Fees
+
+The payment of arbitration fees (the fees imposed by the arbitration administrator including filing, arbitrator, and hearing fees) will be governed by the applicable NAM Rules, unless you qualify for a fee waiver under applicable law. If after exhausting any potentially available fee waivers, the arbitrator finds that the arbitration fees will be prohibitive for you as compared to litigation, we will pay as much of your filing, arbitrator, and hearing fees in the arbitration as the arbitrator deems necessary to prevent the arbitration from being cost-prohibitive, regardless of the outcome of the arbitration, unless the arbitrator determines that your claim(s) were frivolous or brought for an improper purpose or asserted in bad faith.
+
+
+
+You and we agree that arbitration should be cost-effective for all parties and that any party may engage with NAM to address the reduction or deferral of fees.
+
+
+
+Confidentiality
+
+Upon either your or our request, the Arbitrator will issue an order requiring that confidential information of either party disclosed during the arbitration (whether in documents or orally) may not be used or disclosed except in connection with the arbitration or a proceeding to enforce the arbitration award and that any permitted court filing of confidential information must be done under seal.
+
+
+
+Settlement Offers and Offers of Judgment
+
+At least ten (10) calendar days before the date set for the arbitration hearing, you or the Company may serve a written offer of judgment upon the other party to allow judgment on specified terms. If the offer is accepted, the offer with proof of acceptance shall be submitted to the arbitration provider, who shall enter judgment accordingly. If the offer is not accepted prior to the arbitration hearing or within thirty (30) calendar days after it is made, whichever occurs first, it shall be deemed withdrawn, and cannot be given as evidence in the arbitration. If an offer made by one party is not accepted by the other party, and the other party fails to obtain a more favorable award, the other party shall not recover their post-offer costs and shall pay the offering party's costs from the time of the offer (which, solely for purposes of offers of judgment, may include reasonable attorneys' fees to the extent they are recoverable by statute, in an amount not to exceed the damages awarded).
+
+
+
+The parties agree that any disputes with respect to settlement offer(s) or offer(s) of judgment in a Mass Filing are to be resolved by a single arbitrator to the extent such offers contain the same material terms. For arbitrations involving represented parties, the represented parties' attorneys agree to communicate individual settlement offer(s) or offer(s) of judgment to each and every arbitration claimant or respondent to whom such offers are extended.
+
+
+
+Additional Procedures for Mass Arbitration Filings
+
+The following provisions set forth additional procedures that apply to mass arbitration filings. If ten (10) or more similar claims are asserted against the Company by the same or coordinated attorneys or are otherwise coordinated, consistent with the definition and criteria of "Mass Filings" set forth in the NAM Rules, you and we understand and agree that these additional procedures shall apply and the resolution of your dispute might be delayed. You and we agree that throughout this process, our attorneys shall meet and confer to discuss modifications to these procedures based on the particular needs of the Mass Filing. You and we agree to make all reasonable efforts to maximize the integrity and efficiency of arbitration to resolve Disputes between us, particularly those involving Mass Filings, and further commit to acting in good faith to adhere to the procedures established in this section. The parties further agree that application of these Mass Filing procedures have been reasonably designed to result in an efficient and fair adjudication of claims.
+
+
+
+Bellwether Arbitrations for Mass Filings. Bellwether proceedings are encouraged by courts and arbitration administrators where there are multiple disputes involving similar claims against the same or related parties. The parties shall select ten individual arbitration claims (five per side), designated as the "Initial Test Cases," to proceed to arbitration. Only the Initial Test Cases shall be filed with the arbitrator. All other claims shall be held in abeyance. This means that the filing fees will be paid only for the Initial Test Cases; for all other demands for arbitration in a Mass Filing, the filing fees (together with any arbitrator consideration of the other demands) will be held in abeyance, and neither you nor the Company will be required to pay any such filing fees. You and the Company also agree that neither you nor we shall be deemed to be in breach of this Arbitration Agreement for failure to pay any such filing fees, and that neither you nor we shall be entitled to any contractual, statutory, or other remedies, damages, or sanctions of any kind for failure to pay any such filing fees. If, pursuant to this subsection, a party files non-Bellwether Arbitrations with the arbitration provider, the parties agree that the arbitration provider shall hold those demands in abeyance and not refer them to the arbitrator pending resolution of the Initial Test Cases. Unless the claims are resolved in advance or the schedule is extended, the arbitrators will render a final award for the Initial Test Cases within 120 days of the initial pre-hearing conference.
+
+
+
+Global Mediation in Mass Filings. Following the resolution of the Initial Test Cases, the parties agree to engage in a global mediation of all the remaining individual arbitration claims comprising the Mass Filing ("Global Mediation"), deferring any filing costs associated with the non-Initial Test Cases until the Initial Test Cases and subsequent Global Mediation have concluded. After the final awards are provided to the mediator in the Initial Test Cases, the mediator and the parties shall have 90 days to agree upon a substantive methodology and make an offer to resolve the outstanding cases. If the Parties are unable to resolve the outstanding claims during the Global Mediation, the Parties may choose to opt out of the arbitration process and proceed in court with the remaining claims. Notice of the opt-out shall be provided in writing within 60 days of the close of the Global Mediation. Absent notice of an opt-out, the arbitrations may then be filed and administered by the arbitration provider. You and we also acknowledge that any applicable statute of limitations shall be tolled pending resolution of the global mediation process.
+
+
+
+Severability. If any part of this Mass Arbitration provision is declared invalid, void, or unenforceable, then that provision is severable from the Arbitration Agreement and shall not affect the validity and enforceability of the remaining provisions.
+
+
+
+Opting Out of this Arbitration Agreement.
+
+Existing Users. Users who previously agreed to arbitrate may reject this updated Arbitration Agreement by following the opt-out method below, but such users will still be bound by the most recent prior version of the Arbitration Agreement and will otherwise be bound by these terms. Previous or existing users who do not opt out of this updated Arbitration Agreement will be bound by this Arbitration Agreement and it shall apply to all disputes between such users and the Company, including those arising (but not actually filed in arbitration) before the effective date of these terms. Arbitration demands that have already been actually filed with an arbitration provider before the effective date of this Arbitration Agreement and in compliance with a prior version of this Arbitration Agreement are subject to the prior version's terms.
+
+
+
+New Users. Users who create an account with the Company for the first time on or after August 30, 2025 may opt out of this Arbitration Agreement.
+
+
+
+Method and Impact of Opting Out. Subject to the above, you may opt out of this Arbitration Agreement by sending written notice of your decision to opt out to: support@28days.online, within 30 days after (1) the Arbitration Agreement became effective, as indicated in the "Last Updated" date of the terms, (2) your first use of the Services. Your notice must include:
+
+
+
+Your name
+
+Your username (if any)
+
+The email address you used to set up your account
+
+An unequivocal statement that you want to opt out of this Arbitration Agreement
+
+If you opt out of this Arbitration Agreement, all other parts of the terms and any other agreements between you and the Company will continue to apply to you. Opting out of this Arbitration Agreement has no effect on any other arbitration agreements that you may currently have, or may enter in the future, with us.
+
+
+
+Arbitration Agreement Survival. This Arbitration Agreement will survive the termination of your relationship with the Company, including any revocation of consent or other action by you to end your participation in the Service or any communication with the Company.
+
+
+
+Severability: If any portion of this Arbitration Agreement is found to be void, invalid, or otherwise unenforceable, then that portion shall be deemed to be severable and, if possible, superseded by a valid, enforceable provision, or portion thereof, that matches the intent of the original provision, or portion thereof, as closely as possible. The remainder of this Arbitration Agreement shall continue to be enforceable and valid according to the terms contained herein.
+
+
+
+Governing Law
+
+The laws of the State of Florida, excluding its conflicts of law rules, govern this Agreement and your use of the Service. Your use of the Service may also be subject to other local, state, national, or international laws. To the extent that any action relating to any dispute hereunder is shall be brought in a court of law, such action will be subject to the exclusive jurisdiction of the state and federal courts located in Delaware, and you hereby irrevocably submit to personal jurisdiction in such courts, and waive any defence of inconvenient forum.
+
+
+
+If you are a consumer based in the EEA, the UK or Switzerland: Nothing in these Terms shall deprive you of the protection afforded to consumers by the mandatory rules of law of the country in which you live. If you have a complaint, please contact us at support@28days.online.
+
+
+
+You may bring any dispute which may arise under these Terms to the competent court of your country of habitual residence if this country of habitual residence is an EEA, which courts are – with the exclusion of any other court - competent to settle any of such a dispute. The Company shall bring any dispute which may arise under these Terms to the competent court of your country of habitual residence.
+
+
+
+18. Miscellaneous
+
+We may occasionally update our Service and may change information without notice. Please note that certain circumstances beyond our control may cause delays in providing our Service. We may at any time modify or discontinue, temporarily or permanently, the Service (or any part thereof) at our sole discretion with or without notice. You agree that we shall not be liable to you or any third party for any modification, suspension or discontinuance of the Service (to the maximum extent permitted by law).
+
+
+
+19. Changes
+
+We may update these Terms from time to time, for example, to reflect changes in legislation or in our business operations. We will provide you with 30 (thirty) days' advance notice of any material adverse change to the Services or these Terms. Except where mandatory law requires otherwise, other changes take effect upon posting with an updated "Last Revision" date, no additional notice will be given. If you keep using our Services after any changes, it means you accepted such changes. If you receive notice from us of a material change, you will have 30 (thirty) days from the date of such notice to object or opt out from the Services by sending us written notice; if you do not object or opt out within that period, you will be deemed to have accepted the changes.
+
+
+
+
+
+If you have any questions or concerns, please don't hesitate to reach out to our Support Service through the Support Center.
+
+
+
+Contact us
+
+COURSIV LIMITED
+
+
+
+HE 462062
+
+
+
+Georgiou A, 83, Shop 17, Potamos Germasogeias
+
+
+
+4047, Limassol, the Republic of Cyprus
+
+
+
+email: support@28days.online
+
+
+
+
+
+Last Updated: August 30, 2025
+
+
+
+Date of Last Revision: October 24, 2025
+
+
+
+©COURSIV LIMITED 2025 All rights reserved.
+

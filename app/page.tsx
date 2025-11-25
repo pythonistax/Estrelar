@@ -43,7 +43,7 @@ export default function Home() {
                     lineHeight: '28px',
                   }}
                 >
-                  people joined Coursiv to master AI
+                  people joined 28Day to master AI
                 </p>
               </div>
             </div>
