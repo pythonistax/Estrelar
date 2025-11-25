@@ -1,0 +1,219 @@
+================================================================================
+ESTRELAR SERVER GUIDE - Essential Commands
+================================================================================
+
+📦 DATABASE EXPORT & RETRIEVAL
+================================================================================
+
+# Step 1: Copy database from Docker container to server filesystem
+docker cp estrelar-landing-page-1:/app/test_1_database.db /root/test_1_database.db
+
+# Step 2: Download database from server to local machine (Windows PowerShell)
+scp root@65.20.96.127:/root/test_1_database.db C:\Users\mmsou\Documents\Estrelar\test_1_database.db
+
+# View database contents on server
+sqlite3 /root/test_1_database.db -header -column "SELECT * FROM submissions;"
+
+# View database contents (interactive mode)
+sqlite3 /root/test_1_database.db
+# Then run: .tables
+# Then run: SELECT * FROM submissions;
+# Then run: .quit
+
+
+================================================================================
+🐳 DOCKER COMMANDS
+================================================================================
+
+# Navigate to project directory
+cd /root/Estrelar
+
+# Pull latest code from Git
+git pull
+
+# Rebuild and restart Docker container
+docker-compose up -d --build
+
+# Check container status
+docker-compose ps
+
+# View container logs
+docker-compose logs -f
+
+# Stop container
+docker-compose down
+
+# Start container
+docker-compose up -d
+
+# Restart container
+docker-compose restart
+
+
+================================================================================
+🌐 NGINX COMMANDS
+================================================================================
+
+# Edit Nginx configuration
+nano /etc/nginx/sites-available/estrelar
+
+# Test Nginx configuration
+nginx -t
+
+# Restart Nginx
+systemctl restart nginx
+
+# Reload Nginx (without downtime)
+systemctl reload nginx
+
+# Check Nginx status
+systemctl status nginx
+
+# View Nginx error logs
+tail -f /var/log/nginx/error.log
+
+# View Nginx access logs
+tail -f /var/log/nginx/access.log
+
+
+================================================================================
+🔧 SERVER MAINTENANCE
+================================================================================
+
+# Check if app is responding locally
+curl http://localhost:3000
+
+# Check server disk space
+df -h
+
+# Check server memory usage
+free -h
+
+# Check running processes
+htop
+# OR
+top
+
+# Check if port 80 is open
+netstat -tuln | grep :80
+
+# Check firewall status
+ufw status
+
+# View system logs
+journalctl -xe
+
+
+================================================================================
+📝 GIT COMMANDS (On Local Machine)
+================================================================================
+
+# Commit changes
+git add .
+git commit -m "Your commit message"
+git push
+
+# Check status
+git status
+
+# View recent commits
+git log --oneline -10
+
+
+================================================================================
+🌍 DOMAIN & SSL SETUP (When Ready)
+================================================================================
+
+# Update Nginx config for domain (edit file)
+nano /etc/nginx/sites-available/estrelar
+# Change: server_name _; to server_name yourdomain.com www.yourdomain.com;
+# Remove: default_server from listen 80;
+
+# Test and reload
+nginx -t
+systemctl reload nginx
+
+# Get SSL certificate (after DNS is configured)
+certbot --nginx -d yourdomain.com -d www.yourdomain.com
+
+# Check SSL certificates
+certbot certificates
+
+# Test SSL auto-renewal
+certbot renew --dry-run
+
+
+================================================================================
+🔍 TROUBLESHOOTING
+================================================================================
+
+# Check if Docker container is running
+docker ps
+
+# Check container logs for errors
+docker-compose logs landing-page
+
+# Check if port 3000 is accessible
+curl http://localhost:3000
+
+# Check if Nginx can reach the app
+curl -H "Host: 65.20.96.127" http://localhost:3000
+
+# Restart everything (nuclear option)
+docker-compose down
+docker-compose up -d --build
+systemctl restart nginx
+
+# Check database file permissions
+ls -la /root/test_1_database.db
+ls -la /app/test_1_database.db  # Inside container
+
+
+================================================================================
+📊 SERVER INFORMATION
+================================================================================
+
+Server IP: 65.20.96.127
+Project Directory: /root/Estrelar
+Database Location (in container): /app/test_1_database.db
+Database Location (on server): /root/test_1_database.db
+Nginx Config: /etc/nginx/sites-available/estrelar
+App Port: 3000
+Web Port: 80 (HTTP)
+
+
+================================================================================
+🚀 QUICK DEPLOYMENT WORKFLOW
+================================================================================
+
+# 1. Make changes locally and commit
+git add .
+git commit -m "Update description"
+git push
+
+# 2. On server: Pull and rebuild
+cd /root/Estrelar
+git pull
+docker-compose up -d --build
+
+# 3. Check if it's working
+docker-compose ps
+docker-compose logs -f
+
+# 4. Test the website
+# Visit: http://65.20.96.127
+
+
+================================================================================
+📥 DATABASE BACKUP (Regular Maintenance)
+================================================================================
+
+# Create backup of database
+docker cp estrelar-landing-page-1:/app/test_1_database.db /root/backups/test_1_database_$(date +%Y%m%d_%H%M%S).db
+
+# Download backup to local machine
+scp root@65.20.96.127:/root/backups/test_1_database_*.db C:\Users\mmsou\Documents\Estrelar\backups\
+
+
+================================================================================
+
