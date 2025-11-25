@@ -53,7 +53,7 @@ export default function Home() {
               <div 
                 className="bg-contain bg-center bg-no-repeat"
                 style={{
-                  backgroundImage: 'url("https://d3kigabz1zn79w.cloudfront.net/male-1.webp")',
+                  backgroundImage: 'url("/founder_28days_new.png")',
                   backgroundSize: 'contain',
                   backgroundPosition: 'center center',
                   backgroundRepeat: 'no-repeat',
