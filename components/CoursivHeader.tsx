@@ -1,9 +1,120 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
+type DocumentType = 'terms' | 'privacy' | 'subscription' | 'moneyback' | null
 
 export default function CoursivHeader() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [documentOpen, setDocumentOpen] = useState<DocumentType>(null)
+  const [documentContent, setDocumentContent] = useState<string>('')
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    // Load content when document type changes
+    if (!documentOpen) {
+      setDocumentContent('')
+      return
+    }
+
+    setIsLoading(true)
+    setDocumentContent('')
+
+    const apiPath = {
+      terms: '/api/legal-docs/terms',
+      privacy: '/api/legal-docs/privacy',
+      subscription: '/api/legal-docs/subscription',
+      moneyback: '/api/legal-docs/moneyback',
+    }[documentOpen]
+
+    fetch(apiPath)
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to load document')
+        return res.text()
+      })
+      .then(text => {
+        setDocumentContent(text)
+        setIsLoading(false)
+      })
+      .catch(error => {
+        console.error('Error loading document:', error)
+        setDocumentContent('Error loading document. Please try again later.')
+        setIsLoading(false)
+      })
+  }, [documentOpen])
+
+  const handleDocumentClick = (type: DocumentType) => {
+    setDocumentOpen(type)
+    setMenuOpen(false)
+  }
+
+  const closeDocument = () => {
+    setDocumentOpen(null)
+    setDocumentContent('')
+  }
+
+  const formatDocumentContent = (content: string) => {
+    if (!content) return null
+
+    const lines = content.split('\n')
+    const formattedLines: JSX.Element[] = []
+    
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i]
+      const trimmedLine = line.trim()
+      const nextLine = lines[i + 1] || ''
+      const prevLine = lines[i - 1] || ''
+      
+      // Skip empty lines but add minimal spacing
+      if (trimmedLine === '') {
+        formattedLines.push(<div key={i} className="h-1"></div>)
+        continue
+      }
+      
+      // Detect headers:
+      // 1. Numbered sections (e.g., "1. Who We Are", "15.1. If you are...")
+      const isNumberedHeader = /^\d+(\.\d+)*\.\s+[A-Z]/.test(trimmedLine)
+      
+      // 2. Lines that are all caps and short (like "TABLE OF CONTENTS", "PLEASE NOTE")
+      const isAllCapsShort = trimmedLine.length > 0 && 
+                            trimmedLine.length < 100 &&
+                            trimmedLine === trimmedLine.toUpperCase() &&
+                            /^[A-Z\s\.,:;!?'"-]+$/.test(trimmedLine) &&
+                            trimmedLine.length > 2
+      
+      // 3. Short lines that are likely headers (followed by blank line, starts with capital)
+      const isShortHeader = trimmedLine.length > 0 && 
+                           trimmedLine.length < 80 && 
+                           nextLine.trim() === '' && 
+                           prevLine.trim() === '' &&
+                           /^[A-Z]/.test(trimmedLine) && // Starts with uppercase
+                           !trimmedLine.match(/^[a-z]/) // Doesn't start with lowercase
+      
+      // 4. Section headers (Title case, short, followed by blank)
+      const isSectionHeader = /^[A-Z][a-z]+(\s+[A-Z][a-z]+)*$/.test(trimmedLine) && 
+                             trimmedLine.length < 60 && 
+                             nextLine.trim() === '' &&
+                             !isNumberedHeader
+      
+      if (isNumberedHeader || isAllCapsShort || isShortHeader || isSectionHeader) {
+        // Bold headers with slightly more spacing
+        formattedLines.push(
+          <div key={i} className="font-bold text-base mb-1 mt-3 first:mt-0">
+            {line}
+          </div>
+        )
+      } else {
+        // Regular paragraph text with reduced spacing
+        formattedLines.push(
+          <div key={i} className="mb-1.5 text-sm leading-relaxed">
+            {line}
+          </div>
+        )
+      }
+    }
+    
+    return formattedLines
+  }
 
   return (
     <>
@@ -69,25 +180,75 @@ export default function CoursivHeader() {
 
               {/* Menu Items */}
               <nav className="flex flex-1 flex-col px-4">
-                <a href="#" className="py-3 text-left text-gray-700 hover:text-gray-900">
+                <button
+                  onClick={() => handleDocumentClick('terms')}
+                  className="py-3 text-left text-gray-700 hover:text-gray-900"
+                >
                   Terms & Conditions
-                </a>
-                <a href="#" className="py-3 text-left text-gray-700 hover:text-gray-900">
+                </button>
+                <button
+                  onClick={() => handleDocumentClick('privacy')}
+                  className="py-3 text-left text-gray-700 hover:text-gray-900"
+                >
                   Privacy Policy
-                </a>
-                <a href="#" className="py-3 text-left text-gray-700 hover:text-gray-900">
+                </button>
+                <button
+                  onClick={() => handleDocumentClick('subscription')}
+                  className="py-3 text-left text-gray-700 hover:text-gray-900"
+                >
                   Subscription Terms
-                </a>
-                <a href="#" className="py-3 text-left text-gray-700 hover:text-gray-900">
-                  Money Back
-                </a>
-                <a href="#" className="py-3 text-left text-gray-700 hover:text-gray-900">
-                  Support Center
-                </a>
-                <a href="#" className="py-3 text-left text-gray-700 hover:text-gray-900">
-                  e-Privacy Settings
-                </a>
+                </button>
+                <button
+                  onClick={() => handleDocumentClick('moneyback')}
+                  className="py-3 text-left text-gray-700 hover:text-gray-900"
+                >
+                  Money-back Guarantee
+                </button>
               </nav>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* Document Modal */}
+      {documentOpen && (
+        <>
+          {/* Overlay */}
+          <div
+            className="fixed inset-0 z-50 bg-black/50"
+            onClick={closeDocument}
+          ></div>
+
+          {/* Document Modal */}
+          <div className="fixed inset-4 z-50 mx-auto max-w-4xl bg-white rounded-lg shadow-2xl flex flex-col">
+            {/* Header */}
+            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+              <h2 className="text-xl font-bold text-gray-900">
+                {documentOpen === 'terms' && 'Terms & Conditions'}
+                {documentOpen === 'privacy' && 'Privacy Policy'}
+                {documentOpen === 'subscription' && 'Subscription Terms'}
+                {documentOpen === 'moneyback' && 'Money-back Guarantee'}
+              </h2>
+              <button
+                onClick={closeDocument}
+                className="text-2xl font-bold text-gray-700 hover:text-gray-900"
+                aria-label="Close document"
+              >
+                ×
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="flex-1 overflow-y-auto p-6">
+              <div className="max-w-none text-gray-800">
+                {isLoading ? (
+                  <div className="text-center text-gray-500">Loading...</div>
+                ) : (
+                  <div className="font-sans">
+                    {formatDocumentContent(documentContent)}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </>

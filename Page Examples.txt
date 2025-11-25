@@ -61,8 +61,7 @@ OVERVIEW
 ─────────────────────────────────────────────────────────────────────────────
 This document provides detailed analysis of 40+ conversion-focused websites 
 that demonstrate modern funnel architecture, quiz-to-paywall flows, and 
-AI-powered onboarding systems. These examples represent the cutting-edge of 
-rapid deployment, high-conversion digital products that companies like Estrelar 
+AI-powered onboarding systems. These examples represent the cutting-edge of so for the both of the Get My Plan buttons that have this weird hearbeat liek anitmaiton, as you can see here in the image. I hope that you can see in @svg_finder.txt what this is eacxcly cause we need an exact copy of that thanks rapid deployment, high-conversion digital products that companies like Estrelar 
 use to launch 100+ apps per year.
 
 
