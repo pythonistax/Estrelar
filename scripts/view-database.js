@@ -29,6 +29,7 @@ try {
       console.log(`    Name: ${sub.name || '(not provided)'}`)
       console.log(`    Privacy Consent: ${sub.privacy_consent ? 'Yes' : 'No'}`)
       console.log(`    Marketing Consent: ${sub.marketing_consent ? 'Yes' : 'No'}`)
+      console.log(`    Is Lead: ${sub.is_lead || 'N'} ${sub.is_lead === 'Y' ? '✅ (Clicked "Get My Plan")' : '❌ (Did not click)'}`)
       console.log(`    Created: ${sub.created_at}`)
       console.log(`    Submitted: ${sub.submitted_at}`)
       
@@ -56,7 +57,8 @@ try {
       COUNT(*) as total,
       COUNT(DISTINCT email) as unique_emails,
       SUM(privacy_consent) as privacy_yes,
-      SUM(marketing_consent) as marketing_yes
+      SUM(marketing_consent) as marketing_yes,
+      SUM(CASE WHEN is_lead = 'Y' THEN 1 ELSE 0 END) as leads
     FROM submissions
   `).get()
   
@@ -65,6 +67,7 @@ try {
   console.log(`   Unique Emails: ${stats.unique_emails}`)
   console.log(`   Privacy Consent: ${stats.privacy_yes}/${stats.total}`)
   console.log(`   Marketing Consent: ${stats.marketing_yes}/${stats.total}`)
+  console.log(`   Leads (Clicked "Get My Plan"): ${stats.leads}/${stats.total} (${((stats.leads / stats.total) * 100).toFixed(1)}%)`)
   console.log('')
   
 } catch (error) {
