@@ -1,8 +1,13 @@
 ================================================================================
 ESTRELAR SERVER GUIDE - Essential Commands
 ================================================================================
+To update teh docker with the latest git push, stop the old one, and create a new:
+
+cd /root/Estrelar && docker-compose down && git pull origin main && docker-compose up -d --build && systemctl restart nginx && docker-compose ps
 
 
+To Check the status of the website 
+node scripts/fetch-database.js
 
 
 Get it running:
