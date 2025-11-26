@@ -13,6 +13,21 @@ const dbPath = path.join(__dirname, '..', 'test_1_database.db')
 try {
   const db = new Database(dbPath)
   
+  // Check if is_lead column exists, if not, add it
+  const tableInfo = db.prepare("PRAGMA table_info(submissions)").all()
+  const hasLeadColumn = tableInfo.some(col => col.name === 'is_lead')
+  
+  if (!hasLeadColumn) {
+    console.log('⚠️  Column is_lead not found. Adding it now...\n')
+    try {
+      db.exec(`ALTER TABLE submissions ADD COLUMN is_lead TEXT DEFAULT 'N'`)
+      db.exec(`UPDATE submissions SET is_lead = 'N' WHERE is_lead IS NULL`)
+      console.log('✅ Column is_lead added successfully.\n')
+    } catch (e) {
+      console.log('⚠️  Could not add column (may already exist):', e.message)
+    }
+  }
+  
   console.log('\n📊 Fetching Database Results\n')
   console.log('='.repeat(100))
   
@@ -25,7 +40,7 @@ try {
       name,
       privacy_consent,
       marketing_consent,
-      is_lead,
+      COALESCE(is_lead, 'N') as is_lead,
       created_at,
       submitted_at,
       created_timestamp,
@@ -82,8 +97,8 @@ try {
       COUNT(DISTINCT email) as unique_emails,
       SUM(privacy_consent) as privacy_yes,
       SUM(marketing_consent) as marketing_yes,
-      SUM(CASE WHEN is_lead = 'Y' THEN 1 ELSE 0 END) as leads,
-      SUM(CASE WHEN is_lead = 'N' OR is_lead IS NULL THEN 1 ELSE 0 END) as non_leads
+      SUM(CASE WHEN COALESCE(is_lead, 'N') = 'Y' THEN 1 ELSE 0 END) as leads,
+      SUM(CASE WHEN COALESCE(is_lead, 'N') = 'N' THEN 1 ELSE 0 END) as non_leads
     FROM submissions
   `).get()
   
@@ -99,9 +114,9 @@ try {
   
   // Fetch only leads
   const leads = db.prepare(`
-    SELECT id, session_id, email, name, is_lead, created_timestamp
+    SELECT id, session_id, email, name, COALESCE(is_lead, 'N') as is_lead, created_timestamp
     FROM submissions 
-    WHERE is_lead = 'Y'
+    WHERE COALESCE(is_lead, 'N') = 'Y'
     ORDER BY created_timestamp DESC
   `).all()
   
