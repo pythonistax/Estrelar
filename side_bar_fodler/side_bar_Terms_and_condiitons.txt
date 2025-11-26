@@ -4,7 +4,7 @@ Terms and Conditions
 
 
 
-Welcome to Coursiv! We've simplified our Terms and Conditions to make them more user-friendly. Please take a moment to read these terms, as they form the agreement between you, as a user of Coursiv, and us, as the provider of Coursiv services.
+Welcome to 28Days! We've simplified our Terms and Conditions to make them more user-friendly. Please take a moment to read these terms, as they form the agreement between you, as a user of 28Days, and us, as the provider of 28Days services.
 
 
 
@@ -76,19 +76,19 @@ Contact us
 
 1. Who We Are
 
-We Coursiv™, Alis Spot LLC, a company registered at Georgiou A, 83, Shop 17, Potamos Germasogeias 4047, Limassol, the Republic of Cyprus and/or its affiliates or its authorized representatives/resellers ("we", "us", "our" or the "Company"), aim is to provide you with valuable learning materials and related services through our website, www.coursiv.io ("Website"), which serves as our main service platform, or through designated domains such as www.coursiv.com that may redirect you to our Website, as well as through other designated platforms.
+We 28Days™, Alis Spot LLC, a company registered in 1762 Croftdale Dr, Florissant, MO 63031 and/or its affiliates or its authorized representatives/resellers ("we", "us", "our" or the "Company"), aim is to provide you with valuable learning materials and related services through our website, www.28days.io ("Website"), which serves as our main service platform, or through designated domains such as www.28days.online that may redirect you to our Website, as well as through other designated platforms.
 
 
 
 2. Agreement Overview
 
-By using our product Coursiv ("Service"), you agree to abide by these Terms and Conditions (referred to as the "Terms" or the "Agreement").  Also our Privacy Terms and Subscription Terms are incorporated to these Terms by reference, which means they are part of the Terms.
+By using our product 28Days ("Service"), you agree to abide by these Terms and Conditions (referred to as the "Terms" or the "Agreement").  Also our Privacy Terms and Subscription Terms are incorporated to these Terms by reference, which means they are part of the Terms.
 
 
 
 
 
-Any translation of the Terms from the English version is provided for your convenience only. You may always find the English version of the Terms at the following link https://legal.coursiv.io/terms. Please understand that In case of any discrepancies, the English version of the Terms will prevail.
+Any translation of the Terms from the English version is provided for your convenience only. You may always find the English version of the Terms at the following link https://legal.28days.io/terms. Please understand that In case of any discrepancies, the English version of the Terms will prevail.
 
 
 
@@ -100,17 +100,17 @@ If you do not agree with any part of these Terms and any related documents or yo
 
 
 
-To use Coursiv, you must be at least 16 years old and have the legal capacity to enter into an agreement. If you're under 18, you need your parent's permission. If you don't agree with these terms or you're not eligible, please do not use our Service.
+To use 28Days, you must be at least 16 years old and have the legal capacity to enter into an agreement. If you're under 18, you need your parent's permission. If you don't agree with these terms or you're not eligible, please do not use our Service.
 
 
 
 4. What We Offer
 
-Coursiv provides a range of educational materials, including articles, reading materials, and test questions. We also offer an AI Chat feature for educational purposes. All the materials and services are collectively referred to as "Digital Content". Please read carefully the disclaimers and warranties below with regards to this Digital Content.
+28Days provides a range of educational materials, including articles, reading materials, and test questions. We also offer an AI Chat feature for educational purposes. All the materials and services are collectively referred to as "Digital Content". Please read carefully the disclaimers and warranties below with regards to this Digital Content.
 
 
 
-You will have access to the Digital Content and our product Coursiv only after registering for the Service, which means you will have to register and pay for the introductory offer (trial) or subscription plan (4 weeks, 12 weeks or otherwise) depending on what you select at the time of purchase.
+You will have access to the Digital Content and our product 28Days only after registering for the Service, which means you will have to register and pay for the introductory offer (trial) or subscription plan (4 weeks, 12 weeks or otherwise) depending on what you select at the time of purchase.
 
 
 
@@ -130,7 +130,7 @@ While using our AI Chat, you may provide your information (we call it "Input"), 
 
 An important note with regards to the nature of AI Content
 
-Due to the nature of machine learning, Output may not be unique across users and the Services may generate the same or similar output for Coursiv or a third party. For example, you may provide input to a model such as "How many days in January?" and receive output such as "There are 31 days in January." Other users may also ask similar questions and receive the same response. Responses that are requested by and generated for other users are not considered your Content.
+Due to the nature of machine learning, Output may not be unique across users and the Services may generate the same or similar output for 28Days or a third party. For example, you may provide input to a model such as "How many days in January?" and receive output such as "There are 31 days in January." Other users may also ask similar questions and receive the same response. Responses that are requested by and generated for other users are not considered your Content.
 
 
 
@@ -162,7 +162,7 @@ Important note! Some offers may be renewed at the full, not discounted price. Th
 
 
 
-Important note! Regarding the change of price. The prices and the amount of Digital Content available through your introductory offer or subscription may be changed from time to time by territory with no obligation of Coursiv to clearly notify you (except when is obligatory by the applicable law). We will give you a reasonable notice of any such price change by posting the new prices on or through the Website and (or) by sending you a notification, or in any other prominent way. If you do not agree with the new price and you do not want to pay, please, cancel your subscription before it becomes applicable to you.  
+Important note! Regarding the change of price. The prices and the amount of Digital Content available through your introductory offer or subscription may be changed from time to time by territory with no obligation of 28Days to clearly notify you (except when is obligatory by the applicable law). We will give you a reasonable notice of any such price change by posting the new prices on or through the Website and (or) by sending you a notification, or in any other prominent way. If you do not agree with the new price and you do not want to pay, please, cancel your subscription before it becomes applicable to you.  
 
 
 
@@ -174,11 +174,11 @@ We bill for our services through PayPal or other payment providers (Visa, Master
 
 Methods of payment
 
-Payment methods for the Services are billed by Coursiv via PayPal or other payment providers.
+Payment methods for the Services are billed by 28Days via PayPal or other payment providers.
 
 
 
-Coursiv charges the applicable fees to the payment card you submit at the time of purchase (after you confirm by single-touch identification, facial recognition, or entering your payment method details on the web, or otherwise accepting subscription terms provided on the payment screen on our web page).
+28Days charges the applicable fees to the payment card you submit at the time of purchase (after you confirm by single-touch identification, facial recognition, or entering your payment method details on the web, or otherwise accepting subscription terms provided on the payment screen on our web page).
 
 
 
@@ -202,7 +202,7 @@ Please refer to Subscription Terms to find out whether you might be eligible for
 
 
 
-Coursiv may also initiate the cancellation of your subscription and provide refunds at its own discretion and subject to Subscription Terms.
+28Days may also initiate the cancellation of your subscription and provide refunds at its own discretion and subject to Subscription Terms.
 
 8. Data Protection
 
@@ -220,7 +220,7 @@ You're granted a non-exclusive license to use our Service for personal, non-comm
 
 
 
-Information you provide us when you sign up to Coursiv, your "User Content," belongs to you, and we do not obtain any proprietary right over it. However, you agree that we may retain copies of all registration information and User Content and use all such information as reasonably required or incidental to the operation of Services and as described in these Terms.
+Information you provide us when you sign up to 28Days, your "User Content," belongs to you, and we do not obtain any proprietary right over it. However, you agree that we may retain copies of all registration information and User Content and use all such information as reasonably required or incidental to the operation of Services and as described in these Terms.
 
 
 
@@ -228,7 +228,7 @@ Information you provide us when you sign up to Coursiv, your "User Content," bel
 
 
 
-Trademark: All brand assets, including the "Coursiv" name, logos, graphics, and service marks used on our platform are the exclusive property of Alis Spot LLC or their respective owners, and certain of them are registered with the United States Patent and Trademark Office or other trademark authorities. Using our Service does not grant you any license or permission to reproduce or use the Courisv name or any other trademarks.
+Trademark: All brand assets, including the "28Days" name, logos, graphics, and service marks used on our platform are the exclusive property of Alis Spot LLC or their respective owners, and certain of them are registered with the United States Patent and Trademark Office or other trademark authorities. Using our Service does not grant you any license or permission to reproduce or use the 28Days name or any other trademarks.
 
 
 
@@ -246,21 +246,21 @@ You hereby release us, our officers, employees, agents and successors from any c
 
 11. Compliance
 
-The Services are provided in accordance with the laws of the Republic of Cyprus. We make no representation or warranty that a Service or the Digital Content are applicable or available for use in other locations.
+The Services are provided in accordance with the laws of the United States. We make no representation or warranty that a Service or the Digital Content are applicable or available for use in other locations.
 
 
 
-If you use the Services from a jurisdiction other than the Republic of Cyprus you agree to do so at your own risk, and you are responsible for complying with any and all local laws applicable to your use of a Service.
+If you use the Services from a jurisdiction other than the United States you agree to do so at your own risk, and you are responsible for complying with any and all local laws applicable to your use of a Service.
 
 12. Copyright Statement
 
-Coursiv copyrighted the product, including but not limited to all materials, logo, etc.
+28Days copyrighted the product, including but not limited to all materials, logo, etc.
 
 
 
 
 
-Any redistribution or reproduction of part or all the Services and/or Digital content available through subscription services in any form is prohibited. Any other proposed use of Services and/or Digital Content shall be granted by Coursiv in the form of formal written permission.
+Any redistribution or reproduction of part or all the Services and/or Digital content available through subscription services in any form is prohibited. Any other proposed use of Services and/or Digital Content shall be granted by 28Days in the form of formal written permission.
 
 
 
@@ -334,7 +334,7 @@ As for information on the Service. Any statement or information that may be post
 
 
 
-As for any advice. Coursiv does not provide investment or financial advice or advocate the purchase or sale of any security or investment via the Service.
+As for any advice. 28Days does not provide investment or financial advice or advocate the purchase or sale of any security or investment via the Service.
 
 
 
@@ -346,17 +346,17 @@ As for any results. We make no guarantees about the level of success you will ha
 
 
 
-As with any learning program or service, your results will vary and will be based on a number of factors, including but not limited to your individual capacity, life experience, financial status, starting point, expertise, and level of commitment. You agree that Coursiv is not liable for any success or failure of your financial risk that is directly or indirectly related to the purchase and use of the Service.
+As with any learning program or service, your results will vary and will be based on a number of factors, including but not limited to your individual capacity, life experience, financial status, starting point, expertise, and level of commitment. You agree that 28Days is not liable for any success or failure of your financial risk that is directly or indirectly related to the purchase and use of the Service.
 
 
 
 
 
-As for capital risk. Coursiv is an education platform, you can not invest with us. You should acknowledge if you decide to invest yourself there is a risk of capital loss and income is not guaranteed and will depend on various factors. Your decision to make an investment should be made at your own discretion and upon your own will only.
+As for capital risk. 28Days is an education platform, you can not invest with us. You should acknowledge if you decide to invest yourself there is a risk of capital loss and income is not guaranteed and will depend on various factors. Your decision to make an investment should be made at your own discretion and upon your own will only.
 
 
 
-As for any representations. Coursiv makes no representations or warranties and, to the fullest extent permitted by law, expressly disclaims any and all liability relating to your reliance on the statements or other information offered or provided within or through the Service. If you have specific concerns or a situation arises in which you require professional advice, you should consult with an appropriately appropriate, trained and qualified specialist.
+As for any representations. 28Days makes no representations or warranties and, to the fullest extent permitted by law, expressly disclaims any and all liability relating to your reliance on the statements or other information offered or provided within or through the Service. If you have specific concerns or a situation arises in which you require professional advice, you should consult with an appropriately appropriate, trained and qualified specialist.
 
 
 
@@ -372,11 +372,11 @@ Warranties relating to the accuracy, reliability, correctness, timeliness or com
 
 
 
-Coursiv disclaims responsibility for any loss, damage, or injury arising out of or in connection with the Service information usage.
+28Days disclaims responsibility for any loss, damage, or injury arising out of or in connection with the Service information usage.
 
 
 
-Coursiv will not be liable to the User for any indirect, consequential, special, incidental, punitive, or exemplary damages resulting from access or use of the website's Services or such Digital content, tools, or prizes, or in connection with any failure of performance, error, transmission, computer virus, or line or system failure, including, without limitation, lost profits, lost savings, and lost revenues.
+28Days will not be liable to the User for any indirect, consequential, special, incidental, punitive, or exemplary damages resulting from access or use of the website's Services or such Digital content, tools, or prizes, or in connection with any failure of performance, error, transmission, computer virus, or line or system failure, including, without limitation, lost profits, lost savings, and lost revenues.
 
 
 
@@ -388,7 +388,7 @@ IN NO EVENT SHALL WE (AND OUR AFFILIATES) BE LIABLE TO YOU OR ANY THIRD PARTY FO
 
 
 
-NOTWITHSTANDING ANYTHING TO THE CONTRARY CONTAINED HEREIN, YOU AGREE THAT THE AGGREGATE LIABILITY OF COURSIV TO YOU FOR ANY AND ALL CLAIMS ARISING FROM THE USE OF THE APP, CONTENT, SERVICE OR PRODUCTS, IS LIMITED TO THE AMOUNTS YOU HAVE PAID TO COURSIV FOR ACCESS TO AND USE OF THE SERVICE. THE LIMITATIONS OF DAMAGES SET FORTH ABOVE ARE FUNDAMENTAL ELEMENTS OF THE BASIS OF THE TERMS BETWEEN COURSIV AND YOU.
+NOTWITHSTANDING ANYTHING TO THE CONTRARY CONTAINED HEREIN, YOU AGREE THAT THE AGGREGATE LIABILITY OF 28DAYS TO YOU FOR ANY AND ALL CLAIMS ARISING FROM THE USE OF THE APP, CONTENT, SERVICE OR PRODUCTS, IS LIMITED TO THE AMOUNTS YOU HAVE PAID TO 28DAYS FOR ACCESS TO AND USE OF THE SERVICE. THE LIMITATIONS OF DAMAGES SET FORTH ABOVE ARE FUNDAMENTAL ELEMENTS OF THE BASIS OF THE TERMS BETWEEN 28DAYS AND YOU.
 
 
 
@@ -422,19 +422,19 @@ If the failure is not considered major, we will remedy the issue within a reason
 
 16. Indemnification
 
-In no event will Coursiv be liable for any loss, damage, or injury, including, without limitation, any indirect, consequential, special, incidental, or punitive damages arising out of, or in connection with, the use of the Services, including but not limited to any decision made or action taken in reliance on the information contained in the Services, or any errors or omissions in the Services.
+In no event will 28Days be liable for any loss, damage, or injury, including, without limitation, any indirect, consequential, special, incidental, or punitive damages arising out of, or in connection with, the use of the Services, including but not limited to any decision made or action taken in reliance on the information contained in the Services, or any errors or omissions in the Services.
 
 
 
 
 
-By using the Services, you agree to indemnify, defend, and hold harmless Coursiv from and against any and all claims, complaints, lawsuits, or other liabilities, including reasonable attorneys' fees, that may arise from your use of the Services or your decision to follow any advice, recommendation, or instruction provided therein.
+By using the Services, you agree to indemnify, defend, and hold harmless 28Days from and against any and all claims, complaints, lawsuits, or other liabilities, including reasonable attorneys' fees, that may arise from your use of the Services or your decision to follow any advice, recommendation, or instruction provided therein.
 
 
 
 
 
-You agree to indemnify and hold Coursiv, its successors, subsidiaries, affiliates, any related companies, its suppliers, licensors and partners, and the officers, directors, employees, agents and representatives of each of them harmless, including costs and attorneys' fees, from any claim or demand made by any third party due to or arising out of (i) your use of the Service or Digital Products, (ii) your User Content, or (ii) your violation of these Terms.
+You agree to indemnify and hold 28Days, its successors, subsidiaries, affiliates, any related companies, its suppliers, licensors and partners, and the officers, directors, employees, agents and representatives of each of them harmless, including costs and attorneys' fees, from any claim or demand made by any third party due to or arising out of (i) your use of the Service or Digital Products, (ii) your User Content, or (ii) your violation of these Terms.
 
 
 
@@ -468,7 +468,7 @@ You must send the Notice to the Company at the following address:
 
 
 
-Georgiou A, 83, Shop 17, Potamos Germasogeias 4047, Limassol, the Republic of Cyprus
+1762 Croftdale Dr, Florissant, MO 63031
 
 
 
@@ -688,15 +688,7 @@ Alis Spot LLC
 
 
 
-HE 462062
-
-
-
-Georgiou A, 83, Shop 17, Potamos Germasogeias
-
-
-
-4047, Limassol, the Republic of Cyprus
+1762 Croftdale Dr, Florissant, MO 63031
 
 
 

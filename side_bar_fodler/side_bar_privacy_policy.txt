@@ -4,7 +4,7 @@ Privacy Policy
 
 
 
-This Privacy Policy is incorporated by reference in the Terms and Conditions of Coursiv™ ("Coursiv", or "us") and is part of the agreement between you, user of the Website www.coursiv.io ("Website" or "Service"), and Coursiv.
+This Privacy Policy is incorporated by reference in the Terms and Conditions of 28Days™ ("28Days", or "us") and is part of the agreement between you, user of the Website www.28days.io ("Website" or "Service"), and 28Days.
 
 
 
@@ -64,7 +64,7 @@ Privacy Policy
 
 
 
-This Privacy Policy explains what personal data is collected when you use the Coursiv Website located at https://coursiv.io/ (the "Website") and the services and Digital products provided through it (the "Service"), how such personal data will be processed.
+This Privacy Policy explains what personal data is collected when you use the 28Days Website located at https://28days.io/ (the "Website") and the services and Digital products provided through it (the "Service"), how such personal data will be processed.
 
 
 
@@ -146,7 +146,7 @@ Contact Us
 
 1. Personal Data Controller
 
-Alis Spot LLC, a company registered under the laws of the Republic of Cyprus, having its registered office at Georgiou A, 83, Shop 17, Potamos Germasogeias, 4047, Limassol, the Republic of Cyprus will be the controller of your personal data.
+Alis Spot LLC, a company registered under the laws of the United States, having its registered office at 1762 Croftdale Dr, Florissant, MO 63031 will be the controller of your personal data.
 
 
 
@@ -562,7 +562,7 @@ E-privacy settings: we also bring EU privacy features to customers worldwide and
 
 
 
-If you are based in the EEA, you have the right to lodge a complaint with supervisory authority. We would love you to contact us directly, so we could address your concerns. Nevertheless, you have the right to lodge a complaint with a competent data protection supervisory authority, in particular in the EU Member State where you reside, work or where the alleged infringement has taken place. Based on our registered office, our relevant supervisory authority is The Office of the Commissioner for Personal Data Protection in Cyprus with its address at 1682 Nicosia, Cyprus, P.O.Box 23378, Telephone +357 22818456 or email commissioner@dataprotection.gov.cy.
+If you are based in the EEA, you have the right to lodge a complaint with supervisory authority. We would love you to contact us directly, so we could address your concerns. Nevertheless, you have the right to lodge a complaint with a competent data protection supervisory authority, in particular in the EU Member State where you reside, work or where the alleged infringement has taken place.
 
 
 
@@ -744,15 +744,7 @@ Alis Spot LLC
 
 
 
-HE 462062
-
-
-
-Georgiou A, 83, Shop 17, Potamos Germasogeias
-
-
-
-4047, Limassol, the Republic of Cyprus
+1762 Croftdale Dr, Florissant, MO 63031
 
 
 
