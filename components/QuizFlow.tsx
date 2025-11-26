@@ -39,13 +39,168 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
   const steps = copy.quiz.steps
   const totalSteps = 20 // Total quiz steps
 
-  // Generate session ID when quiz starts
+  // Generate session ID when quiz starts and create initial session record
   useEffect(() => {
     const session = getSessionId()
     setSessionId(session)
+    
+    // Create initial session record in database
+    const sessionData = getSessionMetadata()
+    fetch('/api/create-session', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        sessionId: session,
+        createdAt: sessionData.createdAtISO
+      }),
+    }).catch(error => {
+      console.error('Error creating initial session:', error)
+      // Don't block user if this fails
+    })
+    
+    // Update drop-off page to quiz_start
+    fetch('/api/update-dropoff', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        sessionId: session,
+        dropOffPage: 'quiz_start'
+      }),
+    }).catch(error => {
+      console.error('Error updating drop-off page:', error)
+    })
+
+    // Add browser event listeners for page unload
+    const handleBeforeUnload = () => {
+      // Helper to get current page
+      const getCurrentPage = () => {
+        // Use a ref or check current state - for unload, we'll use a closure
+        // This will capture the state at the time the listener was set up
+        // For dynamic tracking, we'll rely on the useEffect that updates on state changes
+        return 'unknown_page' // Will be updated by the useEffect tracking
+      }
+      
+      const data = JSON.stringify({
+        sessionId: session,
+        dropOffPage: getCurrentPage()
+      })
+      
+      // Try to use sendBeacon (more reliable for page unload)
+      if (navigator.sendBeacon) {
+        const blob = new Blob([data], { type: 'application/json' })
+        navigator.sendBeacon('/api/update-dropoff', blob)
+      } else {
+        // Fallback to fetch (may not complete if page closes)
+        fetch('/api/update-dropoff', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: data,
+          keepalive: true // Keep request alive even after page unloads
+        }).catch(() => {
+          // Ignore errors during unload
+        })
+      }
+    }
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') {
+        // Page is being hidden - update with current state
+        // We'll track this in a separate useEffect that runs on state changes
+      }
+    }
+
+    // Add event listeners
+    window.addEventListener('beforeunload', handleBeforeUnload)
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
+    // Cleanup on unmount
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+    }
   }, [])
 
-  // Load/reset selectedAnswers when currentStep changes
+  // Helper function to get current page identifier
+  const getCurrentPageIdentifier = (): string => {
+    if (showSellingPage) return 'selling_page'
+    if (showScratchPage) return 'scratch_page'
+    if (showNamePage) return 'name_page'
+    if (showEmailPage) return 'email_page'
+    if (showMagicPage) return 'magic_page'
+    if (showPersonalPlan) return 'personal_plan_page'
+    if (showUserProfile) return 'user_profile_page'
+    if (showEndPage) return 'end_page'
+    if (showTeaser) return 'teaser_page'
+    if (currentStep >= 0) return `quiz_step_${currentStep + 1}`
+    return 'quiz_start'
+  }
+
+  // Track current page and update drop-off on visibility change and page unload
+  useEffect(() => {
+    if (!sessionId) return
+
+    const currentPage = getCurrentPageIdentifier()
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') {
+        const page = getCurrentPageIdentifier()
+        fetch('/api/update-dropoff', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            sessionId: sessionId,
+            dropOffPage: page
+          }),
+        }).catch(error => {
+          console.error('Error updating drop-off page on visibility change:', error)
+        })
+      }
+    }
+
+    const handleBeforeUnload = () => {
+      const page = getCurrentPageIdentifier()
+      const data = JSON.stringify({
+        sessionId: sessionId,
+        dropOffPage: page
+      })
+      
+      // Use sendBeacon for reliable delivery even if page is closing
+      if (navigator.sendBeacon) {
+        const blob = new Blob([data], { type: 'application/json' })
+        navigator.sendBeacon('/api/update-dropoff', blob)
+      } else {
+        // Fallback to fetch with keepalive
+        fetch('/api/update-dropoff', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: data,
+          keepalive: true
+        }).catch(() => {
+          // Ignore errors during unload
+        })
+      }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    window.addEventListener('beforeunload', handleBeforeUnload)
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+    }
+  }, [sessionId, showSellingPage, showScratchPage, showNamePage, showEmailPage, showMagicPage, showPersonalPlan, showUserProfile, showEndPage, showTeaser, currentStep])
+
+  // Load/reset selectedAnswers when currentStep changes and update drop-off page
   useEffect(() => {
     const currentQuestion = steps[currentStep]
     const isMultiSelect = currentQuestion?.allowMultiple
@@ -62,7 +217,24 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
       // Reset for non-multi-select questions
       setSelectedAnswers([])
     }
-  }, [currentStep, steps, answers])
+    
+    // Update drop-off page to current quiz step
+    if (sessionId && currentStep >= 0) {
+      const dropOffPage = `quiz_step_${currentStep + 1}`
+      fetch('/api/update-dropoff', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sessionId: sessionId,
+          dropOffPage: dropOffPage
+        }),
+      }).catch(error => {
+        console.error('Error updating drop-off page:', error)
+      })
+    }
+  }, [currentStep, steps, answers, sessionId])
 
   const handleAnswer = (answer: string) => {
     const currentQuestion = steps[currentStep]
@@ -220,6 +392,23 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
     setUserEmail(email)
     setPrivacyConsent(privacy)
     setMarketingConsent(marketing)
+    
+    // Update drop-off page to email_page
+    if (sessionId) {
+      fetch('/api/update-dropoff', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sessionId: sessionId,
+          dropOffPage: 'email_page'
+        }),
+      }).catch(error => {
+        console.error('Error updating drop-off page:', error)
+      })
+    }
+    
     // Ensure all other pages are hidden
     setShowEmailPage(false)
     setShowEndPage(false) // Make sure end page is not shown
@@ -230,6 +419,22 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
   const handleNameSubmit = async (name: string) => {
     // Store name
     setUserName(name.trim())
+    
+    // Update drop-off page to name_page
+    if (sessionId) {
+      fetch('/api/update-dropoff', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sessionId: sessionId,
+          dropOffPage: 'name_page'
+        }),
+      }).catch(error => {
+        console.error('Error updating drop-off page:', error)
+      })
+    }
     
     // Submit email + name + quiz data together after name is collected
     if (userEmail && name.trim()) {
@@ -243,7 +448,8 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
           privacyConsent: privacyConsent,
           marketingConsent: marketingConsent,
           quizAnswers: answers || {},
-          submittedAt: new Date().toISOString()
+          submittedAt: new Date().toISOString(),
+          dropOffPage: 'name_page'
         }
 
         const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT || '/api/save-email'
@@ -275,12 +481,44 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
   }
 
   const handleScratchComplete = () => {
+    // Update drop-off page to scratch_page
+    if (sessionId) {
+      fetch('/api/update-dropoff', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sessionId: sessionId,
+          dropOffPage: 'scratch_page'
+        }),
+      }).catch(error => {
+        console.error('Error updating drop-off page:', error)
+      })
+    }
+    
     // After scratch page - show selling page (readiness level) - this is the final page
     setShowScratchPage(false)
     setShowSellingPage(true)
   }
 
   const handleSellingPageContinue = () => {
+    // Update drop-off page to selling_page
+    if (sessionId) {
+      fetch('/api/update-dropoff', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sessionId: sessionId,
+          dropOffPage: 'selling_page'
+        }),
+      }).catch(error => {
+        console.error('Error updating drop-off page:', error)
+      })
+    }
+    
     // SellingPage (readiness level) is now the final page
     console.log('Quiz completed - readiness page is final')
     // You can add redirect or final action here if needed

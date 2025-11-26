@@ -31,7 +31,7 @@ try {
   console.log('\n📊 Fetching Database Results\n')
   console.log('='.repeat(100))
   
-  // Fetch all submissions with is_lead column
+  // Fetch all submissions with is_lead and drop_off_page columns
   const query = `
     SELECT 
       id,
@@ -41,6 +41,7 @@ try {
       privacy_consent,
       marketing_consent,
       COALESCE(is_lead, 'N') as is_lead,
+      COALESCE(drop_off_page, 'quiz_start') as drop_off_page,
       created_at,
       submitted_at,
       created_timestamp,
@@ -69,8 +70,9 @@ try {
     console.log(`    Privacy Consent: ${sub.privacy_consent ? 'Yes' : 'No'}`)
     console.log(`    Marketing Consent: ${sub.marketing_consent ? 'Yes' : 'No'}`)
     console.log(`    Is Lead: ${sub.is_lead || 'N'} ${sub.is_lead === 'Y' ? '✅ (Clicked "Get My Plan")' : '❌ (Did not click "Get My Plan")'}`)
+    console.log(`    Drop-Off Page: ${sub.drop_off_page || 'quiz_start'} ${sub.drop_off_page === 'completed' ? '✅' : '❌'}`)
     console.log(`    Created: ${sub.created_at}`)
-    console.log(`    Submitted: ${sub.submitted_at}`)
+    console.log(`    Submitted: ${sub.submitted_at || 'Not submitted'}`)
     console.log(`    Timestamp: ${sub.created_timestamp}`)
     
     // Parse and display quiz answers
@@ -114,7 +116,7 @@ try {
   
   // Fetch only leads
   const leads = db.prepare(`
-    SELECT id, session_id, email, name, COALESCE(is_lead, 'N') as is_lead, created_timestamp
+    SELECT id, session_id, email, name, COALESCE(is_lead, 'N') as is_lead, COALESCE(drop_off_page, 'quiz_start') as drop_off_page, created_timestamp
     FROM submissions 
     WHERE COALESCE(is_lead, 'N') = 'Y'
     ORDER BY created_timestamp DESC
@@ -124,7 +126,26 @@ try {
     console.log('🎯 Leads (Clicked "Get My Plan"):')
     console.log('='.repeat(100))
     leads.forEach((lead, index) => {
-      console.log(`   ${index + 1}. ${lead.email} (${lead.name || 'No name'}) - ${lead.created_timestamp}`)
+      console.log(`   ${index + 1}. ${lead.email || 'No email'} (${lead.name || 'No name'}) - ${lead.drop_off_page} - ${lead.created_timestamp}`)
+    })
+    console.log('')
+  }
+  
+  // Show drop-off statistics
+  const dropOffStats = db.prepare(`
+    SELECT 
+      COALESCE(drop_off_page, 'quiz_start') as drop_off_page,
+      COUNT(*) as count
+    FROM submissions
+    GROUP BY drop_off_page
+    ORDER BY count DESC
+  `).all()
+  
+  if (dropOffStats.length > 0) {
+    console.log('📊 Drop-Off Statistics:')
+    console.log('='.repeat(100))
+    dropOffStats.forEach((stat) => {
+      console.log(`   ${stat.drop_off_page}: ${stat.count} session(s)`)
     })
     console.log('')
   }

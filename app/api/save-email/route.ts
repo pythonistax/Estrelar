@@ -32,7 +32,8 @@ export async function POST(request: NextRequest) {
       privacyConsent: privacyConsent || false,
       marketingConsent: marketingConsent || false,
       createdAt: createdAt || new Date().toISOString(),
-      submittedAt: submittedAt || new Date().toISOString()
+      submittedAt: submittedAt || new Date().toISOString(),
+      dropOffPage: 'completed' // Mark as completed when email/name is submitted
     }
 
     // Log the data first (always show in terminal)
