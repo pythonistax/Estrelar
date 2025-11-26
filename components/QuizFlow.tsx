@@ -345,7 +345,7 @@ export default function QuizFlow({ onBack }: QuizFlowProps) {
 
   // Show selling page (readiness level) - FINAL PAGE
   if (showSellingPage) {
-    return <SellingPage onContinue={handleSellingPageContinue} onBack={handleBackClick} />
+    return <SellingPage onContinue={handleSellingPageContinue} onBack={handleBackClick} sessionId={sessionId} />
   }
 
   // Show scratch page after name page

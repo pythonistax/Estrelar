@@ -2,6 +2,20 @@
 ESTRELAR SERVER GUIDE - Essential Commands
 ================================================================================
 
+
+
+
+Get it running:
+cd /root/Estrelar && docker-compose up -d --build && systemctl restart nginx
+
+
+STop:
+cd /root/Estrelar && docker-compose down && systemctl stop nginx
+
+Restart
+cd /root/Estrelar && docker-compose up -d && systemctl start nginx
+
+
 🚀 QUICK START (Turn Everything On)
 ================================================================================
 

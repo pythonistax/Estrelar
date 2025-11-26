@@ -7,6 +7,7 @@ import CheckoutModal from './CheckoutModal'
 interface SellingPageProps {
   onContinue: () => void
   onBack?: () => void
+  sessionId?: string // Session ID to track lead status
 }
 
 // Add global styles for button pulse animation
@@ -34,7 +35,7 @@ if (typeof document !== 'undefined') {
   }
 }
 
-export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
+export default function SellingPage({ onContinue, onBack, sessionId }: SellingPageProps) {
   const sellingPage = copy.sellingPage
   const chartContainerRef = useRef<HTMLDivElement>(null)
   const pricingRef = useRef<HTMLDivElement>(null)
@@ -43,6 +44,36 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
   const [selectedPlan, setSelectedPlan] = useState<'1week' | '4week' | '12week'>('4week')
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false)
+
+  // Handle "Get My Plan" button click - update lead status
+  const handleGetMyPlanClick = async () => {
+    // Open checkout modal
+    setIsCheckoutOpen(true)
+    
+    // Update lead status to 'Y' if we have a sessionId
+    if (sessionId) {
+      try {
+        const response = await fetch('/api/update-lead', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ sessionId }),
+        })
+
+        if (!response.ok) {
+          console.error('Failed to update lead status:', response.statusText)
+          // Continue anyway - don't block user if API fails
+        } else {
+          const result = await response.json()
+          console.log('Lead status updated successfully:', result)
+        }
+      } catch (error) {
+        console.error('Error updating lead status:', error)
+        // Continue anyway - don't block user if API fails
+      }
+    }
+  }
 
   // Load SVG content
   useEffect(() => {
@@ -213,7 +244,7 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
 
           {/* GET MY PLAN Button - Right aligned */}
           <button
-            onClick={() => setIsCheckoutOpen(true)}
+            onClick={handleGetMyPlanClick}
             className="pulse-button px-6 py-2 bg-[#5653FE] text-white rounded-lg font-bold text-sm uppercase tracking-wide hover:bg-[#4442D9] transition-colors"
           >
             GET MY PLAN
@@ -708,7 +739,7 @@ export default function SellingPage({ onContinue, onBack }: SellingPageProps) {
           {/* GET MY PLAN Button */}
           <div className="flex justify-center mt-8">
             <button
-              onClick={() => setIsCheckoutOpen(true)}
+              onClick={handleGetMyPlanClick}
               className="pulse-button px-12 py-4 bg-accent-main text-white rounded-lg font-bold text-base uppercase tracking-wide hover:bg-[#4442D9] transition-colors"
             >
               GET MY PLAN
